@@ -1,7 +1,7 @@
-import { hashPassword } from "../../../helper";
+import { hashPassword, sendMail } from "../../../helper";
 
 interface userData {
-  namne: string;
+  name: string;
   email: string;
   phone: string;
   password: string;
@@ -22,18 +22,19 @@ export const addUser_useCases = (dependancies: any) => {
         return { status1: true, message: "user already exists" };
       }
 
-      console.log("data", data);
-
       const hashedPassword = await hashPassword(data.password);
       const updatedData = { ...data, password: hashedPassword };
-      const addUserData = await authenticationRepository?.createUser(
-        updatedData
-      );
-      if (addUserData.status) {
-        return { status: true, user: addUserData };
-      } else {
-        return { status: false, message: "user creation failed" };
+      
+      const otp = await sendMail(updatedData.email,updatedData.name)
+      console.log(otp);
+      
+      if(otp){
+          return {status: true, user: updatedData, message: `otp sent to ${updatedData.email}`, otp: otp}
       }
+
+
+
+
     } catch (error) {
       return {
         status: false,

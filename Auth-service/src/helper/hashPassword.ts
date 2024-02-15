@@ -16,10 +16,12 @@ export const comparePassword = async (
   hashedPassword: string
 ): Promise<boolean> => {
   try {
+    console.log('compare');    
     const match = await bcrypt.compare(password, hashedPassword);
+    console.log(match);
     return match;
   } catch (error) {
-    console.error(error, "Error verifying password");
-    throw new Error("Error verifying password");
+    console.error("Error verifying password:");
+    throw error;
   }
 };

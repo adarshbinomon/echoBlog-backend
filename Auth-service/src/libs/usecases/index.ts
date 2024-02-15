@@ -1,3 +1,7 @@
-import { addUser_useCases } from "./authentication";
+import {
+  addUser_useCases,
+  verifyOtp_useCase,
+  userLogin_useCase,
+} from "./authentication";
 
-export { addUser_useCases };
+export { addUser_useCases, verifyOtp_useCase, userLogin_useCase };
