@@ -7,7 +7,9 @@ export default (dependancies: any) => {
 
   console.log(addUser_useCases);
   const createUserController = async (req: Request, res: Response) => {
-    const { name, email, phone, password } = req.body;
+    const { name, email, phone, password } = req.body ;
+    console.log(req.body);
+    
 
     const data = {
       name: name,
