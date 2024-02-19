@@ -3,12 +3,14 @@ import {
   addUser_useCases,
   verifyOtp_useCase,
   userLogin_useCase,
+  adminLogin_useCase
 } from "../libs/usecases";
 
 const useCase: any = {
   addUser_useCases,
   verifyOtp_useCase,
   userLogin_useCase,
+  adminLogin_useCase
 };
 
 const repository: any = {

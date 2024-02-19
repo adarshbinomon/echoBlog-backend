@@ -1,4 +1,5 @@
 import { schema } from "../database";
+import { Admin } from "../database/schema/admin.schema";
 const { User } = schema;
 
 export default {
@@ -39,4 +40,16 @@ export default {
       console.log(error, "error while finding user");
     }
   },
+
+  findAdmin: async(email:string)=>{
+    try {
+      const admin = await Admin.findOne({email: email})
+      if(admin){
+        return { status: true, user: admin}
+      }
+    } catch (error) {
+      console.log(error,'error while finding Admin');
+      
+    }
+  }
 };
