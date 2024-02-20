@@ -1,6 +1,5 @@
 import { schema } from "../database";
-import { Admin } from "../database/schema/admin.schema";
-const { User } = schema;
+const { User, Admin } = schema;
 
 export default {
   userEmailExist: async (email: string) => {

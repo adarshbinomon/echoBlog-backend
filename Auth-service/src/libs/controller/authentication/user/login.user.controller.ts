@@ -13,6 +13,7 @@ export default (dependencies: any) => {
       email,
       password
     );
+    
 
     if (response.status) {
       const { user, accessToken, refreshToken } = response;
