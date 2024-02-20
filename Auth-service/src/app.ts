@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import dependancies from "./config/dependancies";
+import dependencies from "./config/dependencies";
 import { routes } from "./router";
 import session, { MemoryStore, SessionOptions } from "express-session";
 import dotenv from "dotenv";
@@ -47,6 +47,6 @@ app.use(
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", routes(dependancies));
+app.use("/api", routes(dependencies));
 
 export { app };

@@ -1,10 +1,10 @@
 import { comparePassword, hashPassword } from "../../../helper";
 import { createAccessToken, createRefreshToken } from "../../../utils/jwt";
 
-export const userLogin_useCase = (dependancies: any) => {
+export const userLogin_useCase = (dependencies: any) => {
   const {
     repository: { authenticationRepository },
-  } = dependancies;
+  } = dependencies;
 
   const executeFunction = async (email: string, password: string) => {
     try {
@@ -18,7 +18,7 @@ export const userLogin_useCase = (dependancies: any) => {
           const passwordValidation = await comparePassword(
             password,
             user.password
-          ); 
+          );
 
           if (passwordValidation) {
             const accessToken = createAccessToken(

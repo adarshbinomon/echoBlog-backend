@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 
-export default (dependancies: any) => {
+export default (dependencies: any) => {
   const {
     useCase: { userLogin_useCase },
-  } = dependancies;
+  } = dependencies;
 
   const userLogin = async (req: Request, res: Response) => {
     const { email, password } = req.body;
     console.log(req.body);
 
-    const response = await userLogin_useCase(dependancies).executeFunction(
+    const response = await userLogin_useCase(dependencies).executeFunction(
       email,
       password
     );
@@ -24,7 +24,7 @@ export default (dependancies: any) => {
         secure: true,
       });
       res
-        .status(201)
+        .status(200)
         .json({ status: true, accessToken: accessToken, user: user });
     } else {
       res.status(400).json({ status: false, message: response.message });

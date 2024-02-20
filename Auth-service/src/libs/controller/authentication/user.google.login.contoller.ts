@@ -1,23 +1,27 @@
-import { Response, Request } from "express";
+import { Request, Response } from "express";
 
 export default (dependencies: any) => {
   const {
-    useCase: { verifyOtp_useCase },
+    useCase: { userGoogleLogin_useCase },
   } = dependencies;
 
-  const verifyOtp = async (req: Request, res: Response) => {
-    console.log("verifyotpcontroller");
-    console.log(req.body);
-    
-    const enteredOtp = req.body.enteredOtp;
-    const otp = String(req.session.otp);
-    const userData = req.session.userData;
+  const googleLogin = async (req: Request, res: Response) => {
+    const { name, email, uid, isGoogle, profile } = req.body;
 
-    const response = await verifyOtp_useCase(dependencies).executeFunction(
-      userData,
-      otp,
-      enteredOtp
-    );
+    const data = {
+      name: name,
+      email: email,
+      uid: uid,
+      isGoogle: isGoogle,
+      profilePicture: profile,
+      password: "",
+      phone: "",
+    };
+
+    const response = await userGoogleLogin_useCase(
+      dependencies
+    ).executeFunction(data);
+
     if (response.status) {
       const { user, accessToken, refreshToken } = response;
       req.session.refreshToken = refreshToken;
@@ -28,12 +32,11 @@ export default (dependencies: any) => {
         secure: true,
       });
       res
-        .status(201)
+        .status(200)
         .json({ status: true, accessToken: accessToken, user: user });
     } else {
       res.status(400).json({ status: false, message: response.message });
     }
   };
-
-  return verifyOtp;
+  return googleLogin;
 };

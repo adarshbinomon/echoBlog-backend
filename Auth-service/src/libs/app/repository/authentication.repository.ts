@@ -18,6 +18,9 @@ export default {
       email: data.email,
       phone: data.phone,
       password: data.password,
+      profilePicture: data.profilePicture,
+      uid: data.uid,
+      isGoogle: data.isGoogle
     };
 
     let response = await User.create(userData);

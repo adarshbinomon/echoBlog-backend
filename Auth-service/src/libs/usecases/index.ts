@@ -3,6 +3,7 @@ import {
   verifyOtp_useCase,
   userLogin_useCase,
   adminLogin_useCase,
+  userGoogleLogin_useCase,
 } from "./authentication";
 
 export {
@@ -10,4 +11,5 @@ export {
   verifyOtp_useCase,
   userLogin_useCase,
   adminLogin_useCase,
+  userGoogleLogin_useCase,
 };

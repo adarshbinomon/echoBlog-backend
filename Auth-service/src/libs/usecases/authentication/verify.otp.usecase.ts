@@ -7,10 +7,10 @@ interface userData {
   password: string;
 }
 
-export const verifyOtp_useCase = (dependancies: any) => {
+export const verifyOtp_useCase = (dependencies: any) => {
   const {
     repository: { authenticationRepository },
-  } = dependancies;
+  } = dependencies;
 
   const executeFunction = async (
     data: userData,
