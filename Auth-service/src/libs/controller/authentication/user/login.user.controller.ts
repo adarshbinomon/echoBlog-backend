@@ -7,7 +7,7 @@ export default (dependencies: any) => {
 
   const userLogin = async (req: Request, res: Response) => {
     const { email, password } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
 
     const response = await userLogin_useCase(dependencies).executeFunction(
       email,

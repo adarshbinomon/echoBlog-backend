@@ -11,15 +11,17 @@ const app = express();
 const store = new MemoryStore();
 declare module "express-session" {
   interface Session {
-    userData: {
-      _id: string;
-      name: string;
-      email: string;
-      password: string;
-    },
-    otp: string,
-    refreshToken: string,
-    adminRefreshToken: string
+    userData:
+      | {
+          _id: string;
+          name: string;
+          email: string;
+          password: string;
+        }
+      | undefined;
+    otp: string;
+    refreshToken: string;
+    adminRefreshToken: string;
   }
 }
 

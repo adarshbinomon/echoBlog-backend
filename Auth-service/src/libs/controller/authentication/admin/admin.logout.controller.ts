@@ -4,8 +4,8 @@ import { clearAccessTokenFromCookie } from "../../../../utils/jwt";
 export default (dependencies: any) => {
   const userLogoutController = (req: Request, res: Response) => {
     try {
-      clearAccessTokenFromCookie("accessToken", res);
-      res.clearCookie("accessToken");
+      clearAccessTokenFromCookie("adminAccessToken", res);
+      res.clearCookie("adminAccessToken");
       req.session.userData = undefined;
 
       res.json({ status: true, message: "Logout success" });

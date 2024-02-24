@@ -7,8 +7,8 @@ export default (dependencies: any) => {
   } = dependencies;
 
   const verifyOtp = async (req: Request, res: Response) => {
-    console.log("verifyotpcontroller");
-    console.log(req.body);
+    // console.log("verifyotpcontroller");
+    // console.log(req.body);
 
     const enteredOtp = req.body.enteredOtp;
     const otp = String(req.session.otp);

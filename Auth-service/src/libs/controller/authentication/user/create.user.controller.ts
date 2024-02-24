@@ -7,7 +7,7 @@ export default (dependencies: any) => {
 
   const createUserController = async (req: Request, res: Response) => {
     const { name, email, phone, password } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
 
     const data = {
       name: name,
@@ -23,7 +23,7 @@ export default (dependencies: any) => {
 
     req.session.otp = response.otp;
     req.session.userData = response.user;
-    console.log(response);
+    // console.log(response);
 
     if (response.status) {
       res.json({
@@ -36,7 +36,7 @@ export default (dependencies: any) => {
         message: response.message,
       });
     } else {
-      console.log(response.message);
+      // console.log(response.message);
       res.json({
         status: false,
         message: response.message,

@@ -1,28 +1,30 @@
 import { schema } from "../database";
 const { User, Admin } = schema;
 
+interface UserData {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  uid: string;
+  profilePicture: string;
+  isGoogle: boolean;
+}
+
 export default {
   userEmailExist: async (email: string) => {
     try {
-      let response = await User.findOne({ email: email });
+      const response = await User.findOne({ email: email });
       return response;
     } catch (error) {
       console.log("error in authentication.repository.userEmailExist", error);
     }
   },
 
-  createUser: async (data: any) => {
-    let userData = {
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      password: data.password,
-      profilePicture: data.profilePicture,
-      uid: data.uid,
-      isGoogle: data.isGoogle
-    };
+  createUser: async (data: UserData) => {
+    const userData = { ...data };
 
-    let response = await User.create(userData);
+    const response = await User.create(userData);
     if (response) {
       return { status: true, message: "user created!", response };
     } else {
@@ -43,15 +45,14 @@ export default {
     }
   },
 
-  findAdmin: async(email:string)=>{
+  findAdmin: async (email: string) => {
     try {
-      const admin = await Admin.findOne({email: email})
-      if(admin){
-        return { status: true, user: admin}
+      const admin = await Admin.findOne({ email: email });
+      if (admin) {
+        return { status: true, user: admin };
       }
     } catch (error) {
-      console.log(error,'error while finding Admin');
-      
+      console.log(error, "error while finding Admin");
     }
-  }
+  },
 };

@@ -16,8 +16,8 @@ export const addUser_useCases = (dependencies: any) => {
   } = dependencies;
 
   const executeFunction = async (data: userData) => {
-    console.log("data");
-    console.log(data);
+    // console.log("data");
+    // console.log(data);
 
     try {
       const userExist = await authenticationRepository?.userEmailExist(

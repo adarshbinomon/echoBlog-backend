@@ -4,9 +4,11 @@ import { profileController } from "../../libs/controller";
 export default (dependencies: any) => {
   const router = express();
 
-  const { adminLoginController } = profileController(dependencies);
+  const { adminLoginController, adminLogoutController } =
+    profileController(dependencies);
 
   router.post("/login", adminLoginController);
+  router.get("/logout", adminLogoutController);
 
   return router;
 };

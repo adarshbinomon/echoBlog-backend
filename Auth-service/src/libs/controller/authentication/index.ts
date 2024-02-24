@@ -4,6 +4,7 @@ import login_user_controller from "./user/login.user.controller";
 import admin_login_controller from "./admin/admin.login.controller";
 import user_google_login_controller from "./user/user.google.login.contoller";
 import user_logout_controller from "./user/user.logout.controller";
+import admin_logout_controller from "./admin/admin.logout.controller";
 
 export default (dependencies: any) => {
   return {
@@ -13,5 +14,6 @@ export default (dependencies: any) => {
     adminLoginController: admin_login_controller(dependencies),
     userGoogleLoginController: user_google_login_controller(dependencies),
     userLogoutController: user_logout_controller(dependencies),
+    adminLogoutController: admin_logout_controller(dependencies),
   };
 };

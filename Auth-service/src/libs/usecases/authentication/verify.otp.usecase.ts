@@ -18,9 +18,9 @@ export const verifyOtp_useCase = (dependencies: any) => {
     enteredOtp: string
   ) => {
     try {
-      console.log("try");
-      console.log(otp);
-      console.log(enteredOtp);
+      // console.log("try");
+      console.log('otp', otp);
+      console.log('entered otp', enteredOtp);
 
       if (enteredOtp === otp) {
         const addUserData = await authenticationRepository?.createUser(data);

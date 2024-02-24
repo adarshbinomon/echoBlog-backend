@@ -8,7 +8,7 @@ export const adminLogin_useCase = (dependencies: any) => {
 
   const executeFunction = async (email: string, password: string) => {
     try {
-      console.log('usecase');
+      // console.log('usecase');
       
       const response = await authenticationRepository?.findAdmin(email);
       //makew it userdata
@@ -36,8 +36,8 @@ export const adminLogin_useCase = (dependencies: any) => {
             return {
               status: true,
               user: user,
-              accessToken: accessToken,
-              refreshToken: refreshToken,
+              adminAccessToken: accessToken,
+              adminRefreshToken: refreshToken,
             };
           } else {
             return { status: false, message: "incorrect password" };
