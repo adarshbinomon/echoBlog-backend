@@ -3,15 +3,14 @@ export const createUserUsecase = (dependencies: any) => {
     
   const {repository: { userRepository }} = dependencies;
   const executeFunction = async (data: any) => {
-    console.log("ENTER TO EECUTER");
     
     const response = await userRepository.createUser(data);
        console.log(response);
                                                
     if (!response.status) {
-      return { message: "Email is not valid", status: false };
+      return { message: "Email invalid", status: false };
     } else {
-      return { message: "User craeted", status: true };
+      return { message: "User created", status: true };
     }
 
   };

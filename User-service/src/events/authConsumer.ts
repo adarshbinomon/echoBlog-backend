@@ -1,14 +1,9 @@
 import {kafka} from '../config/kafkaClient'
-import {addUser} from './consumerHandler'
 import { createUserController } from '../libs/controller/consumeControllers'
 
 const consumer=kafka.consumer({
     groupId:"auth-service"
 })
-
- 
-
-
 
 
 export const userConsumer = async(dependencies:any)=>{
@@ -22,7 +17,6 @@ export const userConsumer = async(dependencies:any)=>{
                 const jsondata=JSON.parse(jsonstring)
                 const messagetype=jsondata?.type
                 if(messagetype == 'createUser'){
-                    console.log('consumer',jsondata);
                     
                     await createUserController(dependencies,jsondata.data)
                 }

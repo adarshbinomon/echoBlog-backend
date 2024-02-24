@@ -1,7 +1,7 @@
-import { userRepository } from "../libs/app/repository";
+// import { userRepository } from "../libs/app/repository";
 
-export const addUser = async (data: any) => {
-  const { createUser } = userRepository;
+// export const addUser = async (data: any) => {
+//   const { createUser } = userRepository;
 
-  await createUser(data);
-};
+//   await createUser(data);
+// };
