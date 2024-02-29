@@ -1,13 +1,9 @@
 import { Request, Response } from "express";
+import { UserData } from "../../../utils/interfaces/ interfaces";
 
-export const createUserController = async (dependencies: any, data: any) => {
-  console.log("ENTER TO CONTROLLER");
-  console.log(data);
-  
+export const createUserController = async (dependencies: any, data: UserData) => {
   const {
     consumeUsecase: { createUserUsecase },
   } = dependencies;
-  console.log("ENTER TO createUserController");
   const response = await createUserUsecase(dependencies).executeFunction(data);
-  console.log(response);
 };

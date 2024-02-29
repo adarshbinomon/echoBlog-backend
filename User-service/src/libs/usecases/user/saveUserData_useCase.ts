@@ -1,28 +1,12 @@
-interface userData {
-  name: string;
-  email: string;
-  userName: string;
-  following: any[];
-  followers: any[];
-  accountType: string;
-  bio: string;
-  phone: string;
-  gender: string;
-  dateOfBirth: Date;
-  profilePicture: string;
-  coverPicture: string;
-  interestedTags: string[];
-  createdOn: Date;
-  editedOn: Date;
-  _id: string;
-}
+import { UserData } from "../../../utils/interfaces/ interfaces";
+
 
 export const saveUserData_useCase = (dependencies: any) => {
   const {
     repository: { userRepository },
   } = dependencies;
 
-  const executeFunction = async (data: userData) => {
+  const executeFunction = async (data: UserData) => {
     try {
       const userId = data._id;
 

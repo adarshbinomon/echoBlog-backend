@@ -8,7 +8,6 @@ export default (dependencies: any) => {
   const saveUserDataController = async (req: Request, res: Response) => {
     try {
       const data = req.body;
-      // console.log(data);
       
       const response = await saveUserData_useCase(dependencies).executeFunction(
         data

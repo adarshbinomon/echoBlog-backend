@@ -1,30 +1,33 @@
-import {kafka} from '../config/kafkaClient'
-import { createUserController } from '../libs/controller/consumeControllers'
+import { kafka } from "../config/kafkaClient";
+import { createUserController } from "../libs/controller/consumeControllers";
 
-const consumer=kafka.consumer({
-    groupId:"auth-service"
-})
+const consumer = kafka.consumer({
+  groupId: "auth-service",
+});
 
+export const userConsumer = async (dependencies: any) => {
+  try {
+    await consumer.connect();
+    await consumer.subscribe({ topic: "authTopic", fromBeginning: true });
+    await consumer.run({
+      eachMessage: async ({ message }) => {
+        try {
+          const binaryData: any = message.value;
+          const jsonString: string = binaryData?.toString();
+          const jsonData = JSON.parse(jsonString);
+          const messageType = jsonData?.type;
 
-export const userConsumer = async(dependencies:any)=>{
-    try {
-        await consumer.connect()
-        await consumer.subscribe({topic:"authTopic",fromBeginning:true})
-        await consumer.run({
-            eachMessage:async({message})=>{
-                const bynerydata:any=message.value
-                const jsonstring:string=bynerydata?.toString()
-                const jsondata=JSON.parse(jsonstring)
-                const messagetype=jsondata?.type
-                if(messagetype == 'createUser'){
-                    
-                    await createUserController(dependencies,jsondata.data)
-                }
-            }
-        })
-        
-    } catch (error) {
-        console.log('Error in auth consumer',error);
-        
-    }
-}
+          if (messageType === "createUser") {
+            await createUserController(dependencies, jsonData.data);
+          } else {
+            console.log("Unhandled message type:", messageType);
+          }
+        } catch (error) {
+          console.error("Error processing message:", error);
+        }
+      },
+    });
+  } catch (error) {
+    console.error("Error in auth consumer", error);
+  }
+};

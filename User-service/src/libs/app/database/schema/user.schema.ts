@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
   followers: Array,
   accountType: {
     type: String,
-    enum: accountTypeEnum,
+    enum: accountTypeEnum
   },
   followRequests: Array,
   bio: String,

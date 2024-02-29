@@ -1,3 +1,4 @@
+import { UserData } from "../../../utils/interfaces/ interfaces";
 import { schema } from "../database";
 
 const { User } = schema;
@@ -11,60 +12,29 @@ export default {
       console.log("error in authentication.repository.userEmailExist", error);
     }
   },
-  createUser: async (data: any) => {
+  createUser: async (data: UserData) => {
     try {
-      const userData = {
-        _id: data._id || "",
-        name: data.name || "",
-        profilePicture: data.profile || "",
-        email: data.email || "",
-        isGoogle: data.isGoogle || "",
-        userName: data.userName || "",
-        following: data.following || [],
-        followers: data.followers || [],
-        accountType: data.accountType || "public",
-        followRequests: data.followRequests || [],
-        bio: data.bio || "",
-        phone: data.phone || "",
-        dateOfBirth: data.dateOfBirth || "",
-        coverPicture: data.coverPicture || "",
-        createdOn: Date.now(),
-        editedOn: Date.now(),
-      };
+      const userData = { ...data };
+
       const response = await schema.User.create(userData);
       console.log(response, "rees");
 
       if (response) {
         return { status: true, message: "user created sucessfully", response };
       } else {
-        return { status: false, message: "user cretion failed" };
+        return { status: false, message: "user creation failed" };
       }
     } catch (error) {
       console.log(
-        "Error in the cretae user in the auth service / repositery ",
+        "Error in the creating user in the auth service / repository ",
         error
       );
     }
   },
 
-  saveData: async (data: any) => {
+  saveData: async (data: UserData) => {
     try {
-      const userData = {
-        name: data.name,
-        userName: data.userName,
-        following: data.following,
-        followers: data.followers,
-        accountType: data.accountType,
-        bio: data.bio,
-        phone: data.phone,
-        gender: data.gender,
-        dateOfBirth: data.dateOfBirth,
-        profilePicture: data.profilePicture,
-        coverPicture: data.coverPicture,
-        interestedTags: data.interestedTags,
-        createdOn: data.createdOn,
-        editedOn: Date.now(),
-      };
+      const userData = { ...data, editedOn: Date.now() };
 
       let response = await User.findOneAndUpdate(
         { _id: data._id },
