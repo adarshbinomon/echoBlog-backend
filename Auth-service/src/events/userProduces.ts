@@ -1,7 +1,8 @@
 import { kafka } from "../config/kafkaClient";
+import { UserData } from "../utils/interface";
 const producer = kafka.producer();
 
-export const userProducer = async (sendData: any, topic: any, type: any) => {
+export const userProducer = async (sendData: UserData, topic: string, type: string) => {
   try {
     if (!sendData) {
       throw new Error("send data not existed");
@@ -17,6 +18,7 @@ export const userProducer = async (sendData: any, topic: any, type: any) => {
         topic: topic,
         messages: [{ value: JSON.stringify(messagepayload) }],
       });
+
 
       if (result && result[0] && result[0]?.error) {
         throw new Error("Message production failed");

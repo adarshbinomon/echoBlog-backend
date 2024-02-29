@@ -1,25 +1,16 @@
 import { hashPassword, sendMail } from "../../../helper";
-
-interface userData {
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
-  uid: string;
-  profilePicture: string;
-  isGoogle: boolean;
-}
+import { UserData } from "../../../utils/interface";
 
 export const addUser_useCases = (dependencies: any) => {
   const {
     repository: { authenticationRepository },
   } = dependencies;
 
-  const executeFunction = async (data: userData) => {
-    // console.log("data");
-    // console.log(data);
-
+  const executeFunction = async (data: UserData) => {
     try {
+      console.log('data');
+      console.log(data);
+      
       const userExist = await authenticationRepository?.userEmailExist(
         data?.email
       );
@@ -28,7 +19,7 @@ export const addUser_useCases = (dependencies: any) => {
         return { status1: true, message: "user already exists" };
       }
 
-      const hashedPassword = await hashPassword(data.password);
+      const hashedPassword = await hashPassword(data?.password);
       const updatedData = { ...data, password: hashedPassword };
 
       const otp = await sendMail(updatedData.email, updatedData.name);

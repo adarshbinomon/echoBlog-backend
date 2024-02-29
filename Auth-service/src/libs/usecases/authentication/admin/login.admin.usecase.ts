@@ -8,10 +8,8 @@ export const adminLogin_useCase = (dependencies: any) => {
 
   const executeFunction = async (email: string, password: string) => {
     try {
-      // console.log('usecase');
       
       const response = await authenticationRepository?.findAdmin(email);
-      //makew it userdata
 
       if (response.status) {
         try {

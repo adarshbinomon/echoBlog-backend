@@ -1,11 +1,6 @@
 import { createAccessToken, createRefreshToken } from "../../../utils/jwt";
+import { UserData } from "../../../utils/interface";
 
-interface userData {
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
-}
 
 export const verifyOtp_useCase = (dependencies: any) => {
   const {
@@ -13,7 +8,7 @@ export const verifyOtp_useCase = (dependencies: any) => {
   } = dependencies;
 
   const executeFunction = async (
-    data: userData,
+    data: UserData,
     otp: string,
     enteredOtp: string
   ) => {

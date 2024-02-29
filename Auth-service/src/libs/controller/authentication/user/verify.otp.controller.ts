@@ -19,7 +19,6 @@ export default (dependencies: any) => {
       otp,
       enteredOtp
     );
-    // console.log(response)
     if (response.status) {
       const { user, accessToken, refreshToken } = response;
       req.session.refreshToken = refreshToken;
@@ -29,18 +28,20 @@ export default (dependencies: any) => {
         httpOnly: true,
         secure: true,
       });
-      const userDataForResponse = {
-        _id: response.user.response._id,
-        name: response.user.response.name,
-        email: response.user.response.email,
-        phone: response.user.response.phone || "",
-        profilePicture: response.user.response.profilePicture || "",
-        isGoogle: response.user.response.isGoogle,
-      };
-      await userProducer(userDataForResponse, 'authTopic', 'createUser');
-      res
-        .status(201)
-        .json({ status: true, accessToken: accessToken, user: userDataForResponse });
+      const userDataForResponse = JSON.parse(
+        JSON.stringify(response.user.response)
+      );
+      delete userDataForResponse.password;
+      delete userDataForResponse.isGoogle;
+      delete userDataForResponse.__v;
+      delete userDataForResponse.uid;
+
+      await userProducer(userDataForResponse, "authTopic", "createUser");
+      res.status(201).json({
+        status: true,
+        accessToken: accessToken,
+        user: userDataForResponse,
+      });
     } else {
       res.status(400).json({ status: false, message: response.message });
     }

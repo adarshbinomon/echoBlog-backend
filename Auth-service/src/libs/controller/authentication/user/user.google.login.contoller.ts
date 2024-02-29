@@ -6,17 +6,7 @@ export default (dependencies: any) => {
   } = dependencies;
 
   const googleLogin = async (req: Request, res: Response) => {
-    const { name, email, uid, isGoogle, profile } = req.body;
-
-    const data = {
-      name: name,
-      email: email,
-      uid: uid,
-      isGoogle: isGoogle,
-      profilePicture: profile,
-      password: "",
-      phone: "",
-    };
+    const data = { ...req.body, password: "", phone: "" };
 
     const response = await userGoogleLogin_useCase(
       dependencies

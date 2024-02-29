@@ -1,15 +1,8 @@
 import { schema } from "../database";
 const { User, Admin } = schema;
+import { UserData } from "../../../utils/interface";
 
-interface UserData {
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
-  uid: string;
-  profilePicture: string;
-  isGoogle: boolean;
-}
+
 
 export default {
   userEmailExist: async (email: string) => {

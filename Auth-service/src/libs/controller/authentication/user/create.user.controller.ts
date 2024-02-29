@@ -6,24 +6,21 @@ export default (dependencies: any) => {
   } = dependencies;
 
   const createUserController = async (req: Request, res: Response) => {
-    const { name, email, phone, password } = req.body;
     // console.log(req.body);
-
     const data = {
-      name: name,
-      email: email,
-      phone: phone,
-      password: password,
+      ...req.body,
       profilePicture: "",
       uid: "",
       isGoogle: false,
     };
 
+    console.log("data");
+    console.log(data);
+
     const response = await addUser_useCases(dependencies).executeFunction(data);
 
     req.session.otp = response.otp;
     req.session.userData = response.user;
-    // console.log(response);
 
     if (response.status) {
       res.json({

@@ -1,14 +1,7 @@
 import { createAccessToken, createRefreshToken } from "../../../utils/jwt";
+import { UserData } from "../../../utils/interface";
 
-interface UserData {
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
-  uid: string;
-  profilePicture: string;
-  isGoogle: boolean;
-}
+
 
 export const userGoogleLogin_useCase = (dependencies: any) => {
   const {
