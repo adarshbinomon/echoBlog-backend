@@ -14,7 +14,7 @@ export default {
   },
   createUser: async (data: UserData) => {
     try {
-      const userData = { ...data };
+      const userData = { ...data, createdOn: Date.now() };
 
       const response = await schema.User.create(userData);
       console.log(response, "rees");
@@ -39,7 +39,7 @@ export default {
       let response = await User.findOneAndUpdate(
         { _id: data._id },
         { $set: userData },
-        { new: true }
+        { new: true, upsert: true }
       );
 
       return {
@@ -58,7 +58,6 @@ export default {
 
   findUser: async (userId: string) => {
     try {
-      console.log(userId);
       const user = await User.findById(userId);
       if (user) {
         return { status: true, user: user };

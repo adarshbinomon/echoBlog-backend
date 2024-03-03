@@ -16,6 +16,8 @@ export const userConsumer = async (dependencies: any) => {
           const jsonString: string = binaryData?.toString();
           const jsonData = JSON.parse(jsonString);
           const messageType = jsonData?.type;
+          console.log(jsonData);
+          
 
           if (messageType === "createUser") {
             await createUserController(dependencies, jsonData.data);

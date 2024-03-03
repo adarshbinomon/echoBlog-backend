@@ -1,25 +1,22 @@
 import { UserData } from "../../../utils/interfaces/ interfaces";
 
-
-export const saveUserData_useCase = (dependencies: any) => {
+export const editUserProfile_useCase = (dependencies: any) => {
   const {
     repository: { userRepository },
   } = dependencies;
 
   const executeFunction = async (data: UserData) => {
     try {
-      const userId = data._id;
-
-      const user = await userRepository?.findUser(userId);
-
       const updatedUser = await userRepository?.saveData(data);
 
       return {
         status: true,
-        message: "user data saved successfully",
+        message: "User data Updated successfully",
         user: updatedUser.response,
       };
-    } catch (error) {}
+    } catch (error) {
+      console.log(error, "error in editUserProfile_useCase");
+    }
   };
   return { executeFunction };
 };

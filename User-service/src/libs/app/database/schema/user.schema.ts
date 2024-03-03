@@ -46,6 +46,7 @@ const userSchema = new mongoose.Schema({
   createdOn: {
     type: Date,
     // required: true,
+    default: Date.now()
   },
   editedOn: {
     type: Date,
