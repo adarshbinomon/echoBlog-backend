@@ -1,4 +1,4 @@
-import { UserData } from "../../../utils/interfaces/ interfaces";
+import { UserData } from "../../../utils/interfaces/interfaces";
 
 
 export const saveUserData_useCase = (dependencies: any) => {
@@ -21,7 +21,8 @@ export const saveUserData_useCase = (dependencies: any) => {
       };
     } catch (error) {
       console.log(error, 'error in saveUserData_useCase');
-      
+      return { status: false, message: `Error in saveUserData_useCase` };
+
     }
   };
   return { executeFunction };

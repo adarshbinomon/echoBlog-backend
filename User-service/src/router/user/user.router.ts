@@ -1,6 +1,6 @@
 import express from "express";
 import { userController } from "../../libs/controller/";
-import { uploadProfilePicture, uploadCoverPicture } from "../../helper/multer";
+import { uploadProfilePicture, uploadCoverPicture } from "../../helper/s3Multer";
 export default (dependencies: any) => {
   const router = express();
 

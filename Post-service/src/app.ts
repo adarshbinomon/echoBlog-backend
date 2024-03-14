@@ -6,15 +6,14 @@ import session, { MemoryStore, SessionOptions } from "express-session";
 import dotenv from "dotenv";
 import path from "path";
 import { userConsumer } from "./events/authConsumer";
+import { userUpdateConsumer } from "./events/userUpdateConsumer";
 dotenv.config({ path: ".env" });
 
 const app = express();
 
 const store = new MemoryStore();
 declare module "express-session" {
-  interface Session {
-
-}
+  interface Session {}
 }
 
 app.use(express.json());
@@ -40,6 +39,7 @@ app.use(
 );
 
 userConsumer(dependencies);
+userUpdateConsumer(dependencies);
 
 app.use(express.urlencoded({ extended: true }));
 

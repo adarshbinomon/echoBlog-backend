@@ -4,8 +4,11 @@ import {
   verifyOtp_useCase,
   userLogin_useCase,
   adminLogin_useCase,
-  userGoogleLogin_useCase
+  userGoogleLogin_useCase,
+  updateUserUsecase
 } from "../libs/usecases";
+
+
 
 const useCase: any = {
   addUser_useCases,
@@ -15,11 +18,16 @@ const useCase: any = {
   userGoogleLogin_useCase
 };
 
+const consumeUsecase: any ={
+  updateUserUsecase
+}
+
 const repository: any = {
   authenticationRepository,
 };
 
 export default {
   useCase,
+  consumeUsecase,
   repository,
 };

@@ -4,6 +4,7 @@ import dependencies from "./config/dependencies";
 import { routes } from "./router";
 import session, { MemoryStore, SessionOptions } from "express-session";
 import dotenv from "dotenv";
+import path from "path";
 import { userConsumer } from "./events/authConsumer";
 dotenv.config({ path: "src/.env" });
 
@@ -43,5 +44,7 @@ userConsumer(dependencies);
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", routes(dependencies));
+
+app.use("/images", express.static(path.join(__dirname, "../public/Images")));
 
 export { app };

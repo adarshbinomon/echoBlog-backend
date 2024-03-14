@@ -1,4 +1,4 @@
-import { UserData } from "../../../utils/interfaces/ interfaces";
+import { UserData } from "../../../utils/interfaces/interfaces";
 import { schema } from "../database";
 
 const { User } = schema;

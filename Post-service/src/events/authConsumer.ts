@@ -7,11 +7,13 @@ const consumer = kafka.consumer({
 
 export const userConsumer = async (dependencies: any) => {
   try {
+    
     await consumer.connect();
     await consumer.subscribe({ topic: "authTopic", fromBeginning: true });
     await consumer.run({
       eachMessage: async ({ message }) => {
         try {
+          console.log('userConsumer');
           const binaryData: any = message.value;
           const jsonString: string = binaryData?.toString();
           const jsonData = JSON.parse(jsonString);

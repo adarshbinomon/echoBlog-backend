@@ -4,6 +4,7 @@ import dependencies from "./config/dependencies";
 import { routes } from "./router";
 import session, { MemoryStore, SessionOptions } from "express-session";
 import dotenv from "dotenv";
+import { userConsumer } from "./events/userUpdateConsumer";
 dotenv.config({ path: "src/.env" });
 
 const app = express();
@@ -46,6 +47,8 @@ app.use(
     store: store,
   } as SessionOptions)
 );
+
+userConsumer(dependencies);
 
 app.use(express.urlencoded({ extended: true }));
 

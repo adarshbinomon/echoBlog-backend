@@ -7,8 +7,7 @@ export default (dependencies: any) => {
   } = dependencies;
 
   const verifyOtp = async (req: Request, res: Response) => {
-    // console.log("verifyotpcontroller");
-    // console.log(req.body);
+
 
     const enteredOtp = req.body.enteredOtp;
     const otp = String(req.session.otp);
@@ -31,6 +30,8 @@ export default (dependencies: any) => {
       const userDataForResponse = JSON.parse(
         JSON.stringify(response.user.response)
       );
+      console.log(userDataForResponse);
+      
       delete userDataForResponse.password;
       delete userDataForResponse.isGoogle;
       delete userDataForResponse.__v;

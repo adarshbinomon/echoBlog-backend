@@ -77,7 +77,7 @@ export default {
       console.log(id);
       const response = await schema.Post.findById(id);
       console.log(response);
-      
+
       if (response) {
         return { status: true, message: "post found", post: response };
       } else {
@@ -87,6 +87,16 @@ export default {
       console.log("error in find post repository", error);
 
       return { status: false, message: "post not found" };
+    }
+  },
+
+  updateUser: async (data: UserData) => {
+    try {
+      const response = await User.findByIdAndUpdate(data._id, data);
+      return { status: true, updatedUser: response };
+    } catch (error) {
+      console.log(error);
+      return { status: false, message: "update failed" };
     }
   },
 };

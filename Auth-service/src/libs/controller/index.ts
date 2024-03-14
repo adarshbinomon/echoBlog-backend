@@ -1,3 +1,3 @@
-import profileController from "./authentication"
+import profileController from "./authentication";
 
 export { profileController };

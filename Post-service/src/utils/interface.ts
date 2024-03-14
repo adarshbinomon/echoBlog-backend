@@ -6,6 +6,7 @@ export interface UserData {
   uid?: string;
   profilePicture?: string;
   isGoogle?: boolean;
+  _id?: string;
 }
 
 export interface PostData {

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { UserData } from "../../../utils/interfaces/ interfaces";
+import { UserData } from "../../../utils/interfaces/interfaces";
+import { userProducer } from "../../../events/userUpdateProducer";
 
 export default (dependencies: any) => {
   const {
@@ -9,17 +10,26 @@ export default (dependencies: any) => {
   const editUserProfileController = async (req: Request, res: Response) => {
     try {
       const data: UserData = req.file
-        ? { ...req.body, [req.file.fieldname]: req.file.filename }
+        ? { ...req.body, [req.file.fieldname]: req.file.location }
         : { ...req.body };
+        console.log(data);
+        
 
       const response = await editUserProfile_useCase(
         dependencies
       ).executeFunction(data);
 
+      await userProducer(data, "userTopic", "updateUser");
+
+
       if (response.status) {
         res
           .status(200)
-          .json({ status: true, message: "user data edited successfuly" });
+          .json({
+            status: true,
+            user: response.user,
+            message: "user data edited successfuly",
+          });
       }
     } catch (error) {
       res

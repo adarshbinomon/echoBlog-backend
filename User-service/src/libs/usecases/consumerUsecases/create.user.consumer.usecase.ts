@@ -1,4 +1,4 @@
-import { UserData } from "../../../utils/interfaces/ interfaces";
+import { UserData } from "../../../utils/interfaces/interfaces";
 
 export const createUserUsecase = (dependencies: any) => {
     console.log("55createUserUsecase");

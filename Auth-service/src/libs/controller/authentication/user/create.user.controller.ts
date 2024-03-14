@@ -9,7 +9,8 @@ export default (dependencies: any) => {
     // console.log(req.body);
     const data = {
       ...req.body,
-      profilePicture: "",
+      profilePicture:
+        "https://echoblog-images.s3.ap-south-1.amazonaws.com/1709811864797_profilePicture_dummy-profile.png",
       uid: "",
       isGoogle: false,
     };

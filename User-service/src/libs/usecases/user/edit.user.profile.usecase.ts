@@ -1,6 +1,6 @@
-import { UserData } from "../../../utils/interfaces/ interfaces";
+import { UserData } from "../../../utils/interfaces/interfaces";
 
-export const editUserProfile_useCase = (dependencies: any) => {
+export  const editUserProfile_useCase = (dependencies: any) => {
   const {
     repository: { userRepository },
   } = dependencies;

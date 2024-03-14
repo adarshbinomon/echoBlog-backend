@@ -1,7 +1,6 @@
 import { createAccessToken, createRefreshToken } from "../../../utils/jwt";
 import { UserData } from "../../../utils/interface";
 
-
 export const verifyOtp_useCase = (dependencies: any) => {
   const {
     repository: { authenticationRepository },
@@ -13,9 +12,8 @@ export const verifyOtp_useCase = (dependencies: any) => {
     enteredOtp: string
   ) => {
     try {
-      // console.log("try");
-      console.log('otp', otp);
-      console.log('entered otp', enteredOtp);
+      console.log("otp", otp);
+      console.log("entered otp", enteredOtp);
 
       if (enteredOtp === otp) {
         const addUserData = await authenticationRepository?.createUser(data);

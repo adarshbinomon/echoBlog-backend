@@ -1,14 +1,14 @@
 import { kafka } from "../config/kafkaClient";
-import { createUserController } from "../libs/controller/consumeControllers";
+import { updateUserController } from "../libs/controller/consumeControllers/user.update.controller";
 
 const consumer = kafka.consumer({
-  groupId: "auth-service",
+  groupId: "user-service",
 });
 
 export const userConsumer = async (dependencies: any) => {
   try {
     await consumer.connect();
-    await consumer.subscribe({ topic: "authTopic", fromBeginning: true });
+    await consumer.subscribe({ topic: "userTopic", fromBeginning: true });
     await consumer.run({
       eachMessage: async ({ message }) => {
         try {
@@ -16,10 +16,10 @@ export const userConsumer = async (dependencies: any) => {
           const jsonString: string = binaryData?.toString();
           const jsonData = JSON.parse(jsonString);
           const messageType = jsonData?.type;
-          console.log(jsonData);
+          // console.log("data from user service", jsonData);
 
-          if (messageType === "createUser") {
-            await createUserController(dependencies, jsonData.data);
+          if (messageType === "updateUser") {            
+            await updateUserController(dependencies, jsonData.data);
           } else {
             console.log("Unhandled message type:", messageType);
           }

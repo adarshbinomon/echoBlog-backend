@@ -2,8 +2,6 @@ import { schema } from "../database";
 const { User, Admin } = schema;
 import { UserData } from "../../../utils/interface";
 
-
-
 export default {
   userEmailExist: async (email: string) => {
     try {
@@ -46,6 +44,17 @@ export default {
       }
     } catch (error) {
       console.log(error, "error while finding Admin");
+    }
+  },
+
+  updateUser: async (data: UserData) => {
+    try {
+      const response = await User.findByIdAndUpdate(data._id, data);
+      return { status: true, updatedUser: response };
+    } catch (error) {
+      console.log(error);
+      return {status: false, message: 'update failed'}
+      
     }
   },
 };

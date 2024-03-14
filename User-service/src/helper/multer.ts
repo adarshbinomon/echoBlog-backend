@@ -24,4 +24,3 @@ const upload = multer({ storage });
 const uploadProfilePicture = upload.single("profilePicture");
 const uploadCoverPicture = upload.single("coverPicture");
 
-export { upload, uploadProfilePicture, uploadCoverPicture };
