@@ -1,4 +1,4 @@
-import { UserData } from "../../../utils/interface";
+import { CommentObject, UserData } from "../../../utils/interface";
 import { schema } from "../database";
 import { PostData } from "../../../utils/interface";
 
@@ -113,15 +113,100 @@ export default {
 
   editPost: async (id: string, data: PostData) => {
     try {
-      console.log('data:',data);
-      
-      const response = await Post.findByIdAndUpdate(id, { content: data.content });
+      console.log("data:", data);
+
+      const response = await Post.findByIdAndUpdate(id, {
+        content: data.content,
+      });
       console.log(response);
-      
+
       return { status: true, updatedPost: response };
     } catch (error) {
       console.log("error in updatePost repository");
       return { status: false, message: "post update failed" };
+    }
+  },
+
+  deletePost: async (id: string) => {
+    try {
+      console.log("repo:", id);
+
+      const response = await Post.findByIdAndDelete(id);
+      return { status: true, message: "post deleted successfully." };
+    } catch (error) {
+      console.log("error:", error);
+      return { status: false, message: "post deletion failed!" };
+    }
+  },
+
+  getAllPosts: async () => {
+    try {
+      const response = await Post.find().populate("createdBy");
+      return {
+        status: true,
+        message: "posts found successfully",
+        posts: response,
+      };
+    } catch (error) {
+      return { status: false, message: "post not found" };
+    }
+  },
+
+  likePost: async (postId: string, userId: string, liked: boolean) => {
+    try {
+      if (!liked) {
+        const response = await Post.findByIdAndUpdate(
+          postId,
+          {
+            $push: { like: userId },
+          },
+          { new: true }
+        );
+        return {
+          status: true,
+          message: "like added",
+          likes: response?.like.length,
+        };
+      } else {
+        const response = await Post.findByIdAndUpdate(
+          postId,
+          {
+            $pull: { like: userId },
+            new: true,
+          },
+          { new: true }
+        );
+        return {
+          status: true,
+          message: "like removed",
+          likes: response?.like.length,
+        };
+      }
+    } catch (error) {
+      console.log("error in like post repository:", error);
+
+      return { status: false, message: "like unsuccessfull" };
+    }
+  },
+
+  addComment: async (postId: string, comment: CommentObject) => {
+    try {
+      const response = await Post.findByIdAndUpdate(
+        postId,
+        {
+          $push: { comment: comment },
+        },
+        { new: true }
+      );
+      return {
+        status: true,
+        message: "comment added successfully",
+        comment: response?.comment,
+      };
+    } catch (error) {
+      console.log("eeror:", error);
+
+      return { status: false, message: "comment add failed" };
     }
   },
 };

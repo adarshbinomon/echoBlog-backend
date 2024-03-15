@@ -4,6 +4,7 @@ import {
   userLogin_useCase,
   adminLogin_useCase,
   userGoogleLogin_useCase,
+  resendOtp_useCase,
 } from "./authentication";
 
 import { updateUserUsecase } from "./consumerUsecase";
@@ -14,5 +15,6 @@ export {
   userLogin_useCase,
   adminLogin_useCase,
   userGoogleLogin_useCase,
-  updateUserUsecase
+  updateUserUsecase,
+  resendOtp_useCase,
 };

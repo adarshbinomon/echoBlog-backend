@@ -23,3 +23,11 @@ export interface PostData {
   reportedUsersList?: any[];
   communityId?: string;
 }
+
+export interface CommentObject {
+  userId: string;
+  comment: string;
+  name: string;
+  profilePicture: string;
+  userName: string;
+}

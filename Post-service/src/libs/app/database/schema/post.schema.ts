@@ -25,6 +25,7 @@ const postSchema = new mongoose.Schema({
   },
   createdBy: {
     type: String,
+    ref: 'User'
   },
   tags: {
     type: String,
@@ -38,6 +39,10 @@ const postSchema = new mongoose.Schema({
   },
   communityId: {
     type: String,
+  },
+  visibility: {
+    type: Boolean,
+    default: true,
   },
 });
 

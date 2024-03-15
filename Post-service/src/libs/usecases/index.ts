@@ -3,6 +3,10 @@ import {
   findUserPosts_useCase,
   getPost_useCase,
   editPost_useCase,
+  deletePost_useCase,
+  getAllPosts_useCase,
+  likePost_useCase,
+  addComment_Usecase,
 } from "./post";
 
 export {
@@ -10,4 +14,8 @@ export {
   findUserPosts_useCase,
   getPost_useCase,
   editPost_useCase,
+  deletePost_useCase,
+  getAllPosts_useCase,
+  likePost_useCase,
+  addComment_Usecase,
 };

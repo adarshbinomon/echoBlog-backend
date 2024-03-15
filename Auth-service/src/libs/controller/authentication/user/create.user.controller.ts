@@ -15,13 +15,12 @@ export default (dependencies: any) => {
       isGoogle: false,
     };
 
-    console.log("data");
-    console.log(data);
 
     const response = await addUser_useCases(dependencies).executeFunction(data);
 
     req.session.otp = response.otp;
     req.session.userData = response.user;
+
 
     if (response.status) {
       res.json({
@@ -34,7 +33,6 @@ export default (dependencies: any) => {
         message: response.message,
       });
     } else {
-      // console.log(response.message);
       res.json({
         status: false,
         message: response.message,

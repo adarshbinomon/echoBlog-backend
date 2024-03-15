@@ -9,7 +9,8 @@ export default (dependencies: any) => {
     verifyOtpController,
     loginUserController,
     userGoogleLoginController,
-    userLogoutController
+    userLogoutController,
+    resendOtpController
   } = profileController(dependencies);
 
   router.post("/signup", createUserController);
@@ -17,6 +18,7 @@ export default (dependencies: any) => {
   router.post("/login", loginUserController);
   router.get("/logout", userLogoutController);
   router.post("/google-login", userGoogleLoginController);
+  router.get("/resend-otp", resendOtpController);
 
   return router;
 };

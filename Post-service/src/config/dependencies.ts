@@ -4,6 +4,10 @@ import {
   findUserPosts_useCase,
   getPost_useCase,
   editPost_useCase,
+  deletePost_useCase,
+  getAllPosts_useCase,
+  likePost_useCase,
+  addComment_Usecase
 } from "../libs/usecases";
 import {
   createUserUsecase,
@@ -15,6 +19,10 @@ const useCase: any = {
   findUserPosts_useCase,
   getPost_useCase,
   editPost_useCase,
+  deletePost_useCase,
+  getAllPosts_useCase,
+  likePost_useCase,
+  addComment_Usecase
 };
 
 const repository: any = {
