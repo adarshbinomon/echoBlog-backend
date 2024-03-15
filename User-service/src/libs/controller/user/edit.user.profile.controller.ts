@@ -17,7 +17,7 @@ export default (dependencies: any) => {
 
       const response = await editUserProfile_useCase(
         dependencies
-      ).executeFunction(data);
+      ).executeFunction(data);      
 
       await userProducer(data, "userTopic", "updateUser");
 

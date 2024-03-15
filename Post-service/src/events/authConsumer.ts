@@ -2,11 +2,13 @@ import { kafka } from "../config/kafkaClient";
 import { createUserController } from "../libs/controllers/consumeControllers/auth.consumer.controller";
 
 const consumer = kafka.consumer({
-  groupId: "auth-service",
+  groupId: "post-service",
 });
 
 export const userConsumer = async (dependencies: any) => {
   try {
+    console.log('auth to post consumer');
+    
     
     await consumer.connect();
     await consumer.subscribe({ topic: "authTopic", fromBeginning: true });
@@ -22,6 +24,8 @@ export const userConsumer = async (dependencies: any) => {
           
 
           if (messageType === "createUser") {
+            console.log('if');
+            
             await createUserController(dependencies, jsonData.data);
           } else {
             console.log("Unhandled message type:", messageType);

@@ -10,6 +10,7 @@ export interface UserData {
 }
 
 export interface PostData {
+  _id?: string;
   title?: string;
   content?: string;
   image?: string;

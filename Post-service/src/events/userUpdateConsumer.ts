@@ -2,7 +2,7 @@ import { kafka } from "../config/kafkaClient";
 import { updateUserController } from "../libs/controllers/consumeControllers";
 
 const consumer = kafka.consumer({
-  groupId: "user-service",
+  groupId: "post-service2",
 });
 
 export const userUpdateConsumer = async (dependencies: any) => {

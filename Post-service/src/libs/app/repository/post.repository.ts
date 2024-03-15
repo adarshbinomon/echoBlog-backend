@@ -74,9 +74,9 @@ export default {
 
   getPost: async (id: string) => {
     try {
-      console.log(id);
+      // console.log(id);
       const response = await schema.Post.findById(id);
-      console.log(response);
+      // console.log(response);
 
       if (response) {
         return { status: true, message: "post found", post: response };
@@ -97,6 +97,31 @@ export default {
     } catch (error) {
       console.log(error);
       return { status: false, message: "update failed" };
+    }
+  },
+
+  findUser: async (id: UserData) => {
+    try {
+      console.log(id, "id");
+
+      const response = await User.findById(id);
+      return { status: true, user: response };
+    } catch (error) {
+      return { status: false, message: "user not found" };
+    }
+  },
+
+  editPost: async (id: string, data: PostData) => {
+    try {
+      console.log('data:',data);
+      
+      const response = await Post.findByIdAndUpdate(id, { content: data.content });
+      console.log(response);
+      
+      return { status: true, updatedPost: response };
+    } catch (error) {
+      console.log("error in updatePost repository");
+      return { status: false, message: "post update failed" };
     }
   },
 };

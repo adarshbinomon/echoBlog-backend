@@ -48,7 +48,7 @@ app.use(
   } as SessionOptions)
 );
 
-userConsumer(dependencies);
+// userConsumer(dependencies);
 
 app.use(express.urlencoded({ extended: true }));
 

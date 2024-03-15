@@ -2,16 +2,20 @@ import { kafka } from "../config/kafkaClient";
 import { createUserController } from "../libs/controller/consumeControllers";
 
 const consumer = kafka.consumer({
-  groupId: "auth-service",
+  groupId: "user-service",
 });
 
 export const userConsumer = async (dependencies: any) => {
   try {
+    console.log('auth to user consumer');
+    
     await consumer.connect();
     await consumer.subscribe({ topic: "authTopic", fromBeginning: true });
     await consumer.run({
       eachMessage: async ({ message }) => {
         try {
+          console.log('tryy');
+          
           const binaryData: any = message.value;
           const jsonString: string = binaryData?.toString();
           const jsonData = JSON.parse(jsonString);

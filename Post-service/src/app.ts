@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import path from "path";
 import { userConsumer } from "./events/authConsumer";
 import { userUpdateConsumer } from "./events/userUpdateConsumer";
+import bodyParser from "body-parser";
 dotenv.config({ path: ".env" });
 
 const app = express();
@@ -16,7 +17,7 @@ declare module "express-session" {
   interface Session {}
 }
 
-app.use(express.json());
+app.use(bodyParser.json({ limit: "10mb" }));
 app.use(
   cors({
     origin: "http://localhost:5173",
