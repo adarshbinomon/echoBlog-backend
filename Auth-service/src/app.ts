@@ -26,15 +26,6 @@ declare module "express-session" {
   }
 }
 
-app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  })
-);
-
 app.use(
   session({
     secret: process.env.SECRET || "default-secret",
@@ -46,6 +37,15 @@ app.use(
     },
     store: store,
   } as SessionOptions)
+);
+
+app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
 );
 
 // userConsumer(dependencies);

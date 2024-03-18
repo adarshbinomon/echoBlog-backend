@@ -1,7 +1,14 @@
 import mongoose from "mongoose";
 
-const accountTypeEnum = ["private", "public"];
-const genderEnum = ["Male", "Female", "Other"];
+enum accountTypeEnum {
+  "private",
+  "public",
+}
+enum genderEnum {
+  "Male",
+  "Female",
+  "Other",
+}
 
 const userSchema = new mongoose.Schema({
   _id: {
@@ -33,7 +40,7 @@ const userSchema = new mongoose.Schema({
     // required: true,
   },
   posts: {
-    type: Array
+    type: Array,
   },
   gender: {
     type: String,

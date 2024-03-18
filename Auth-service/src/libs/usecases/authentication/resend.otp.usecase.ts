@@ -10,6 +10,7 @@ export const resendOtp_useCase = (dependencies: any) => {
     try {
       const otp = await sendMail(user.email, user.name);
       console.log(otp);
+    
 
       if (otp) {
         return {
