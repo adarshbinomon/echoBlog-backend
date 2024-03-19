@@ -70,6 +70,9 @@ const userSchema = new mongoose.Schema({
     type: Date,
     // required: true,
   },
+  savedPosts: {
+    type: Array,
+  },
 });
 
 const User = mongoose.model("User", userSchema);

@@ -68,4 +68,33 @@ export default {
       console.log(error, "error while finding user");
     }
   },
+
+  findAllUsersExcept: async (userId: string) => {
+    try {
+      const users = await User.find({ _id: { $ne: userId } });
+      if (users) {
+        return { status: true, users: users, message: "Users found" };
+      }
+    } catch (error) {
+      console.log("Error in find all user repository:", error);
+      return { status: false, message: "Users not found" };
+    }
+  },
+
+  addPostToSave: async (userId: string, postId: string) => {
+    try {
+      const response = await User.findByIdAndUpdate(
+        userId,
+        { $push: { savedPosts: postId } },
+        { new: true, useFindAndModify: false }
+      );
+
+      if (response) {
+        return { status: true, message: "post saved successfully" };
+      }
+    } catch (error) {
+      console.log("error in post save repository:", error);
+      return { status: false, message: "error in post save repository" };
+    }
+  },
 };

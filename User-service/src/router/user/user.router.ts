@@ -1,6 +1,9 @@
 import express from "express";
 import { userController } from "../../libs/controller/";
-import { uploadProfilePicture, uploadCoverPicture } from "../../helper/s3Multer";
+import {
+  uploadProfilePicture,
+  uploadCoverPicture,
+} from "../../helper/s3Multer";
 export default (dependencies: any) => {
   const router = express();
 
@@ -8,6 +11,7 @@ export default (dependencies: any) => {
     saveUserDataController,
     getUserController,
     editUserProfileController,
+    findAllUsersController,
   } = userController(dependencies);
 
   router.post("/user-details", saveUserDataController);
@@ -23,6 +27,7 @@ export default (dependencies: any) => {
     uploadCoverPicture,
     editUserProfileController
   );
+  router.get("/find-users/:userId", findAllUsersController);
 
   return router;
 };

@@ -59,7 +59,7 @@ export default {
 
   findPosts: async (id: string) => {
     try {
-      const response = await schema.Post.find({ createdBy: id });
+      const response = await schema.Post.find({ createdBy: id }).populate("createdBy");
       if (response) {
         return { status: true, message: "posts found", posts: response };
       } else {
@@ -209,4 +209,6 @@ export default {
       return { status: false, message: "comment add failed" };
     }
   },
+
+  
 };

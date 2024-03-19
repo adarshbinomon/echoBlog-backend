@@ -1,4 +1,5 @@
 import { PostData } from "../../../utils/interface";
+import { imgExtractor } from "../../../helper/imgExtractor";
 
 export const createPost_UseCase = (dependencies: any) => {
   const {
@@ -8,6 +9,10 @@ export const createPost_UseCase = (dependencies: any) => {
   const executeFunction = async (data: PostData) => {
     try {
       console.log("Use case received data:", data);
+      const image = imgExtractor(data?.content);
+
+      data = { ...data, image };
+      console.log(data);
 
       const response = await postRepository?.createPost(data);
 
@@ -25,5 +30,5 @@ export const createPost_UseCase = (dependencies: any) => {
     }
   };
 
-  return  {executeFunction} ;
+  return { executeFunction };
 };

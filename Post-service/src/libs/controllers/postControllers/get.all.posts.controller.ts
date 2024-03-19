@@ -6,8 +6,6 @@ export default (dependencies: any) => {
   } = dependencies;
   const getAllPostsController = async (req: Request, res: Response) => {
     try {
-        console.log('contorller');
-        
       const response = await getAllPosts_useCase(
         dependencies
       ).executeFunction();
@@ -24,6 +22,6 @@ export default (dependencies: any) => {
     } catch (error) {
       res.status(500).json({ status: false, message: "posts not found" });
     }
-};
-return getAllPostsController;
+  };
+  return getAllPostsController;
 };
