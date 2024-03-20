@@ -7,7 +7,9 @@ export const savePost_useCase = (dependenciees: any) => {
     try {
       const response = await userRepository.addPostToSave(userId, postId);
       if (response.status) {
-        return { status: true, message: response.message };
+        console.log('usecase',response);
+        
+        return { status: true, message: response.message, user: response.response };
       } else {
         return { status: false, message: response.message };
       }

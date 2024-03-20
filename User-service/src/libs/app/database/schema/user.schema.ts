@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 enum accountTypeEnum {
-  "private",
-  "public",
+  "Private",
+  "Public",
 }
 enum genderEnum {
   "Male",
@@ -72,6 +72,10 @@ const userSchema = new mongoose.Schema({
   },
   savedPosts: {
     type: Array,
+  },
+  isActive: {
+    type: Boolean,
+    default: true,
   },
 });
 

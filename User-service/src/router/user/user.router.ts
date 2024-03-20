@@ -12,6 +12,10 @@ export default (dependencies: any) => {
     getUserController,
     editUserProfileController,
     findAllUsersController,
+    savePostController,
+    followUserController,
+    findAllUsersAdminController,
+    changeUserStatusAdminController,
   } = userController(dependencies);
 
   router.post("/user-details", saveUserDataController);
@@ -28,6 +32,13 @@ export default (dependencies: any) => {
     editUserProfileController
   );
   router.get("/find-users/:userId", findAllUsersController);
+  router.put("/save-post", savePostController);
+  router.post("/follow-user", followUserController);
+
+  //admin routes
+
+  router.get("/find-all-users", findAllUsersAdminController);
+  router.put("/change-user-status/:userId", changeUserStatusAdminController);
 
   return router;
 };

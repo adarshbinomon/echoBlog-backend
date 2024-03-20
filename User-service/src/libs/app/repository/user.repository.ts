@@ -83,18 +83,131 @@ export default {
 
   addPostToSave: async (userId: string, postId: string) => {
     try {
-      const response = await User.findByIdAndUpdate(
+      console.log("userId", userId);
+      console.log("postId", postId);
+
+      const user = await User.findById(userId);
+      if (!user) {
+        return { status: false, message: "User not found" };
+      }
+
+      const response = user.savedPosts.includes(postId)
+        ? await User.findByIdAndUpdate(
+            userId,
+            { $pull: { savedPosts: postId } },
+            { new: true, useFindAndModify: false }
+          )
+        : await User.findByIdAndUpdate(
+            userId,
+            { $push: { savedPosts: postId } },
+            { new: true, useFindAndModify: false }
+          );
+
+      console.log("response", response);
+
+      if (response) {
+        return {
+          status: true,
+          message: "Post saved successfully",
+          response: response,
+        };
+      } else {
+        return { status: false, message: "Post save failed" };
+      }
+    } catch (error) {
+      console.log("Error in post save repository:", error);
+      return { status: false, message: "Error in post save repository" };
+    }
+  },
+
+  followUser: async (userId: string, userToBeFollowed: string) => {
+    try {
+      const addFollowingInUser = await User.findByIdAndUpdate(
         userId,
-        { $push: { savedPosts: postId } },
+        { $push: { following: userToBeFollowed } },
         { new: true, useFindAndModify: false }
       );
 
-      if (response) {
-        return { status: true, message: "post saved successfully" };
+      const addFollowerInFollowedUSer = await User.findByIdAndUpdate(
+        userToBeFollowed,
+        { $push: { followers: userId } },
+        { new: true, useFindAndModify: false }
+      );
+      if (addFollowerInFollowedUSer && addFollowingInUser) {
+        return {
+          status: true,
+          message: `Followed ${addFollowerInFollowedUSer.name}`,
+          user: addFollowingInUser,
+        };
+      } else {
+        return { status: false, message: "follow failed" };
       }
     } catch (error) {
-      console.log("error in post save repository:", error);
-      return { status: false, message: "error in post save repository" };
+      console.log("error in folloUser repository:", error);
+      return { status: false, message: "follow failed" };
+    }
+  },
+  unFollowUser: async (userId: string, userToBeFollowed: string) => {
+    try {
+      const removeFollowingInUser = await User.findByIdAndUpdate(
+        userId,
+        { $pull: { following: userToBeFollowed } },
+        { new: true, useFindAndModify: false }
+      );
+
+      const removeFollowerInFollowedUSer = await User.findByIdAndUpdate(
+        userToBeFollowed,
+        { $push: { followers: userId } },
+        { new: true, useFindAndModify: false }
+      );
+      if (removeFollowingInUser && removeFollowerInFollowedUSer) {
+        return {
+          status: true,
+          message: `Unfollowed ${removeFollowerInFollowedUSer.name}`,
+          user: removeFollowingInUser,
+        };
+      } else {
+        return { status: false, message: "unfollow failed" };
+      }
+    } catch (error) {
+      console.log("error in followUser repository:", error);
+      return { status: false, message: " unfollow failed" };
+    }
+  },
+
+  findAllUsers: async () => {
+    try {
+      const users = await User.find();
+
+      if (users) {
+        return { status: true, message: "users found", users: users };
+      } else {
+        return { status: false, message: "users not found" };
+      }
+    } catch (error) {
+      console.log("error in findAllUsers repository:", error);
+      return { status: false, message: "users not found" };
+    }
+  },
+
+  changeUserStatus: async (userId: string) => {
+    try {
+      const user = await User.findById(userId);
+
+      if (!user) {
+        console.log("User not found");
+        return;
+      }
+
+      user.isActive = !user.isActive;
+      await user.save();
+      if (user) {
+        return { status: true, message: "userstatus changed", user: user };
+      } else {
+        return { status: false, message: "userstatus change failed" };
+      }
+    } catch (error) {
+      console.error("Error toggling isActive:", error);
     }
   },
 };

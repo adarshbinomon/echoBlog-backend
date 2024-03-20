@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import { UserData } from "../../../utils/interfaces/interfaces";
 
 export const createUserController = async (dependencies: any, data: UserData) => {

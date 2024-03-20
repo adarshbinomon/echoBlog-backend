@@ -4,6 +4,9 @@ import {
   editUserProfile_useCase,
   findAllUsers_useCase,
   savePost_useCase,
+  followUser_useCase,
+  findAllUsersAdmin_useCase,
+  changeUserStatus_useCase,
 } from "./user";
 
 export {
@@ -12,4 +15,7 @@ export {
   editUserProfile_useCase,
   findAllUsers_useCase,
   savePost_useCase,
+  followUser_useCase,
+  findAllUsersAdmin_useCase,
+  changeUserStatus_useCase,
 };
