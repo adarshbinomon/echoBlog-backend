@@ -5,8 +5,9 @@ import editPost_controller from "./edit.post.controller";
 import deletePost_controller from "./delete.post.controller";
 import getAllPosts_Controller from "./get.all.posts.controller";
 import likePost_Controller from "./like.post.controller";
-import addComment_controller from './add.comment.controller'
-
+import addComment_controller from "./add.comment.controller";
+import updatePostStatusAdmin_controller from "./update.post.status.admin.controller";
+import getAllPostsAdmin_Controller from "./get.all.posts.admin.controller";
 export default (dependencies: any) => {
   return {
     createPostController: createPost_controller(dependencies),
@@ -16,6 +17,9 @@ export default (dependencies: any) => {
     deletePostController: deletePost_controller(dependencies),
     getAllPostsController: getAllPosts_Controller(dependencies),
     likePostController: likePost_Controller(dependencies),
-    addCommentController: addComment_controller(dependencies)
+    addCommentController: addComment_controller(dependencies),
+    updatePostStatusAdminController:
+      updatePostStatusAdmin_controller(dependencies),
+    getAllPostsAdminController: getAllPostsAdmin_Controller(dependencies),
   };
 };

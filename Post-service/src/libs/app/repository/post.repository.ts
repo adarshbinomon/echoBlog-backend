@@ -1,6 +1,5 @@
-import { CommentObject, UserData } from "../../../utils/interface";
+import { CommentObject, UserData, PostData } from "../../../utils/interface";
 import { schema } from "../database";
-import { PostData } from "../../../utils/interface";
 
 const { User, Post } = schema;
 
@@ -143,6 +142,20 @@ export default {
 
   getAllPosts: async () => {
     try {
+      const response = await Post.find({ visibility: true }).populate(
+        "createdBy"
+      );
+      return {
+        status: true,
+        message: "posts found successfully",
+        posts: response,
+      };
+    } catch (error) {
+      return { status: false, message: "post not found" };
+    }
+  },
+  getAllPostsForAdmin: async () => {
+    try {
       const response = await Post.find().populate("createdBy");
       return {
         status: true,
@@ -212,5 +225,24 @@ export default {
     }
   },
 
-  
+  updatePostStatus: async (postId: string) => {
+    try {
+      const post = await Post.findById(postId);
+
+      if (!post) {
+        console.log("post not found");
+        return;
+      }
+
+      post.visibility = !post.visibility;
+      await post.save();
+      if (post) {
+        return { status: true, message: "poststatus changed", post: post };
+      } else {
+        return { status: false, message: "poststatus change failed" };
+      }
+    } catch (error) {
+      console.error("Error toggling isActive:", error);
+    }
+  },
 };

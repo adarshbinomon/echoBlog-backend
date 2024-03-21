@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const postType = ["Free", "Exclusive"];
+enum postType  {"Free", "Exclusive"}
 
 const postSchema = new mongoose.Schema({
   // _id: {
@@ -22,6 +22,7 @@ const postSchema = new mongoose.Schema({
   },
   postType: {
     type: String,
+    enum: postType
   },
   createdBy: {
     type: String,

@@ -7,6 +7,8 @@ import {
   getAllPosts_useCase,
   likePost_useCase,
   addComment_Usecase,
+  updataPostStatus_useCase,
+  getAllPostsAdmin_useCase,
 } from "./post";
 
 export {
@@ -18,4 +20,6 @@ export {
   getAllPosts_useCase,
   likePost_useCase,
   addComment_Usecase,
+  updataPostStatus_useCase,
+  getAllPostsAdmin_useCase,
 };

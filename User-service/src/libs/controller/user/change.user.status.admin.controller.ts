@@ -5,6 +5,7 @@ export default (dependencies: any) => {
   const {
     useCase: { changeUserStatus_useCase },
   } = dependencies;
+  console.log(changeUserStatus_useCase);
 
   const changeUserStatusAdminController = async (
     req: Request,

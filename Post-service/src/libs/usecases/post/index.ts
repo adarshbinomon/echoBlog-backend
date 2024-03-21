@@ -6,6 +6,8 @@ import { deletePost_useCase } from "./delete.post.usecase";
 import { getAllPosts_useCase } from "./find.all.posts.usecase";
 import { likePost_useCase } from "./like.post.usecase";
 import { addComment_Usecase } from "./add.comment.usecase";
+import { updataPostStatus_useCase } from "./update.post.status.admin.usecase";
+import { getAllPostsAdmin_useCase } from "./get.all.posts.admin.usecase";
 
 export {
   createPost_UseCase,
@@ -16,4 +18,6 @@ export {
   getAllPosts_useCase,
   likePost_useCase,
   addComment_Usecase,
+  updataPostStatus_useCase,
+  getAllPostsAdmin_useCase,
 };

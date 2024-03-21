@@ -7,7 +7,9 @@ import {
   deletePost_useCase,
   getAllPosts_useCase,
   likePost_useCase,
-  addComment_Usecase
+  addComment_Usecase,
+  updataPostStatus_useCase,
+  getAllPostsAdmin_useCase,
 } from "../libs/usecases";
 import {
   createUserUsecase,
@@ -22,7 +24,9 @@ const useCase: any = {
   deletePost_useCase,
   getAllPosts_useCase,
   likePost_useCase,
-  addComment_Usecase
+  addComment_Usecase,
+  updataPostStatus_useCase,
+  getAllPostsAdmin_useCase,
 };
 
 const repository: any = {

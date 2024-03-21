@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import dependencies from "../../../config/dependencies";
 
 export default (dependencies: any) => {
   const {
