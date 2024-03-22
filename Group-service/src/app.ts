@@ -3,6 +3,8 @@ import cors from "cors";
 import dependencies from "./config/dependencies";
 import { routes } from "./router/index";
 import session, { MemoryStore, SessionOptions } from "express-session";
+import { userConsumer } from "./events/authConsumer";
+import { userUpdateConsumer } from "./events/userUpdateConsumer";
 import dotenv from "dotenv";
 dotenv.config({ path: "src/.env" });
 
@@ -46,6 +48,9 @@ app.use(
     credentials: true,
   })
 );
+
+userConsumer(dependencies);
+userUpdateConsumer(dependencies);
 
 
 app.use(express.urlencoded({ extended: true }));

@@ -4,10 +4,17 @@ import { communityController } from "../../libs/controller";
 export default (dependencies: any) => {
   const router = express();
 
-  const { createCommunityController } = communityController(dependencies);
+  const {
+    createCommunityController,
+    getCommunityController,
+    getAllCommunityController,
+    joinCommunityController,
+  } = communityController(dependencies);
 
   router.post("/create-community", createCommunityController);
-  //   router.get("/logout", adminLogoutController);
+  router.get("/get-community/:communityId", getCommunityController);
+  router.get("/get-all-communities/:userId", getAllCommunityController);
+  router.put("/join-community", joinCommunityController);
 
   return router;
 };

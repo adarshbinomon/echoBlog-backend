@@ -13,19 +13,15 @@ enum genderEnum {
 const userSchema = new mongoose.Schema({
   _id: {
     type: String,
-    // required: true,
   },
   name: {
     type: String,
-    // required: true,
   },
   email: {
     type: String,
-    // required: true,
   },
   userName: {
     type: String,
-    // required: true,
   },
   following: Array,
   followers: Array,
@@ -37,7 +33,6 @@ const userSchema = new mongoose.Schema({
   bio: String,
   phone: {
     type: String,
-    // required: true,
   },
   posts: {
     type: Array,
@@ -48,7 +43,6 @@ const userSchema = new mongoose.Schema({
   },
   dateOfBirth: {
     type: Date,
-    // required: true,
   },
   profilePicture: {
     type: String,
@@ -63,12 +57,10 @@ const userSchema = new mongoose.Schema({
   InterestedTags: Array,
   createdOn: {
     type: Date,
-    // required: true,
     default: Date.now(),
   },
   editedOn: {
     type: Date,
-    // required: true,
   },
   savedPosts: {
     type: Array,
@@ -77,6 +69,7 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  community: Array,
 });
 
 const User = mongoose.model("User", userSchema);

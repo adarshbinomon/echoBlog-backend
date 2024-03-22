@@ -8,13 +8,16 @@ export default (dependencies: any) => {
   const createCommunityController = async (req: Request, res: Response) => {
     try {
       const data = { ...req.body };
-      const { executeFunction } = await createCommunity_usecase(dependencies);
-      const response = await executeFunction(data);
+      
+      const response = await createCommunity_usecase(
+        dependencies
+        ).executeFunction(data);
+        console.log(response);
       if (response.status) {
         res.status(201).json({
           status: true,
           message: response.message,
-          community: response.commuinity,
+          community: response.community,
         });
       } else {
         res.status(500).json({ status: false, message: response.message });
