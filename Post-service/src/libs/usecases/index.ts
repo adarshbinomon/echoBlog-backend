@@ -9,6 +9,8 @@ import {
   addComment_Usecase,
   updataPostStatus_useCase,
   getAllPostsAdmin_useCase,
+  getUserCommunityPost_useCase,
+  getCommunityPosts_useCase,
 } from "./post";
 
 export {
@@ -22,4 +24,6 @@ export {
   addComment_Usecase,
   updataPostStatus_useCase,
   getAllPostsAdmin_useCase,
+  getUserCommunityPost_useCase,
+  getCommunityPosts_useCase,
 };

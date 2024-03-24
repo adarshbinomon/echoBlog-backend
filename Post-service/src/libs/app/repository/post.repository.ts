@@ -58,9 +58,10 @@ export default {
 
   findPosts: async (id: string) => {
     try {
-      const response = await schema.Post.find({ createdBy: id }).populate(
-        "createdBy"
-      );
+      const response = await schema.Post.find({
+        createdBy: id,
+        communityId: { $exists: false },
+      }).populate("createdBy");
       if (response) {
         return { status: true, message: "posts found", posts: response };
       } else {
@@ -243,6 +244,39 @@ export default {
       }
     } catch (error) {
       console.error("Error toggling isActive:", error);
+    }
+  },
+
+  findUserCommunityPosts: async (id: string) => {
+    try {
+      const response = await Post.find({
+        createdBy: id,
+        communityId: { $exists: true },
+      }).populate("createdBy");
+      if (response) {
+        return { status: true, message: "posts found", posts: response };
+      } else {
+        return { status: false, message: "posts not found" };
+      }
+    } catch (error) {
+      console.log("error in find post repository", error);
+
+      return { status: false, message: "posts not found" };
+    }
+  },
+
+  findCommunityPosts: async (communityId: string) => {
+    try {
+      const response = await Post.find({ communityId: communityId }).populate('createdBy')
+
+      if (response) {
+        return { status: true, message: "posts found", posts: response };
+      } else {
+        return { status: false, message: "posts not found" };
+      }
+    } catch (error) {
+      console.log("error in find community posts repository:", error);
+      return { status: false, message: "posts not found" };
     }
   },
 };

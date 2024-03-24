@@ -210,4 +210,36 @@ export default {
       console.error("Error toggling isActive:", error);
     }
   },
+
+  joinCommunity: async (userId: string, communityId: string) => {
+    try {
+      const response = await User.findByIdAndUpdate(userId, {
+        $push: { community: communityId },
+      });
+      if (response) {
+        return { status: true, message: "communityId added to user" };
+      } else {
+        return { status: false, message: "communityId not added to user" };
+      }
+    } catch (error) {
+      console.log("error in join community reopsitory:", error);
+
+      return { status: false, message: "communityId not added to user" };
+    }
+  },
+
+  getCommunityMembers: async (communityId: string) => {
+    try {
+      const users = await User.find({ community: { $in: [communityId] } });
+
+      if (users) {
+        return { status: true, message: "users found", users: users };
+      } else {
+        return { status: false, message: "users not found" };
+      }
+    } catch (error) {
+      console.log("error in find community members repository:", error);
+      return { status: false, message: "users not found" };
+    }
+  },
 };

@@ -9,12 +9,14 @@ export default (dependencies: any) => {
     getCommunityController,
     getAllCommunityController,
     joinCommunityController,
+    getUserCommunitiesController,
   } = communityController(dependencies);
 
   router.post("/create-community", createCommunityController);
   router.get("/get-community/:communityId", getCommunityController);
   router.get("/get-all-communities/:userId", getAllCommunityController);
   router.put("/join-community", joinCommunityController);
+  router.get("/get-user-communities/:userId", getUserCommunitiesController);
 
   return router;
 };

@@ -7,9 +7,13 @@ import {
   savePost_useCase,
   followUser_useCase,
   findAllUsersAdmin_useCase,
-  changeUserStatus_useCase
+  changeUserStatus_useCase,
+  getCommunityMembers_useCase,
 } from "../libs/usecases";
-import { createUserUsecase } from "../libs/usecases/consumerUsecases";
+import {
+  createUserUsecase,
+  joinCommunity_useCase,
+} from "../libs/usecases/consumerUsecases";
 
 const useCase: any = {
   saveUserData_useCase,
@@ -19,7 +23,8 @@ const useCase: any = {
   savePost_useCase,
   followUser_useCase,
   findAllUsersAdmin_useCase,
-  changeUserStatus_useCase
+  changeUserStatus_useCase,
+  getCommunityMembers_useCase,
 };
 
 const repository: any = {
@@ -28,6 +33,7 @@ const repository: any = {
 
 const consumeUsecase: any = {
   createUserUsecase,
+  joinCommunity_useCase,
 };
 
 export default {

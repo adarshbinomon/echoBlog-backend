@@ -4,6 +4,7 @@ import {
   getCommunity_useCase,
   getAllCommunities_useCase,
   joinCommunity_useCase,
+  getUserCommunities_useCase,
 } from "../libs/usecase";
 import {
   createUserUsecase,
@@ -15,6 +16,7 @@ const useCase: any = {
   getCommunity_useCase,
   getAllCommunities_useCase,
   joinCommunity_useCase,
+  getUserCommunities_useCase,
 };
 
 const consumeUsecase: any = { createUserUsecase, updateUserUsecase };

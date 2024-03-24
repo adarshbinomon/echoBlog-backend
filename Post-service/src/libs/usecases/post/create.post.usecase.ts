@@ -12,7 +12,7 @@ export const createPost_UseCase = (dependencies: any) => {
       const image = imgExtractor(data?.content);
 
       data = { ...data, image };
-      console.log(data);
+      console.log('usecase',data);
 
       const response = await postRepository?.createPost(data);
 

@@ -16,6 +16,7 @@ export default (dependencies: any) => {
     followUserController,
     findAllUsersAdminController,
     changeUserStatusAdminController,
+    getCommunityMembersController,
   } = userController(dependencies);
 
   router.post("/user-details", saveUserDataController);
@@ -34,6 +35,10 @@ export default (dependencies: any) => {
   router.get("/find-users/:userId", findAllUsersController);
   router.put("/save-post", savePostController);
   router.post("/follow-user", followUserController);
+  router.get(
+    "/get-community-members/:communityId",
+    getCommunityMembersController
+  );
 
   //admin routes
 

@@ -7,6 +7,7 @@ import {
   followUser_useCase,
   findAllUsersAdmin_useCase,
   changeUserStatus_useCase,
+  getCommunityMembers_useCase,
 } from "./user";
 
 export {
@@ -18,4 +19,5 @@ export {
   followUser_useCase,
   findAllUsersAdmin_useCase,
   changeUserStatus_useCase,
+  getCommunityMembers_useCase,
 };

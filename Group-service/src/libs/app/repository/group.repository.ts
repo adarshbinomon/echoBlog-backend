@@ -88,7 +88,7 @@ export default {
       if (response) {
         return {
           status: true,
-          message: "communities found",
+          message: "communities found!",
           communities: response,
         };
       } else {
@@ -107,7 +107,6 @@ export default {
         { $push: { members: userId } },
         { new: true }
       );
-      console.log(response);
 
       if (response) {
         return {
@@ -127,6 +126,26 @@ export default {
         status: false,
         message: "Join to community not successful",
       };
+    }
+  },
+
+  getUserCommunities: async (userId: string) => {
+    try {
+
+      const response = await Community.find({ members: userId });
+
+      if (response) {
+        return {
+          status: true,
+          message: "communities found",
+          communities: response,
+        };
+      } else {
+        return { status: false, message: "communities not found" };
+      }
+    } catch (error) {
+      console.log("error in get user community group repository:", error);
+      return { status: false, message: "communities not found" };
     }
   },
 };

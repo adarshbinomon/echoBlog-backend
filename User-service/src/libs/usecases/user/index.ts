@@ -6,6 +6,7 @@ import { savePost_useCase } from "./save.post.usecase";
 import { followUser_useCase } from "./follow.user.usecase";
 import { findAllUsersAdmin_useCase } from "./find.all.users.admin.usecase";
 import { changeUserStatus_useCase } from "./change.user.status.usecase";
+import { getCommunityMembers_useCase } from "./get.community.members.usecase";
 
 export {
   saveUserData_useCase,
@@ -16,4 +17,5 @@ export {
   followUser_useCase,
   findAllUsersAdmin_useCase,
   changeUserStatus_useCase,
+  getCommunityMembers_useCase,
 };

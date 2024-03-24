@@ -14,15 +14,16 @@ export default (dependencies: any) => {
     likePostController,
     addCommentController,
     updatePostStatusAdminController,
-    getAllPostsAdminController
+    getAllPostsAdminController,
+    getUserCommunityPostController,
+    getCommunityPostsController,
   } = postController(dependencies);
 
   //admin routes
-  
-  router.put("/update-post-status/:postId",updatePostStatusAdminController);
-  router.get("/all-posts",getAllPostsAdminController)
 
-  
+  router.put("/update-post-status/:postId", updatePostStatusAdminController);
+  router.get("/all-posts", getAllPostsAdminController);
+
   //user routes
 
   router.get("/posts", getAllPostsController);
@@ -33,7 +34,11 @@ export default (dependencies: any) => {
   router.get("/delete-post/:id", deletePostController);
   router.post("/like-post/:postId", likePostController);
   router.post("/comment-post/:postId", addCommentController);
-  
+  router.get(
+    "/get-user-community-post/:userId",
+    getUserCommunityPostController
+  );
+  router.get("/get-community-posts/:communityId", getCommunityPostsController);
 
   return router;
 };

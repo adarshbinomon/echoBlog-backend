@@ -6,6 +6,7 @@ import session, { MemoryStore, SessionOptions } from "express-session";
 import dotenv from "dotenv";
 import path from "path";
 import { userConsumer } from "./events/authConsumer";
+import { communityConsumer } from "./events/communityConsumer";
 dotenv.config({ path: "src/.env" });
 
 const app = express();
@@ -40,6 +41,7 @@ app.use(
 );
 
 userConsumer(dependencies);
+communityConsumer(dependencies);
 
 app.use(express.urlencoded({ extended: true }));
 

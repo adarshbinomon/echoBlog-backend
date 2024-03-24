@@ -10,6 +10,8 @@ import {
   addComment_Usecase,
   updataPostStatus_useCase,
   getAllPostsAdmin_useCase,
+  getUserCommunityPost_useCase,
+  getCommunityPosts_useCase,
 } from "../libs/usecases";
 import {
   createUserUsecase,
@@ -27,6 +29,8 @@ const useCase: any = {
   addComment_Usecase,
   updataPostStatus_useCase,
   getAllPostsAdmin_useCase,
+  getUserCommunityPost_useCase,
+  getCommunityPosts_useCase,
 };
 
 const repository: any = {

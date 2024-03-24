@@ -34,3 +34,8 @@ export interface MulterS3File {
   location: string;
   etag: string;
 }
+
+export interface communityKafka {
+  userId: string;
+  communityId: string;
+}

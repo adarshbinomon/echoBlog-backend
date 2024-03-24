@@ -40,6 +40,7 @@ const postSchema = new mongoose.Schema({
   },
   communityId: {
     type: String,
+    ref: 'Community'
   },
   visibility: {
     type: Boolean,

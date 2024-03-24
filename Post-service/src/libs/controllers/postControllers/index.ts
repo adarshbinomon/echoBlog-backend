@@ -8,6 +8,9 @@ import likePost_Controller from "./like.post.controller";
 import addComment_controller from "./add.comment.controller";
 import updatePostStatusAdmin_controller from "./update.post.status.admin.controller";
 import getAllPostsAdmin_Controller from "./get.all.posts.admin.controller";
+import getUserCommunityPost_controller from "./get.user.community.post.controller";
+import getCommunityPosts_controller from "./get.community.posts.controller";
+
 export default (dependencies: any) => {
   return {
     createPostController: createPost_controller(dependencies),
@@ -21,5 +24,8 @@ export default (dependencies: any) => {
     updatePostStatusAdminController:
       updatePostStatusAdmin_controller(dependencies),
     getAllPostsAdminController: getAllPostsAdmin_Controller(dependencies),
+    getUserCommunityPostController:
+      getUserCommunityPost_controller(dependencies),
+    getCommunityPostsController: getCommunityPosts_controller(dependencies),
   };
 };

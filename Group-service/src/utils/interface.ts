@@ -14,3 +14,8 @@ export interface UserData {
   isGoogle?: boolean;
   _id?: string;
 }
+
+export interface dataForKafka {
+  userId: string
+  communityId: string
+}

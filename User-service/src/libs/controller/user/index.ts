@@ -6,6 +6,7 @@ import save_post_controller from "./save.post.controller";
 import follow_user_controller from "./follow.user.controller";
 import find_all_users_admin_controller from "./find.all.user.admin.controller";
 import change_user_status_admin_controller from "./change.user.status.admin.controller";
+import get_community_members_controller from "./get.community.members.controller";
 
 export default (dependencies: any) => {
   return {
@@ -18,5 +19,7 @@ export default (dependencies: any) => {
     findAllUsersAdminController: find_all_users_admin_controller(dependencies),
     changeUserStatusAdminController:
       change_user_status_admin_controller(dependencies),
+    getCommunityMembersController:
+      get_community_members_controller(dependencies),
   };
 };
