@@ -10,6 +10,7 @@ import updatePostStatusAdmin_controller from "./update.post.status.admin.control
 import getAllPostsAdmin_Controller from "./get.all.posts.admin.controller";
 import getUserCommunityPost_controller from "./get.user.community.post.controller";
 import getCommunityPosts_controller from "./get.community.posts.controller";
+import replyToCommentController from "./reply.to.comment.controller";
 
 export default (dependencies: any) => {
   return {
@@ -27,5 +28,6 @@ export default (dependencies: any) => {
     getUserCommunityPostController:
       getUserCommunityPost_controller(dependencies),
     getCommunityPostsController: getCommunityPosts_controller(dependencies),
+    replyToCommentController: replyToCommentController(dependencies)
   };
 };

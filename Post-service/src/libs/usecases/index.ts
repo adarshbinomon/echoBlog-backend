@@ -11,6 +11,7 @@ import {
   getAllPostsAdmin_useCase,
   getUserCommunityPost_useCase,
   getCommunityPosts_useCase,
+  replyToComment_useCase,
 } from "./post";
 
 export {
@@ -26,4 +27,5 @@ export {
   getAllPostsAdmin_useCase,
   getUserCommunityPost_useCase,
   getCommunityPosts_useCase,
+  replyToComment_useCase,
 };

@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
+import { dependencies } from "../../../../utils/dependencies,interface";
 
-export default (dependencies: any) => {
+export default (dependencies: dependencies) => {
   const {
     useCase: { addUser_useCases },
   } = dependencies;

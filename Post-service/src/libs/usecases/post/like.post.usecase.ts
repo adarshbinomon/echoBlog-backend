@@ -1,6 +1,6 @@
-import dependencies from "../../../config/dependencies";
+import { dependencies } from "../../../utils/dependency.interface";
 
-export const likePost_useCase = (dependencies: any) => {
+export const likePost_useCase = (dependencies: dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;

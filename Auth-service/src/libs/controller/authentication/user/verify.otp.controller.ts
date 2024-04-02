@@ -1,7 +1,8 @@
 import { Response, Request } from "express";
 import { userProducer } from "../../../../events/userProduces";
+import { dependencies } from "../../../../utils/dependencies,interface";
 
-export default (dependencies: any) => {
+export default (dependencies: dependencies) => {
   const {
     useCase: { verifyOtp_useCase },
   } = dependencies;

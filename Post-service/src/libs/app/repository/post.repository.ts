@@ -1,5 +1,7 @@
+import { Types } from "mongoose";
 import { CommentObject, UserData, PostData } from "../../../utils/interface";
 import { schema } from "../database";
+import { ObjectId } from "mongodb";
 
 const { User, Post } = schema;
 
@@ -207,6 +209,8 @@ export default {
 
   addComment: async (postId: string, comment: CommentObject) => {
     try {
+      console.log("comment:", comment);
+
       const response = await Post.findByIdAndUpdate(
         postId,
         {
@@ -267,7 +271,9 @@ export default {
 
   findCommunityPosts: async (communityId: string) => {
     try {
-      const response = await Post.find({ communityId: communityId }).populate('createdBy')
+      const response = await Post.find({ communityId: communityId }).populate(
+        "createdBy"
+      );
 
       if (response) {
         return { status: true, message: "posts found", posts: response };
@@ -277,6 +283,37 @@ export default {
     } catch (error) {
       console.log("error in find community posts repository:", error);
       return { status: false, message: "posts not found" };
+    }
+  },
+
+  replyToComment: async (postId: string, commentData: CommentObject) => {
+    try {
+      console.log("commentData:", commentData);
+
+      const post = await Post.findById(postId);
+      const commentId = commentData.commentId;
+
+      if (!post) {
+        return { status: false, message: "Post not found" };
+      }
+
+      const comment = post.comment.find(
+        (comment) => comment._id.toString() === commentId
+      );
+
+      if (!comment) {
+        return { status: false, message: "Comment not found" };
+      }
+      comment.replies.push(commentData);
+      const replies = await post.save();
+      if (replies) {
+        console.log(replies);
+
+        return { status: true, message: "reply added", comment };
+      }
+    } catch (error) {
+      console.log("error in reply to comment repository:", error);
+      return { status: false, message: "error in adding reply" };
     }
   },
 };

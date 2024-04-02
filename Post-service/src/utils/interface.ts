@@ -1,3 +1,5 @@
+import { ObjectId } from "mongoose";
+
 export interface UserData {
   name: string;
   email: string;
@@ -25,9 +27,12 @@ export interface PostData {
 }
 
 export interface CommentObject {
+  commentId: string
   userId: string;
   comment: string;
   name: string;
   profilePicture: string;
   userName: string;
+  _id: ObjectId
+  reply?:any[]
 }

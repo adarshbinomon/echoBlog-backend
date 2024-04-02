@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import dependencies from "../../../config/dependencies";
+import { dependencies } from "../../../utils/dependency.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: dependencies) => {
   const {
     useCase: { getUserCommunityPost_useCase },
   } = dependencies;

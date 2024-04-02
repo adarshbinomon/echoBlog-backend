@@ -1,8 +1,9 @@
+import { dependencies } from "../../../utils/interfaces/dependency.interface";
 import userRepository from "../../app/repository/user.repository";
 
-export const followUser_useCase = (dependencies: any) => {
+export const followUser_useCase = (dependencies: dependencies) => {
   const {
-    repository: { folloWUser, findUser },
+    repository: { userRepository },
   } = dependencies;
 
   const executeFunction = async (

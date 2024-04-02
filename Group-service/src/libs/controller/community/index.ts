@@ -3,6 +3,7 @@ import getCommunity_controller from "./get.community.controller";
 import getAllCommunities_controller from "./get.all.communities.controller";
 import joinCommunity_controller from "./join.community.controller";
 import getUserCommunities_controller from "./get.user.community.controller";
+import editCommunity_controller from "./edit.community.controller";
 
 export default (dependencies: any) => {
   return {
@@ -11,5 +12,6 @@ export default (dependencies: any) => {
     getAllCommunityController: getAllCommunities_controller(dependencies),
     joinCommunityController: joinCommunity_controller(dependencies),
     getUserCommunitiesController: getUserCommunities_controller(dependencies),
+    editCommunityController: editCommunity_controller(dependencies)
   };
 };

@@ -1,9 +1,10 @@
 import { createAccessToken, createRefreshToken } from "../../../utils/jwt";
 import { UserData } from "../../../utils/interface";
+import { dependencies } from "../../../utils/dependencies,interface";
 
 
 
-export const userGoogleLogin_useCase = (dependencies: any) => {
+export const userGoogleLogin_useCase = (dependencies: dependencies) => {
   const {
     repository: { authenticationRepository },
   } = dependencies;

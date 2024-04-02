@@ -17,6 +17,7 @@ export default (dependencies: any) => {
     getAllPostsAdminController,
     getUserCommunityPostController,
     getCommunityPostsController,
+    replyToCommentController,
   } = postController(dependencies);
 
   //admin routes
@@ -39,6 +40,7 @@ export default (dependencies: any) => {
     getUserCommunityPostController
   );
   router.get("/get-community-posts/:communityId", getCommunityPostsController);
+  router.post("/reply-to-comment/:postId", replyToCommentController);
 
   return router;
 };

@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
+import { dependencies } from "../../../utils/interfaces/dependency.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: dependencies) => {
   const {
     useCase: { findAllUsersAdmin_useCase },
   } = dependencies;
 
   const findAllUsersAdminController = async (req: Request, res: Response) => {
-    console.log("controller");
 
     try {
       const response = await findAllUsersAdmin_useCase(

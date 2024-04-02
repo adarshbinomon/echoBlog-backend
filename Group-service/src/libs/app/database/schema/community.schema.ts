@@ -18,6 +18,7 @@ const communitySchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  // admins
 });
 
 const Community = mongoose.model("Community", communitySchema);

@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { PostData } from "../../../utils/interface";
+import { dependencies } from "../../../utils/dependency.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: dependencies) => {
   const {
     useCase: { createPost_UseCase },
   } = dependencies;

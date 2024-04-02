@@ -1,25 +1,21 @@
 import { dependencies } from "../../../utils/dependency.interface";
+import { CommentObject } from "../../../utils/interface";
 
-export const deletePost_useCase = (dependencies: dependencies) => {
+export const replyToComment_useCase = (dependencies: dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;
 
-  const executeFunction = async (id: string) => {
+  const executeFunction = async (postId: string, commentData: CommentObject) => {
     try {
-        console.log('usecase:', id);
-
-      const response = await postRepository?.deletePost(id);
+      const response = await postRepository.replyToComment(postId, commentData);
       if (response.status) {
         return { status: true, message: response.message };
       } else {
         return { status: false, message: response.message };
       }
-    } catch (error) {
-      console.log("error:", error);
-
-      return { status: false, message:'error in delete post usecase' };
-    }
+    } catch (error) {}
   };
+
   return { executeFunction };
 };

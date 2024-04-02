@@ -12,6 +12,7 @@ import {
   getAllPostsAdmin_useCase,
   getUserCommunityPost_useCase,
   getCommunityPosts_useCase,
+  replyToComment_useCase,
 } from "../libs/usecases";
 import {
   createUserUsecase,
@@ -31,6 +32,7 @@ const useCase: any = {
   getAllPostsAdmin_useCase,
   getUserCommunityPost_useCase,
   getCommunityPosts_useCase,
+  replyToComment_useCase,
 };
 
 const repository: any = {

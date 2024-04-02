@@ -3,19 +3,21 @@ import { dependencies } from "../../../utils/dependencies.interface";
 
 export default (dependencies: dependencies) => {
   const {
-    useCase: { createCommunity_usecase },
+    useCase: { editCommunity_useCase },
   } = dependencies;
 
-  const createCommunityController = async (req: Request, res: Response) => {
+  const editCommunityController = async (req: Request, res: Response) => {
     try {
-      const data = { ...req.body };
+      const data = req.body;
+      console.log("dataaaaa", data);
 
-      const response = await createCommunity_usecase(
+      const communityId = req.params.communityId;
+
+      const response = await editCommunity_useCase(
         dependencies
-      ).executeFunction(data);
-      console.log(response);
+      ).executeFunction(communityId, data);
       if (response.status) {
-        res.status(201).json({
+        res.status(200).json({
           status: true,
           message: response.message,
           community: response.community,
@@ -24,11 +26,11 @@ export default (dependencies: dependencies) => {
         res.status(500).json({ status: false, message: response.message });
       }
     } catch (error) {
-      console.log("error in create community controler:", error);
+      console.log("error in edit community controller:", error);
       res
         .status(500)
-        .json({ status: false, message: "error in creating community" });
+        .json({ status: false, message: "error in editing community" });
     }
   };
-  return createCommunityController;
+  return editCommunityController;
 };

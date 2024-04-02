@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-export default (dependencies: any) => {
+import { dependencies } from "../../../utils/interfaces/dependency.interface";
+export default (dependencies: dependencies) => {
   const {
     useCase: { getCommunityMembers_useCase },
   } = dependencies;

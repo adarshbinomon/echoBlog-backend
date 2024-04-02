@@ -1,7 +1,8 @@
 import { hashPassword, sendMail } from "../../../helper";
+import { dependencies } from "../../../utils/dependencies,interface";
 import { UserData } from "../../../utils/interface";
 
-export const addUser_useCases = (dependencies: any) => {
+export const addUser_useCases = (dependencies: dependencies) => {
   const {
     repository: { authenticationRepository },
   } = dependencies;

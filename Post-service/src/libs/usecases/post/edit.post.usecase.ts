@@ -1,6 +1,7 @@
+import { dependencies } from "../../../utils/dependency.interface";
 import { PostData } from "../../../utils/interface";
 
-export const editPost_useCase = (dependencies: any) => {
+export const editPost_useCase = (dependencies: dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;

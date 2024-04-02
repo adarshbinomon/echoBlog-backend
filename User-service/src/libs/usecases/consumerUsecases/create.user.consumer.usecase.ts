@@ -1,13 +1,13 @@
+import { dependencies } from "../../../utils/interfaces/dependency.interface";
 import { UserData } from "../../../utils/interfaces/interfaces";
 
-export const createUserUsecase = (dependencies: any) => {
-    console.log("55createUserUsecase");
+export const createUserUsecase = (dependencies: dependencies) => {
     
   const {repository: { userRepository }} = dependencies;
   const executeFunction = async (data: UserData) => {
     
     const response = await userRepository.createUser(data);
-       console.log(response);
+       console.log('user created in user service',response);
                                                
     if (!response.status) {
       return { message: "Email invalid", status: false };

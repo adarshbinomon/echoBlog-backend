@@ -1,6 +1,7 @@
+import { dependencies } from "../../../utils/dependencies,interface";
 import { UserData } from "../../../utils/interface";
 
-export const updateUserUsecase = (dependencies: any) => {
+export const updateUserUsecase = (dependencies: dependencies) => {
   const {
     repository: { authenticationRepository },
   } = dependencies;

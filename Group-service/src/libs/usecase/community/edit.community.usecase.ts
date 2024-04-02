@@ -1,17 +1,17 @@
 import { dependencies } from "../../../utils/dependencies.interface";
+import { CommunityData } from "../../../utils/interface";
 
-export const getCommunity_useCase = (dependencies: dependencies) => {
+export const editCommunity_useCase = (dependencies: dependencies) => {
   const {
     repository: { communityRepository },
   } = dependencies;
 
-  const executeFunction = async (communityId: string) => {
+  const executeFunction = async (communityId: string, data: CommunityData) => {
     try {
-      const response = await communityRepository.getCommunityWithId(
-        communityId
+      const response = await communityRepository.editCommunitySettings(
+        communityId,
+        data
       );
-      console.log("usecase:", response);
-
       if (response.status) {
         return {
           status: true,
@@ -22,8 +22,8 @@ export const getCommunity_useCase = (dependencies: dependencies) => {
         return { status: false, message: response.message };
       }
     } catch (error) {
-      console.log("error in get community usecase:", error);
-      return { status: false, message: "error in finding community" };
+      console.log("error in edit commuinity usecase:", error);
+      return { status: false, message: "error in editing community" };
     }
   };
   return { executeFunction };

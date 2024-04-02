@@ -1,6 +1,7 @@
+import { dependencies } from "../../../utils/dependencies.interface";
 import { UserData } from "../../../utils/interface";
 
-export const createUserUsecase = (dependencies: any) => {
+export const createUserUsecase = (dependencies: dependencies) => {
   console.log("55createUserUsecase");
 
   const {

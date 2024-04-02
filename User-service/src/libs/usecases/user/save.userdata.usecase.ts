@@ -1,7 +1,8 @@
+import { dependencies } from "../../../utils/interfaces/dependency.interface";
 import { UserData } from "../../../utils/interfaces/interfaces";
 
 
-export const saveUserData_useCase = (dependencies: any) => {
+export const saveUserData_useCase = (dependencies: dependencies) => {
   const {
     repository: { userRepository },
   } = dependencies;

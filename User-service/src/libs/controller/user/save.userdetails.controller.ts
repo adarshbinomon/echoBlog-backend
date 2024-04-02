@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { userConsumer } from "../../../events/authConsumer";
 import { userProducer } from "../../../events/userUpdateProducer";
+import { dependencies } from "../../../utils/interfaces/dependency.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: dependencies) => {
   const {
     useCase: { saveUserData_useCase },
   } = dependencies;
@@ -10,11 +10,13 @@ export default (dependencies: any) => {
   const saveUserDataController = async (req: Request, res: Response) => {
     try {
       const data = req.body;
+      // console.log(data);
+      
 
       const response = await saveUserData_useCase(dependencies).executeFunction(
         data
       );
-      console.log("response:", response);
+      console.log("user data added to user :", response);
 
       if (response.status) {
         await userProducer(response.user, "userTopic", "updateUser");

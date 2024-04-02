@@ -1,7 +1,8 @@
 import { PostData } from "../../../utils/interface";
 import { imgExtractor } from "../../../helper/imgExtractor";
+import { dependencies } from "../../../utils/dependency.interface";
 
-export const createPost_UseCase = (dependencies: any) => {
+export const createPost_UseCase = (dependencies: dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;

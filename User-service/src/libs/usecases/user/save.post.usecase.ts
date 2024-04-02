@@ -1,4 +1,6 @@
-export const savePost_useCase = (dependenciees: any) => {
+import { dependencies } from "../../../utils/interfaces/dependency.interface";
+
+export const savePost_useCase = (dependenciees: dependencies) => {
   const {
     repository: { userRepository },
   } = dependenciees;

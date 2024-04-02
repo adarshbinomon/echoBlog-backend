@@ -1,6 +1,6 @@
-import dependencies from "../../../config/dependencies";
+import { dependencies } from "../../../utils/interfaces/dependency.interface";
 
-export const joinCommunity_useCase = (dependencies: any) => {
+export const joinCommunity_useCase = (dependencies: dependencies) => {
   const {
     repository: { userRepository },
   } = dependencies;

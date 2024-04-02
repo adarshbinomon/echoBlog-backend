@@ -4,6 +4,7 @@ import {
   getAllCommunities_useCase,
   joinCommunity_useCase,
   getUserCommunities_useCase,
+  editCommunity_useCase,
 } from "./community";
 
 export {
@@ -12,4 +13,5 @@ export {
   getAllCommunities_useCase,
   joinCommunity_useCase,
   getUserCommunities_useCase,
+  editCommunity_useCase,
 };

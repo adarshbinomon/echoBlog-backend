@@ -1,4 +1,6 @@
-export const getUser_useCase = (dependencies: any) => {
+import { dependencies } from "../../../utils/interfaces/dependency.interface";
+
+export const getUser_useCase = (dependencies: dependencies) => {
   const {
     repository: { userRepository },
   } = dependencies;

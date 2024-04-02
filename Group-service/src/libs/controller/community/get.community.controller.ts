@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
+import { dependencies } from "../../../utils/dependencies.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: dependencies) => {
+  
   const {
     useCase: { getCommunity_useCase },
   } = dependencies;
@@ -8,9 +10,6 @@ export default (dependencies: any) => {
   const getCommunityController = async (req: Request, res: Response) => {
     try {
       const communityId = req.params.communityId;
-
-      //   const { executeFunction } = await getCommunity_useCase(dependencies);
-      //   const response = await executeFunction(communityId);
 
       const response = await getCommunity_useCase(dependencies).executeFunction(
         communityId

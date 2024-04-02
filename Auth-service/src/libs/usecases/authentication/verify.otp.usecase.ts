@@ -1,7 +1,8 @@
 import { createAccessToken, createRefreshToken } from "../../../utils/jwt";
 import { UserData } from "../../../utils/interface";
+import { dependencies } from "../../../utils/dependencies,interface";
 
-export const verifyOtp_useCase = (dependencies: any) => {
+export const verifyOtp_useCase = (dependencies: dependencies) => {
   const {
     repository: { authenticationRepository },
   } = dependencies;

@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { UserData } from "../../../utils/interfaces/interfaces";
 import { userProducer } from "../../../events/userUpdateProducer";
+import { dependencies } from "../../../utils/interfaces/dependency.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: dependencies) => {
   const {
     useCase: { editUserProfile_useCase },
   } = dependencies;

@@ -1,4 +1,6 @@
-export const getCommunityPosts_useCase = (dependencies: any) => {
+import { dependencies } from "../../../utils/dependency.interface";
+
+export const getCommunityPosts_useCase = (dependencies: dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;

@@ -4,6 +4,8 @@ const producer = kafka.producer();
 
 export const userProducer = async (sendData: UserData, topic: string, type: string) => {
   try {
+    console.log('userproducer');
+    
     if (!sendData) {
       throw new Error("send data not existed");
     } else {

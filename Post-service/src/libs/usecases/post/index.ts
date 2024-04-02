@@ -10,6 +10,7 @@ import { updataPostStatus_useCase } from "./update.post.status.admin.usecase";
 import { getAllPostsAdmin_useCase } from "./get.all.posts.admin.usecase";
 import { getUserCommunityPost_useCase } from "./get.user.community.posts.usecase";
 import { getCommunityPosts_useCase } from "./get.community.posts.usecase";
+import { replyToComment_useCase } from "./reply.to.comment.usecase";
 
 export {
   createPost_UseCase,
@@ -24,4 +25,5 @@ export {
   getAllPostsAdmin_useCase,
   getUserCommunityPost_useCase,
   getCommunityPosts_useCase,
+  replyToComment_useCase
 };

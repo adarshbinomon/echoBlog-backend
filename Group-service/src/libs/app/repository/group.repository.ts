@@ -131,7 +131,6 @@ export default {
 
   getUserCommunities: async (userId: string) => {
     try {
-
       const response = await Community.find({ members: userId });
 
       if (response) {
@@ -146,6 +145,27 @@ export default {
     } catch (error) {
       console.log("error in get user community group repository:", error);
       return { status: false, message: "communities not found" };
+    }
+  },
+
+  editCommunitySettings: async (communityId: string, data: CommunityData) => {
+    try {
+      console.log(data);
+      
+      const response = await Community.findByIdAndUpdate(communityId, data);
+      console.log("repo:", response);
+      if (response) {
+        return {
+          status: true,
+          message: "community edited",
+          community: response,
+        };
+      } else {
+        return { status: false, message: "community not edited" };
+      }
+    } catch (error) {
+      console.log("errror in edit community repository:", error);
+      return { status: false, message: "community not edited" };
     }
   },
 };
