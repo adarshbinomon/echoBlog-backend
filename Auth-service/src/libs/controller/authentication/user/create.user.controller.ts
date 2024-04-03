@@ -7,7 +7,6 @@ export default (dependencies: dependencies) => {
   } = dependencies;
 
   const createUserController = async (req: Request, res: Response) => {
-    // console.log(req.body);
     const data = {
       ...req.body,
       profilePicture:

@@ -25,7 +25,7 @@ export const userProducer = async (sendData: UserData, topic: string, type: stri
       if (result && result[0] && result[0]?.error) {
         throw new Error("Message production failed");
       }
-
+    
       return result;
     }
   } catch (error) {

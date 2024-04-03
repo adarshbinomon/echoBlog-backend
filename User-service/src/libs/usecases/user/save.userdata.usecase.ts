@@ -1,7 +1,6 @@
 import { dependencies } from "../../../utils/interfaces/dependency.interface";
 import { UserData } from "../../../utils/interfaces/interfaces";
 
-
 export const saveUserData_useCase = (dependencies: dependencies) => {
   const {
     repository: { userRepository },
@@ -10,6 +9,13 @@ export const saveUserData_useCase = (dependencies: dependencies) => {
   const executeFunction = async (data: UserData) => {
     try {
       const userId = data._id;
+      if (data.gender === "Male") {
+        data.profilePicture = `https://avatar.iran.liara.run/public/boy?username=[${data?.userName}]`;
+      } else if (data.gender === "Female") {
+        data.profilePicture = `https://avatar.iran.liara.run/public/girl?username=[${data?.userName}]`;
+      } else {
+        data.profilePicture = `https://avatar.iran.liara.run/username?username=${data?.name}`;
+      }
 
       const user = await userRepository?.findUser(userId);
 
@@ -21,9 +27,8 @@ export const saveUserData_useCase = (dependencies: dependencies) => {
         user: updatedUser.response,
       };
     } catch (error) {
-      console.log(error, 'error in saveUserData_useCase');
+      console.log(error, "error in saveUserData_useCase");
       return { status: false, message: `Error in saveUserData_useCase` };
-
     }
   };
   return { executeFunction };
