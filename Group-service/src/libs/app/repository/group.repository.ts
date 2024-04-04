@@ -1,6 +1,8 @@
+import mongoose from "mongoose";
 import { CommunityData, UserData } from "../../../utils/interface";
 import community from "../../controller/community";
 import { schema } from "../database";
+const ObjectId = mongoose.Types.ObjectId;
 
 const { Community, User } = schema;
 
@@ -37,6 +39,26 @@ export default {
       console.log(communityId);
 
       const community = await Community.findById(communityId);
+
+      if (community) {
+        return {
+          status: true,
+          message: "commuinity found",
+          community: community,
+        };
+      } else return { status: false, message: "commuinity not found" };
+    } catch (error) {
+      console.log("errror in get community by id repository:", error);
+      return { status: false, message: "commuinity not found" };
+    }
+  },
+  getCommunityWithUsers: async (communityId: string) => {
+    try {
+      console.log(communityId);
+
+      const community = await Community.findById(communityId).populate(
+        "members"
+      );
       console.log("response:", community);
 
       if (community) {
@@ -151,7 +173,7 @@ export default {
   editCommunitySettings: async (communityId: string, data: CommunityData) => {
     try {
       console.log(data);
-      
+
       const response = await Community.findByIdAndUpdate(communityId, data);
       console.log("repo:", response);
       if (response) {
@@ -168,4 +190,71 @@ export default {
       return { status: false, message: "community not edited" };
     }
   },
+  searchCommunity: async (regex: string) => {
+    try {
+      const communities = await Community.find({
+        name: { $regex: new RegExp(`${regex}`, "i") },
+      });
+
+      if (communities) {
+        return {
+          status: true,
+          message: "communities found",
+          communities: communities,
+        };
+      } else {
+        return { status: false, message: "communities not found" };
+      }
+    } catch (error) {
+      console.log("error in search post repository:", error);
+      return { status: true, message: "error in findinf communities" };
+    }
+  },
+  removeMember: async (communityId: string, memberId: string) => {
+    try {
+      console.log("memberId");
+      console.log(memberId);
+
+      const response = await Community.findByIdAndUpdate(
+        communityId,
+        { $pull: { members: memberId } },
+        { new: true, lean: true }
+      );
+
+      console.log("response", response);
+
+      if (response) {
+        return { status: true, message: "Member removed successfully" };
+      } else {
+        return { status: false, message: "Member not found or not removed" };
+      }
+    } catch (error) {
+      console.log("Error in removeMember function:", error);
+      return { status: false, message: "Error occurred while removing member" };
+    }
+  },
+
+  makeAdmin: async (communityId: string, memberId: string) => {
+    try {
+      console.log(communityId);
+      console.log(memberId);
+      
+      const response = await Community.findByIdAndUpdate(
+        communityId,
+        { $push: { admins: memberId } },
+        { new: true } 
+      );
+  console.log(response);
+  
+      if (response) {
+        return { status: true, message: 'admin added' };
+      } else {
+        return { status: false, message: 'admin not added' };
+      }
+    } catch (error) {
+      console.log('error in make admin repository:', error);
+      return { status: false, message: 'admin not added' };
+    }
+  }
+  
 };

@@ -1,8 +1,7 @@
 import { createAccessToken, createRefreshToken } from "../../../utils/jwt";
 import { UserData } from "../../../utils/interface";
 import { dependencies } from "../../../utils/dependencies,interface";
-
-
+import { hashPassword, sendPasswordMail } from "../../../helper";
 
 export const userGoogleLogin_useCase = (dependencies: dependencies) => {
   const {
@@ -14,10 +13,8 @@ export const userGoogleLogin_useCase = (dependencies: dependencies) => {
       console.log("Received data:", data);
 
       const existingUser = await authenticationRepository?.findUser(data.email);
-      
 
       if (existingUser.status) {
-        
         const accessToken = createAccessToken(
           existingUser,
           process.env.ACCESS_SECRET_KEY || "accesssecret",
@@ -37,8 +34,10 @@ export const userGoogleLogin_useCase = (dependencies: dependencies) => {
           message: "Login using Google success",
         };
       } else {
+        const password = await hashPassword(data.email)
+        data = { ...data, password: password, phone: '' }
         const newUser = await authenticationRepository?.createUser(data);
-        
+
         if (newUser?.status) {
           const accessToken = createAccessToken(
             newUser,
@@ -50,6 +49,8 @@ export const userGoogleLogin_useCase = (dependencies: dependencies) => {
             process.env.REFRESH_SECRET_KEY || "refreshsecret",
             process.env.REFRESH_TOKEN_EXPIRY || "30days"
           );
+
+          await sendPasswordMail(data.email, data.name);
 
           return {
             status: true,

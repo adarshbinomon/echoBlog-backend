@@ -8,6 +8,7 @@ export const saveUserData_useCase = (dependencies: dependencies) => {
 
   const executeFunction = async (data: UserData) => {
     try {
+      
       const userId = data._id;
       if (data.gender === "Male") {
         data.profilePicture = `https://avatar.iran.liara.run/public/boy?username=[${data?.userName}]`;

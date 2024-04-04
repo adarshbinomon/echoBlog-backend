@@ -8,6 +8,7 @@ import {
   findAllUsersAdmin_useCase,
   changeUserStatus_useCase,
   getCommunityMembers_useCase,
+  searchUserUsecase,
 } from "./user";
 
 export {
@@ -20,4 +21,5 @@ export {
   findAllUsersAdmin_useCase,
   changeUserStatus_useCase,
   getCommunityMembers_useCase,
+  searchUserUsecase,
 };

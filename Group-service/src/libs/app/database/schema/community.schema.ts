@@ -11,14 +11,20 @@ const communitySchema = new mongoose.Schema({
     type: String,
     default: "https://wallpapercave.com/wp/wp2089896.jpg",
   },
-  members: Array,
+  members: [
+    {
+      type: String,
+      ref: "User",
+    },
+  ],
+
   post: Array,
   createdBy: String,
   createdOn: {
     type: Date,
     default: Date.now(),
   },
-  // admins
+  admins: [{ type: String }],
 });
 
 const Community = mongoose.model("Community", communitySchema);

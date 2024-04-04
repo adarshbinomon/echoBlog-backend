@@ -11,6 +11,10 @@ import getAllPostsAdmin_Controller from "./get.all.posts.admin.controller";
 import getUserCommunityPost_controller from "./get.user.community.post.controller";
 import getCommunityPosts_controller from "./get.community.posts.controller";
 import replyToCommentController from "./reply.to.comment.controller";
+import editCommentController from "./edit.comment.controller";
+import likeCommentController from "./like.comment.controller";
+import deleteCommentController from "./delete.comment,controller";
+import searchPostController from "./search.post.controller";
 
 export default (dependencies: any) => {
   return {
@@ -28,6 +32,10 @@ export default (dependencies: any) => {
     getUserCommunityPostController:
       getUserCommunityPost_controller(dependencies),
     getCommunityPostsController: getCommunityPosts_controller(dependencies),
-    replyToCommentController: replyToCommentController(dependencies)
+    replyToCommentController: replyToCommentController(dependencies),
+    editCommentController: editCommentController(dependencies),
+    likeCommentController: likeCommentController(dependencies),
+    deleteCommentController: deleteCommentController(dependencies),
+    searchPostController: searchPostController(dependencies),
   };
 };

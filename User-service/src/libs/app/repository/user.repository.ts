@@ -242,4 +242,21 @@ export default {
       return { status: false, message: "users not found" };
     }
   },
+
+  searchUser: async (regex: string) => {
+    try {
+      const users = await User.find({
+        name: { $regex: new RegExp(`^${regex}`, "i") },
+      });
+
+      if (users) {
+        return { status: true, message: "users found", users: users };
+      } else {
+        return { status: false, message: "users not found" };
+      }
+    } catch (error) {
+      console.log("error in search user repository:", error);
+      return { status: false, mesesage: "error in finding user" };
+    }
+  },
 };

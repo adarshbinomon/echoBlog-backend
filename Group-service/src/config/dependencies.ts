@@ -6,6 +6,10 @@ import {
   joinCommunity_useCase,
   getUserCommunities_useCase,
   editCommunity_useCase,
+  removeMemberUseCase,
+  searchCommunityUseCase,
+  getCommunity_useCaseWithUsers,
+  makeAdminUseCase,
 } from "../libs/usecase";
 import {
   createUserUsecase,
@@ -19,6 +23,10 @@ const useCase: any = {
   joinCommunity_useCase,
   getUserCommunities_useCase,
   editCommunity_useCase,
+  removeMemberUseCase,
+  searchCommunityUseCase,
+  getCommunity_useCaseWithUsers,
+  makeAdminUseCase,
 };
 
 const consumeUsecase: any = { createUserUsecase, updateUserUsecase };

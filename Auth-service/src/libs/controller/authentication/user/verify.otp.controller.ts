@@ -32,7 +32,7 @@ export default (dependencies: dependencies) => {
         JSON.stringify(response.user.response)
       );
       console.log(userDataForResponse);
-      
+       
       delete userDataForResponse.password;
       delete userDataForResponse.isGoogle;
       delete userDataForResponse.__v;

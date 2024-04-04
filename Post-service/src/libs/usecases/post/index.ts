@@ -11,6 +11,10 @@ import { getAllPostsAdmin_useCase } from "./get.all.posts.admin.usecase";
 import { getUserCommunityPost_useCase } from "./get.user.community.posts.usecase";
 import { getCommunityPosts_useCase } from "./get.community.posts.usecase";
 import { replyToComment_useCase } from "./reply.to.comment.usecase";
+import { editCommentUseCase } from "./edit.comment.usecase";
+import { likeCommentUseCase } from "./like.comment.usecase";
+import { deleteCommentUseCase } from "./delete.comment.usecase";
+import { searchPostUseCase } from "./search.posts.usecase";
 
 export {
   createPost_UseCase,
@@ -25,5 +29,9 @@ export {
   getAllPostsAdmin_useCase,
   getUserCommunityPost_useCase,
   getCommunityPosts_useCase,
-  replyToComment_useCase
+  replyToComment_useCase,
+  editCommentUseCase,
+  likeCommentUseCase,
+  deleteCommentUseCase,
+  searchPostUseCase,
 };

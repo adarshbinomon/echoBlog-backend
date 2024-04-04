@@ -29,10 +29,9 @@ const replySchema = new mongoose.Schema({
 });
 
 const commentSchema = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    default: new mongoose.Types.ObjectId(),
-  },
+  // _id: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  // },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

@@ -5,6 +5,10 @@ import {
   joinCommunity_useCase,
   getUserCommunities_useCase,
   editCommunity_useCase,
+  searchCommunityUseCase,
+  removeMemberUseCase,
+  getCommunity_useCaseWithUsers,
+  makeAdminUseCase,
 } from "./community";
 
 export {
@@ -14,4 +18,8 @@ export {
   joinCommunity_useCase,
   getUserCommunities_useCase,
   editCommunity_useCase,
+  removeMemberUseCase,
+  searchCommunityUseCase,
+  getCommunity_useCaseWithUsers,
+  makeAdminUseCase,
 };

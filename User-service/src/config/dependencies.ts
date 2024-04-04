@@ -9,6 +9,7 @@ import {
   findAllUsersAdmin_useCase,
   changeUserStatus_useCase,
   getCommunityMembers_useCase,
+  searchUserUsecase,
 } from "../libs/usecases";
 import {
   createUserUsecase,
@@ -25,6 +26,7 @@ const useCase: any = {
   findAllUsersAdmin_useCase,
   changeUserStatus_useCase,
   getCommunityMembers_useCase,
+  searchUserUsecase,
 };
 
 const repository: any = {

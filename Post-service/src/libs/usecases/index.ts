@@ -12,6 +12,10 @@ import {
   getUserCommunityPost_useCase,
   getCommunityPosts_useCase,
   replyToComment_useCase,
+  editCommentUseCase,
+  likeCommentUseCase,
+  deleteCommentUseCase,
+  searchPostUseCase,
 } from "./post";
 
 export {
@@ -28,4 +32,8 @@ export {
   getUserCommunityPost_useCase,
   getCommunityPosts_useCase,
   replyToComment_useCase,
+  editCommentUseCase,
+  likeCommentUseCase,
+  deleteCommentUseCase,
+  searchPostUseCase,
 };

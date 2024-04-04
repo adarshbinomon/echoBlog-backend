@@ -27,12 +27,13 @@ export interface PostData {
 }
 
 export interface CommentObject {
-  commentId: string
+  editedComment: string;
+  commentId: string;
   userId: string;
   comment: string;
   name: string;
   profilePicture: string;
   userName: string;
-  _id: ObjectId
-  reply?:any[]
-}
+  _id: string;
+  reply?: any[];
+} 

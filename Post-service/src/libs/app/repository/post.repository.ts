@@ -1,7 +1,7 @@
-import { Types } from "mongoose";
+import mongoose, { Types } from "mongoose";
 import { CommentObject, UserData, PostData } from "../../../utils/interface";
 import { schema } from "../database";
-import { ObjectId } from "mongodb";
+const { ObjectId } = mongoose.Types;
 
 const { User, Post } = schema;
 
@@ -288,8 +288,6 @@ export default {
 
   replyToComment: async (postId: string, commentData: CommentObject) => {
     try {
-      console.log("commentData:", commentData);
-
       const post = await Post.findById(postId);
       const commentId = commentData.commentId;
 
@@ -298,22 +296,147 @@ export default {
       }
 
       const comment = post.comment.find(
-        (comment) => comment._id.toString() === commentId
+        (comment) => comment?._id?.toString() === commentId
       );
 
       if (!comment) {
         return { status: false, message: "Comment not found" };
       }
+
       comment.replies.push(commentData);
       const replies = await post.save();
-      if (replies) {
-        console.log(replies);
 
-        return { status: true, message: "reply added", comment };
+      if (replies) {
+        return { status: true, message: "Reply added", comment };
       }
     } catch (error) {
       console.log("error in reply to comment repository:", error);
       return { status: false, message: "error in adding reply" };
+    }
+  },
+
+  editComment: async (postId: string, commentData: CommentObject) => {
+    try {
+      console.log("commentData", commentData);
+      const commentId = commentData.commentId;
+
+      const post = await Post.findById(postId);
+
+      if (!post) {
+        return { status: false, message: "Post not found" };
+      }
+
+      const comment = post.comment.find(
+        (comment) => comment._id?.toString() === commentId
+      );
+
+      if (!comment) {
+        return { status: false, message: "Comment not found" };
+      }
+
+      comment.comment = commentData.editedComment;
+
+      const newComment = await post.save();
+      if (newComment) {
+        return { status: true, message: "comment edit successful" };
+      }
+    } catch (err) {
+      console.log("error in edit comment repository", err);
+      return { status: false, message: "comment edit unsuccessfull" };
+    }
+  },
+
+  likeComment: async (
+    postId: string,
+    commentId: string,
+    userId: string,
+    isLiked: boolean
+  ) => {
+    try {
+      if (!isLiked) {
+        const post = await Post.findById(postId);
+
+        if (!post) {
+          return { status: false, message: "Post not found" };
+        }
+
+        const comment = post.comment.find(
+          (comment) => comment._id?.toString() === commentId
+        );
+
+        if (!comment) {
+          return { status: false, message: "Comment not found" };
+        }
+
+        comment.likes.push(userId);
+
+        const liked = await post.save();
+        if (liked) {
+          return { status: true, message: "comment liked" };
+        }
+      } else {
+        const post = await Post.findById(postId);
+
+        if (!post) {
+          return { status: false, message: "Post not found" };
+        }
+
+        const comment = post.comment.find(
+          (comment) => comment._id?.toString() === commentId
+        );
+
+        if (!comment) {
+          return { status: false, message: "Comment not found" };
+        }
+
+        comment.likes = comment.likes.filter((el) => el !== userId);
+
+        const liked = await post.save();
+        if (liked) {
+          return { status: true, message: "comment liked" };
+        }
+      }
+    } catch (error) {
+      console.log("error in  comment like repository", error);
+      return { status: false, message: "comment like unsuccessfull" };
+    }
+  },
+
+  deleteComment: async (postId: string, commentId: string) => {
+    try {
+      const response = await Post.findByIdAndUpdate(
+        postId,
+        {
+          $pull: { comment: { _id: commentId } },
+        },
+        { new: true }
+      );
+
+      if (response) {
+        return { status: true, message: "comment deleted" };
+      } else {
+        return { status: false, message: "comment not deleted" };
+      }
+    } catch (error) {
+      console.log("error in delete comment repository:", error);
+      return { status: false, message: "comment not deleted" };
+    }
+  },
+
+  searchPost: async (regex: string) => {
+    try {
+      const posts = await Post.find({
+        title: { $regex: new RegExp(`${regex}`, "i") },
+      });
+
+      if (posts) {
+        return { status: true, message: "posts found", posts: posts };
+      } else {
+        return { status: false, message: "posts not found" };
+      }
+    } catch (error) {
+      console.log("error in search post repository:", error);
+      return { status: true, message: "error in findinf posts" };
     }
   },
 };

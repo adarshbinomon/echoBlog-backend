@@ -17,6 +17,7 @@ export default (dependencies: any) => {
     findAllUsersAdminController,
     changeUserStatusAdminController,
     getCommunityMembersController,
+    searchUserController,
   } = userController(dependencies);
 
   router.post("/user-details", saveUserDataController);
@@ -44,6 +45,7 @@ export default (dependencies: any) => {
 
   router.get("/find-all-users", findAllUsersAdminController);
   router.put("/change-user-status/:userId", changeUserStatusAdminController);
+  router.get("/search-user/:regex", searchUserController);
 
   return router;
 };

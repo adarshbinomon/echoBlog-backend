@@ -14,6 +14,7 @@ export interface Repository {
 }
 
 export interface CommunityRepository {
+    getCommunityWithUsers(communityId: string): unknown;
     createCommunity:       Function;
     getCommunityWithId:    Function;
     createUser:            Function;

@@ -18,6 +18,10 @@ export default (dependencies: any) => {
     getUserCommunityPostController,
     getCommunityPostsController,
     replyToCommentController,
+    editCommentController,
+    likeCommentController,
+    deleteCommentController,
+    searchPostController,
   } = postController(dependencies);
 
   //admin routes
@@ -41,6 +45,10 @@ export default (dependencies: any) => {
   );
   router.get("/get-community-posts/:communityId", getCommunityPostsController);
   router.post("/reply-to-comment/:postId", replyToCommentController);
+  router.put("/edit-comment/:postId", editCommentController);
+  router.post("/like-comment/:commentId", likeCommentController);
+  router.post("/delete-comment/:postId", deleteCommentController);
+  router.get("/search-post/:regex", searchPostController);
 
   return router;
 };
