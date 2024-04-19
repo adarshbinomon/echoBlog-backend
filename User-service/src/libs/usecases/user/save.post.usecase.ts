@@ -1,6 +1,6 @@
-import { dependencies } from "../../../utils/interfaces/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 
-export const savePost_useCase = (dependenciees: dependencies) => {
+export const savePost_useCase = (dependenciees: Dependencies) => {
   const {
     repository: { userRepository },
   } = dependenciees;
@@ -9,9 +9,11 @@ export const savePost_useCase = (dependenciees: dependencies) => {
     try {
       const response = await userRepository.addPostToSave(userId, postId);
       if (response.status) {
-        console.log('usecase',response);
-        
-        return { status: true, message: response.message, user: response.response };
+        return {
+          status: true,
+          message: response.message,
+          user: response.response,
+        };
       } else {
         return { status: false, message: response.message };
       }

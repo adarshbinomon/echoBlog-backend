@@ -1,4 +1,6 @@
-export const searchUserUsecase = (dependencies: any) => {
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+
+export const searchUserUsecase = (dependencies: Dependencies) => {
   const {
     repository: { userRepository },
   } = dependencies;

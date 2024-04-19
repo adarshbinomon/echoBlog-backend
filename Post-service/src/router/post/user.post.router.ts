@@ -1,7 +1,9 @@
 import express from "express";
 import { postController } from "../../libs/controllers";
+import { verifyUser } from "../../utils/jwt/verify.user";
+import { Dependencies } from "../../utils/dependency.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: Dependencies) => {
   const router = express();
 
   const {
@@ -22,6 +24,9 @@ export default (dependencies: any) => {
     likeCommentController,
     deleteCommentController,
     searchPostController,
+    reportPostController,
+    getSavedPostsController,
+    getPostsFromFollowingController,
   } = postController(dependencies);
 
   //admin routes
@@ -31,10 +36,10 @@ export default (dependencies: any) => {
 
   //user routes
 
-  router.get("/posts", getAllPostsController);
+  router.get("/posts", verifyUser, getAllPostsController);
   router.post("/create", createPostController);
-  router.get("/get-posts/:id", getUserPostsController);
-  router.get("/:id", getPostController);
+  router.get("/get-posts/:id", verifyUser, getUserPostsController);
+  router.get("/:id", verifyUser, getPostController);
   router.put("/edit-post/:id", editPostController);
   router.get("/delete-post/:id", deletePostController);
   router.post("/like-post/:postId", likePostController);
@@ -43,12 +48,23 @@ export default (dependencies: any) => {
     "/get-user-community-post/:userId",
     getUserCommunityPostController
   );
-  router.get("/get-community-posts/:communityId", getCommunityPostsController);
-  router.post("/reply-to-comment/:postId", replyToCommentController);
-  router.put("/edit-comment/:postId", editCommentController);
-  router.post("/like-comment/:commentId", likeCommentController);
-  router.post("/delete-comment/:postId", deleteCommentController);
-  router.get("/search-post/:regex", searchPostController);
+  router.get(
+    "/get-community-posts/:communityId",
+    verifyUser,
+    getCommunityPostsController
+  );
+  router.post(
+    "/reply-to-comment/:postId",
+
+    replyToCommentController
+  );
+  router.put("/edit-comment/:postId",verifyUser, editCommentController);
+  router.post("/like-comment/:commentId",verifyUser, likeCommentController);
+  router.post("/delete-comment/:postId",verifyUser, deleteCommentController);
+  router.get("/search-post/:regex",verifyUser, searchPostController);
+  router.post("/report-post/:postId",verifyUser, reportPostController);
+  router.post("/get-saved-posts",verifyUser, getSavedPostsController);
+  router.post("/posts-from-following",verifyUser, getPostsFromFollowingController);
 
   return router;
 };

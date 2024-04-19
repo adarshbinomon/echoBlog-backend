@@ -1,14 +1,12 @@
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export const getAllPostsAdmin_useCase = (dependencies: dependencies) => {
+export const getAllPostsAdmin_useCase = (dependencies: Dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;
 
   const executeFunction = async () => {
     try {
-      console.log('usexcase');
-      
       const response = await postRepository.getAllPostsForAdmin();
       if (response.status) {
         return {

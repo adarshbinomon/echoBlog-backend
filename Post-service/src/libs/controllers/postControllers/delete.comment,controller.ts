@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { deleteCommentUseCase },
   } = dependencies;
@@ -9,9 +10,6 @@ export default (dependencies: any) => {
     try {
       const { postId } = req.params;
       const { commentId } = req.body;
-
-      console.log("postId", postId);
-      console.log("commentId", commentId);
 
       const response = await deleteCommentUseCase(dependencies).executeFunction(
         postId,

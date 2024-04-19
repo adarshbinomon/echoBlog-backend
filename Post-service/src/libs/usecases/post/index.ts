@@ -15,6 +15,9 @@ import { editCommentUseCase } from "./edit.comment.usecase";
 import { likeCommentUseCase } from "./like.comment.usecase";
 import { deleteCommentUseCase } from "./delete.comment.usecase";
 import { searchPostUseCase } from "./search.posts.usecase";
+import { reportPostUseCase } from "./report.post.usecase";
+import { getSavedPostsUseCase } from "./get.saved.posts.usecase";
+import { getPostsFromFollowingUsecase } from "./get.posts.from.following.usecase";
 
 export {
   createPost_UseCase,
@@ -34,4 +37,7 @@ export {
   likeCommentUseCase,
   deleteCommentUseCase,
   searchPostUseCase,
+  reportPostUseCase,
+  getSavedPostsUseCase,
+  getPostsFromFollowingUsecase,
 };

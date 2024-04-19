@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export default (dependencies: dependencies) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { getUserCommunityPost_useCase },
   } = dependencies;
@@ -12,6 +12,7 @@ export default (dependencies: dependencies) => {
   ) => {
     try {
       const userId = req.params.userId;
+
 
       const response = await getUserCommunityPost_useCase(
         dependencies

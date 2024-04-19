@@ -1,17 +1,15 @@
 import { Request, Response } from "express";
 import { UserData } from "../../../utils/interface";
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 
 export const updateUserController = async (
-  dependencies: dependencies,
+  dependencies: Dependencies,
   data: UserData
 ) => {
   const {
     consumeUsecase: { updateUserUsecase },
   } = dependencies;
-  console.log("data:", data);
 
   const response = await updateUserUsecase(dependencies)?.executeFunction(data);
-  console.log('response:' , response);
   
 };

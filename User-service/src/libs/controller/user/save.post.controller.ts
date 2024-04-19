@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { dependencies } from "../../../utils/interfaces/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 
-export default (depedndencies: dependencies) => {
+export default (depedndencies: Dependencies) => {
   const {
     useCase: { savePost_useCase },
   } = depedndencies;
@@ -14,10 +14,11 @@ export default (depedndencies: dependencies) => {
         userId,
         postId
       );
-      console.log('response',resposne);
-      
+
       if (resposne.status) {
-        res.status(201).json({ status: true, message: "post saved", user: resposne.user });
+        res
+          .status(201)
+          .json({ status: true, message: "post saved", user: resposne.user });
       }
     } catch (error) {
       console.log("error in save post controller:", error);

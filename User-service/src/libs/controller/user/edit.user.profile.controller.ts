@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { UserData } from "../../../utils/interfaces/interfaces";
 import { userProducer } from "../../../events/userUpdateProducer";
-import { dependencies } from "../../../utils/interfaces/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 
-export default (dependencies: dependencies) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { editUserProfile_useCase },
   } = dependencies;
@@ -13,24 +13,18 @@ export default (dependencies: dependencies) => {
       const data: UserData = req.file
         ? { ...req.body, [req.file.fieldname]: req.file.location }
         : { ...req.body };
-        console.log(data);
-        
 
       const response = await editUserProfile_useCase(
         dependencies
-      ).executeFunction(data);      
-
-      await userProducer(data, "userTopic", "updateUser");
-
+      ).executeFunction(data);
 
       if (response.status) {
-        res
-          .status(200)
-          .json({
-            status: true,
-            user: response.user,
-            message: "user data edited successfuly",
-          });
+        await userProducer(data, "userTopic", "updateUser");
+        res.status(200).json({
+          status: true,
+          user: response.user,
+          message: "user data edited successfuly",
+        });
       }
     } catch (error) {
       res

@@ -1,8 +1,8 @@
 import { comparePassword, hashPassword } from "../../../helper";
-import { dependencies } from "../../../utils/dependencies,interface";
+import { Dependencies } from "../../../utils/dependencies.interface";
 import { createAccessToken, createRefreshToken } from "../../../utils/jwt";
 
-export const userLogin_useCase = (dependencies: dependencies) => {
+export const userLogin_useCase = (dependencies: Dependencies) => {
   const {
     repository: { authenticationRepository },
   } = dependencies;
@@ -10,36 +10,39 @@ export const userLogin_useCase = (dependencies: dependencies) => {
   const executeFunction = async (email: string, password: string) => {
     try {
       const response = await authenticationRepository?.findUser(email);
-      //makew it userdata
 
       if (response.status) {
         try {
           const { user } = response;
 
-          const passwordValidation = await comparePassword(
-            password,
-            user.password
-          );
+          if (user.isActive) {
+            const passwordValidation = await comparePassword(
+              password,
+              user.password
+            );
 
-          if (passwordValidation) {
-            const accessToken = createAccessToken(
-              user,
-              process.env.ACCESS_SECRET_KEY || "accesssecret",
-              process.env.ACCESS_TOKEN_EXPIRY || "1h"
-            );
-            const refreshToken = createRefreshToken(
-              user,
-              process.env.REFRESH_SECRET_KEY || "refreshsecret",
-              process.env.REFRESH_TOKEN_EXPIRY || "30days"
-            );
-            return {
-              status: true,
-              user: user,
-              accessToken: accessToken,
-              refreshToken: refreshToken,
-            };
-          } else {
-            return { status: false, message: "incorrect password" };
+            if (passwordValidation) {
+              const accessToken = createAccessToken(
+                user,
+                process.env.ACCESS_SECRET_KEY || "accesssecret",
+                process.env.ACCESS_TOKEN_EXPIRY || "1h"
+              );
+              const refreshToken = createRefreshToken(
+                user,
+                process.env.REFRESH_SECRET_KEY || "refreshsecret",
+                process.env.REFRESH_TOKEN_EXPIRY || "30days"
+              );
+              return {
+                status: true,
+                user: user,
+                accessToken: accessToken,
+                refreshToken: refreshToken,
+              };
+            } else {
+              return { status: false, message: "incorrect password" };
+            }
+          }else{
+return{status:false,message:'Your Account is taken down due to malicious activity!'}
           }
         } catch (error) {
           return { status: false, message: "incorrect email or password1" };

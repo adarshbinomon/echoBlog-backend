@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { searchPostUseCase },
   } = dependencies;
@@ -8,13 +9,10 @@ export default (dependencies: any) => {
   const searchPostController = async (req: Request, res: Response) => {
     try {
       const { regex } = req.params;
-      console.log(regex);
 
       const response = await searchPostUseCase(dependencies).executeFunction(
         regex
       );
-      console.log('response',response);
-      
 
       if (response.status) {
         res.status(200).json({

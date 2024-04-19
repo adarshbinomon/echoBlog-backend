@@ -1,6 +1,6 @@
-import { dependencies } from "../../../utils/interfaces/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 
-export const getUser_useCase = (dependencies: dependencies) => {
+export const getUser_useCase = (dependencies: Dependencies) => {
   const {
     repository: { userRepository },
   } = dependencies;
@@ -13,10 +13,9 @@ export const getUser_useCase = (dependencies: dependencies) => {
           status: true,
           message: "user found successfully",
           user: response.user,
-        }
-      }else{
-        return { status: false,
-        message: response.message}
+        };
+      } else {
+        return { status: false, message: response.message };
       }
     } catch (error) {
       console.log(error, "error in getUser_useCase");

@@ -1,8 +1,8 @@
 import { comparePassword, hashPassword } from "../../../../helper";
-import { dependencies } from "../../../../utils/dependencies,interface";
+import { Dependencies } from "../../../../utils/dependencies.interface";
 import { createAccessToken, createRefreshToken } from "../../../../utils/jwt";
 
-export const adminLogin_useCase = (dependencies: dependencies) => {
+export const adminLogin_useCase = (dependencies: Dependencies) => {
   const {
     repository: { authenticationRepository },
   } = dependencies;

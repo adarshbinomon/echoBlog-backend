@@ -16,6 +16,9 @@ import {
   likeCommentUseCase,
   deleteCommentUseCase,
   searchPostUseCase,
+  reportPostUseCase,
+  getSavedPostsUseCase,
+  getPostsFromFollowingUsecase,
 } from "./post";
 
 export {
@@ -36,4 +39,7 @@ export {
   likeCommentUseCase,
   deleteCommentUseCase,
   searchPostUseCase,
+  reportPostUseCase,
+  getSavedPostsUseCase,
+  getPostsFromFollowingUsecase,
 };

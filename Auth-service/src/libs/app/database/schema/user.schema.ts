@@ -8,6 +8,10 @@ const userSchema = new mongoose.Schema({
   isGoogle: Boolean,
   uid: String,
   profilePicture: String,
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const User = mongoose.model("User", userSchema);

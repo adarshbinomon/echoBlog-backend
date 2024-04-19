@@ -1,11 +1,12 @@
 import { kafka } from "../config/kafkaClient";
 import { updateUserController } from "../libs/controller/consumeControllers/user.update.controller";
+import { Dependencies } from "../utils/dependencies.interface";
 
 const consumer = kafka.consumer({
   groupId: "user-service",
 });
 
-export const userConsumer = async (dependencies: any) => {
+export const userConsumer = async (dependencies: Dependencies) => {
   try {
     await consumer.connect();
     await consumer.subscribe({ topic: "userTopic", fromBeginning: true });

@@ -10,13 +10,12 @@ export interface UserData {
   dateOfBirth?: Date;
   profilePicture?: string;
   coverPicture?: string;
-  following?: any[];
-  followers?: any[];
+  following?: string[];
+  followers?: string[];
   interestedTags?: string[];
   createdOn?: Date;
   editedOn?: Date;
 }
-
 export interface MulterS3File {
   fieldname: string;
   originalname: string;

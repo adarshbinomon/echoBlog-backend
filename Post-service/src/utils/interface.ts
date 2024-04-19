@@ -16,11 +16,11 @@ export interface PostData {
   title?: string;
   content: string;
   image?: string;
-  like: any[];
-  comment?: any[];
+  like: [UserData];
+  comment?: [CommentObject];
   postType?: string;
   createdBy?: string;
-  tags?: any[];
+  tags?: [string];
   createdOn?: Date;
   reportedUsersList?: any[];
   communityId?: string;
@@ -35,5 +35,9 @@ export interface CommentObject {
   profilePicture: string;
   userName: string;
   _id: string;
-  reply?: any[];
-} 
+  reply?: [CommentObject];
+}
+export interface reportObject {
+  userId: string;
+  reason: string;
+}

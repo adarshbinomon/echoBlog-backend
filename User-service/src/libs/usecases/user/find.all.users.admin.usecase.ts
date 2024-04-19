@@ -1,6 +1,6 @@
-import { dependencies } from "../../../utils/interfaces/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 
-export const findAllUsersAdmin_useCase = (dependencies: dependencies) => {
+export const findAllUsersAdmin_useCase = (dependencies: Dependencies) => {
   const {
     repository: { userRepository },
   } = dependencies;
@@ -8,7 +8,6 @@ export const findAllUsersAdmin_useCase = (dependencies: dependencies) => {
   const executeFunction = async () => {
     try {
       const response = await userRepository.findAllUsers();
-console.log(response);
 
       if (response.status) {
         return {

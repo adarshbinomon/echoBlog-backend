@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import Conversation from "../../app/database/schema/conversation.schema";
+import { Dependencies } from "../../../utils/dependencies.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { getMessagesUseCase },
   } = dependencies;
@@ -10,11 +10,11 @@ export default (dependencies: any) => {
     try {
       const recieverId = req.params.userId;
       const { senderId } = req.body;
-
+      console.log(senderId, recieverId,"senderId, recieverI");
+      
       const conversation = await getMessagesUseCase(
         dependencies
       ).executeFunction(senderId, recieverId);
-
       if (conversation.status) {
         res.status(200).json({
           status: true,

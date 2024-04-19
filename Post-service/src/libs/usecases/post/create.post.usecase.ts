@@ -1,8 +1,8 @@
 import { PostData } from "../../../utils/interface";
 import { imgExtractor } from "../../../helper/imgExtractor";
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export const createPost_UseCase = (dependencies: dependencies) => {
+export const createPost_UseCase = (dependencies: Dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;
@@ -13,7 +13,6 @@ export const createPost_UseCase = (dependencies: dependencies) => {
       const image = imgExtractor(data?.content);
 
       data = { ...data, image };
-      console.log('usecase',data);
 
       const response = await postRepository?.createPost(data);
 
@@ -30,6 +29,5 @@ export const createPost_UseCase = (dependencies: dependencies) => {
       return { status: false, message: `Error in createPost_UseCase` };
     }
   };
-
   return { executeFunction };
 };

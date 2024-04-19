@@ -4,7 +4,10 @@ import {
   uploadProfilePicture,
   uploadCoverPicture,
 } from "../../helper/s3Multer";
-export default (dependencies: any) => {
+import { verifyUser } from "../../utils/jwt/verify.user";
+import { Dependencies } from "../../utils/interfaces/dependency.interface";
+// import { verifyUser } from "@adarshbinomon/verify-user";
+export default (dependencies: Dependencies) => {
   const router = express();
 
   const {
@@ -15,14 +18,13 @@ export default (dependencies: any) => {
     savePostController,
     followUserController,
     findAllUsersAdminController,
-    changeUserStatusAdminController,
     getCommunityMembersController,
     searchUserController,
   } = userController(dependencies);
 
-  router.post("/user-details", saveUserDataController);
-  router.get("/user-profile/:id", getUserController);
-  router.put("/edit-profile", editUserProfileController);
+  router.post("/user-details", verifyUser, saveUserDataController);
+  router.get("/user-profile/:id", verifyUser, getUserController);
+  router.put("/edit-profile", verifyUser, editUserProfileController);
   router.post(
     "/upload-profile-picture",
     uploadProfilePicture,
@@ -30,21 +32,22 @@ export default (dependencies: any) => {
   );
   router.post(
     "/upload-cover-picture",
+    
     uploadCoverPicture,
     editUserProfileController
   );
-  router.get("/find-users/:userId", findAllUsersController);
-  router.put("/save-post", savePostController);
-  router.post("/follow-user", followUserController);
+  router.get("/find-users/:userId", verifyUser, findAllUsersController);
+  router.put("/save-post", verifyUser, savePostController);
+  router.post("/follow-user", verifyUser, followUserController);
   router.get(
     "/get-community-members/:communityId",
+    verifyUser,
     getCommunityMembersController
   );
 
   //admin routes
 
   router.get("/find-all-users", findAllUsersAdminController);
-  router.put("/change-user-status/:userId", changeUserStatusAdminController);
   router.get("/search-user/:regex", searchUserController);
 
   return router;

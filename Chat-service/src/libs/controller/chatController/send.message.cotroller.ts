@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
+import { Dependencies } from "../../../utils/dependencies.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { sendMessageUsecase },
   } = dependencies;
@@ -15,12 +16,11 @@ export default (dependencies: any) => {
         recieverId,
         message
       );
-      if(response.status){
-        res.status(201).json('message sent successfully')
+      if (response.status) {
+        res.status(201).json("message sent successfully");
       }
     } catch (error) {
-        console.log('error in send message controller:',error);
-        
+      console.log("error in send message controller:", error);
     }
   };
 

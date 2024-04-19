@@ -1,4 +1,6 @@
-export const sendMessageUsecase = (dependencies: any) => {
+import { Dependencies } from "../../../utils/dependencies.interface";
+
+export const sendMessageUsecase = (dependencies: Dependencies) => {
   const {
     repository: { chatRepository },
   } = dependencies;

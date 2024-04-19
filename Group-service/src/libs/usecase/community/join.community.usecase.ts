@@ -1,7 +1,7 @@
 import { communityProducer } from "../../../events/communityProducer";
-import { dependencies } from "../../../utils/dependencies.interface";
+import { Dependencies } from "../../../utils/dependencies.interface";
 
-export const joinCommunity_useCase = (dependencies: dependencies) => {
+export const joinCommunity_useCase = (dependencies: Dependencies) => {
   const {
     repository: { communityRepository },
   } = dependencies;

@@ -1,5 +1,6 @@
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export const searchPostUseCase = (dependencies: any) => {
+export const searchPostUseCase = (dependencies: Dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;

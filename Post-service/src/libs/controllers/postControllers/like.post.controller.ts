@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export default (dependencies: dependencies) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { likePost_useCase },
   } = dependencies;
@@ -10,7 +10,6 @@ export default (dependencies: dependencies) => {
     try {
       const postId = req.params.postId;
       const { userId, liked } = req.body;
-      console.log(req.body);
 
       const response = await likePost_useCase(dependencies).executeFunction(
         postId,
@@ -18,13 +17,11 @@ export default (dependencies: dependencies) => {
         liked
       );
       if (response.status) {
-        res
-          .status(200)
-          .json({
-            status: true,
-            message: "like successfull",
-            likes: response?.likes,
-          });
+        res.status(200).json({
+          status: true,
+          message: "like successfull",
+          likes: response?.likes,
+        });
       } else {
         res.status(500).json({
           status: false,

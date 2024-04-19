@@ -6,7 +6,7 @@ const generateOtp = () => {
 };
 
 //send mail
-export const sendMail = async (email: string, name: string) => {
+export const sendMail = async (email: string, name?: string) => {
   try {
     const otp = generateOtp();
     console.log(otp);

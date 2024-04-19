@@ -1,6 +1,7 @@
 import { Request, Response, response } from "express";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { likeCommentUseCase },
   } = dependencies;
@@ -16,7 +17,6 @@ export default (dependencies: any) => {
         userId,
         isLiked
       );
-      console.log("response:", response);
 
       if (response.status) {
         res.status(201).json({ status: true, message: response.message });

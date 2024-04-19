@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema({
   coverPicture: {
     type: String,
     default:
-      "https://images.unsplash.com/photo-1707845623251-14f30e7c209b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=150&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTcxMjI2NDUyMg&ixlib=rb-4.0.3&q=80&w=500",
+      "https://echoblog-images.s3.ap-south-1.amazonaws.com/1709535142155_coverPicture_9ae8fc22197c56c5e5b0c2c22b05186e+.jpeg",
   },
   InterestedTags: Array,
   createdOn: {

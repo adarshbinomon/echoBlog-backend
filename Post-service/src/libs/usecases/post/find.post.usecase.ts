@@ -1,6 +1,6 @@
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export const getPost_useCase = (dependencies: dependencies) => {
+export const getPost_useCase = (dependencies: Dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;
@@ -9,7 +9,6 @@ export const getPost_useCase = (dependencies: dependencies) => {
     try {
       const response = await postRepository?.getPost(id);
       const user = await postRepository?.findUser(response.post.createdBy);
-      console.log(user.user);
 
       if (response.status) {
         return {

@@ -1,6 +1,6 @@
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export const getCommunityPosts_useCase = (dependencies: dependencies) => {
+export const getCommunityPosts_useCase = (dependencies: Dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;
@@ -8,6 +8,8 @@ export const getCommunityPosts_useCase = (dependencies: dependencies) => {
   const executeFunction = async (communityId: string) => {
     try {
       const response = await postRepository.findCommunityPosts(communityId);
+      console.log(communityId);
+      
       if (response.status) {
         return {
           status: true,

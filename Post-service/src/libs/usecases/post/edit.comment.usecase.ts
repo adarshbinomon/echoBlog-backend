@@ -1,6 +1,7 @@
+import { Dependencies } from "../../../utils/dependency.interface";
 import { CommentObject } from "../../../utils/interface";
 
-export const editCommentUseCase = (dependencies: any) => {
+export const editCommentUseCase = (dependencies: Dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;

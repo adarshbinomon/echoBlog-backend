@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export default (dependencies: dependencies) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { editPost_useCase },
   } = dependencies;

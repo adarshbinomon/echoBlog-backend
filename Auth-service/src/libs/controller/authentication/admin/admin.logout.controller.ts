@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { clearAccessTokenFromCookie } from "../../../../utils/jwt";
-import { dependencies } from "../../../../utils/dependencies,interface";
+import { Dependencies } from "../../../../utils/dependencies.interface";
 
-export default (dependencies: dependencies) => {
+export default (dependencies: Dependencies) => {
   const userLogoutController = (req: Request, res: Response) => {
     try {
       clearAccessTokenFromCookie("adminAccessToken", res);

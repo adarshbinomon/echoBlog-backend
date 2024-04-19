@@ -1,7 +1,7 @@
-import { dependencies } from "../../../utils/dependencies.interface";
+import { Dependencies } from "../../../utils/dependencies.interface";
 import { UserData } from "../../../utils/interface";
 
-export const updateUserUsecase = (dependencies: dependencies) => {
+export const updateUserUsecase = (dependencies: Dependencies) => {
   const {
     repository: { communityRepository },
   } = dependencies;

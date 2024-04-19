@@ -1,4 +1,6 @@
-export const deleteCommentUseCase = (dependencies: any) => {
+import { Dependencies } from "../../../utils/dependency.interface";
+
+export const deleteCommentUseCase = (dependencies: Dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;

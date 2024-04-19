@@ -1,18 +1,16 @@
 import { Request, Response } from "express";
-import { dependencies } from "../../../utils/interfaces/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 
-export default (dependencies: dependencies) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { findAllUsersAdmin_useCase },
   } = dependencies;
 
   const findAllUsersAdminController = async (req: Request, res: Response) => {
-
     try {
       const response = await findAllUsersAdmin_useCase(
         dependencies
       ).executeFunction();
-      console.log(response);
 
       if (response.status) {
         res.status(200).json({

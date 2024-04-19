@@ -1,6 +1,6 @@
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export const updataPostStatus_useCase = (dependencies: dependencies) => {
+export const updataPostStatus_useCase = (dependencies: Dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;

@@ -1,14 +1,12 @@
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export const deletePost_useCase = (dependencies: dependencies) => {
+export const deletePost_useCase = (dependencies: Dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;
 
   const executeFunction = async (id: string) => {
     try {
-        console.log('usecase:', id);
-
       const response = await postRepository?.deletePost(id);
       if (response.status) {
         return { status: true, message: response.message };
@@ -18,7 +16,7 @@ export const deletePost_useCase = (dependencies: dependencies) => {
     } catch (error) {
       console.log("error:", error);
 
-      return { status: false, message:'error in delete post usecase' };
+      return { status: false, message: "error in delete post usecase" };
     }
   };
   return { executeFunction };

@@ -1,23 +1,38 @@
 import { Request, Response } from "express";
-import { dependencies } from "../../../utils/interfaces/dependency.interface";
+import { changeUserStatus } from "../../../../events/changeUserStatus";
+import { clearAccessTokenFromCookie } from "../../../../utils/jwt";
+import { Dependencies } from "../../../../utils/dependencies.interface";
 
-export default (dependencies: dependencies) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { changeUserStatus_useCase },
   } = dependencies;
-  console.log(changeUserStatus_useCase);
 
   const changeUserStatusAdminController = async (
     req: Request,
     res: Response
   ) => {
     try {
-      const userId = req.params.userId;
+      const { userId } = req.params;
       const response = await changeUserStatus_useCase(
         dependencies
       ).executeFunction(userId);
 
       if (response.status) {
+        clearAccessTokenFromCookie("accessToken", res);
+        clearAccessTokenFromCookie("refreshToken", res);
+        res.clearCookie("accessToken");
+        res.clearCookie("refreshToken");
+        changeUserStatus(
+          {
+            _id: userId,
+            name: "",
+            email: "",
+            password: "",
+          },
+          "changeUserStatus",
+          "statuschange"
+        );
         res.status(201).json({
           status: true,
           message: response.message,

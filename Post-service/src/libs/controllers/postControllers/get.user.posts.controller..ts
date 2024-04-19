@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export default (dependencies: dependencies) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { findUserPosts_useCase },
   } = dependencies;
@@ -9,12 +9,10 @@ export default (dependencies: dependencies) => {
   const getUserPostsController = async (req: Request, res: Response) => {
     try {
       const userId = req.params.id;
-      console.log("userId:", userId);
 
       const response = await findUserPosts_useCase(
         dependencies
       ).executeFunction(userId);
-      console.log("response:", response);
       if (response.status) {
         res.status(200).json({
           status: true,

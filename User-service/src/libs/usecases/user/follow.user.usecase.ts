@@ -1,7 +1,7 @@
-import { dependencies } from "../../../utils/interfaces/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 import userRepository from "../../app/repository/user.repository";
 
-export const followUser_useCase = (dependencies: dependencies) => {
+export const followUser_useCase = (dependencies: Dependencies) => {
   const {
     repository: { userRepository },
   } = dependencies;
@@ -17,7 +17,7 @@ export const followUser_useCase = (dependencies: dependencies) => {
         const response = await userRepository.unFollowUser(
           userId,
           userToBeFollowedId
-        );        
+        );
         if (response.status) {
           return {
             status: true,
@@ -34,7 +34,7 @@ export const followUser_useCase = (dependencies: dependencies) => {
         if (userToBeFollowed?.user?.accountType === "Public") {
           const response = await userRepository.followUser(
             userId,
-            userToBeFollowedId,
+            userToBeFollowedId
           );
 
           if (response.status) {

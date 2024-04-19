@@ -1,7 +1,7 @@
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 import { CommentObject } from "../../../utils/interface";
 
-export const replyToComment_useCase = (dependencies: dependencies) => {
+export const replyToComment_useCase = (dependencies: Dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;

@@ -7,6 +7,8 @@ import dotenv from "dotenv";
 import path from "path";
 import { userConsumer } from "./events/authConsumer";
 import { communityConsumer } from "./events/communityConsumer";
+import cookieParser from "cookie-parser";
+import { updateUserStatusConsumer } from "./events/updateUserStatusConsumer";
 dotenv.config({ path: "src/.env" });
 
 const app = express();
@@ -17,6 +19,8 @@ declare module "express-session" {
     otp: string;
   }
 }
+
+app.use(cookieParser());
 
 app.use(express.json());
 app.use(
@@ -42,6 +46,7 @@ app.use(
 
 userConsumer(dependencies);
 communityConsumer(dependencies);
+updateUserStatusConsumer(dependencies);
 
 app.use(express.urlencoded({ extended: true }));
 

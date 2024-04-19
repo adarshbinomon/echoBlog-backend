@@ -1,5 +1,10 @@
 import mongoose, { Types } from "mongoose";
-import { CommentObject, UserData, PostData } from "../../../utils/interface";
+import {
+  CommentObject,
+  UserData,
+  PostData,
+  reportObject,
+} from "../../../utils/interface";
 import { schema } from "../database";
 const { ObjectId } = mongoose.Types;
 
@@ -11,7 +16,6 @@ export default {
       const userData = { ...data };
 
       const response = await schema.User.create(userData);
-      console.log(response, "res");
 
       if (response) {
         return { status: true, message: "user created sucessfully", response };
@@ -29,13 +33,8 @@ export default {
   createPost: async (data: PostData) => {
     try {
       const post = { ...data, createdOn: Date.now() };
-      console.log("post");
-      console.log(post);
 
       const response = await schema.Post.create(post);
-      console.log("sdfs");
-
-      console.log("response", response);
 
       if (response) {
         return {
@@ -78,9 +77,7 @@ export default {
 
   getPost: async (id: string) => {
     try {
-      // console.log(id);
       const response = await schema.Post.findById(id);
-      // console.log(response);
 
       if (response) {
         return { status: true, message: "post found", post: response };
@@ -106,8 +103,6 @@ export default {
 
   findUser: async (id: UserData) => {
     try {
-      console.log(id, "id");
-
       const response = await User.findById(id);
       return { status: true, user: response };
     } catch (error) {
@@ -117,12 +112,9 @@ export default {
 
   editPost: async (id: string, data: PostData) => {
     try {
-      console.log("data:", data);
-
       const response = await Post.findByIdAndUpdate(id, {
         content: data.content,
       });
-      console.log(response);
 
       return { status: true, updatedPost: response };
     } catch (error) {
@@ -133,8 +125,6 @@ export default {
 
   deletePost: async (id: string) => {
     try {
-      console.log("repo:", id);
-
       const response = await Post.findByIdAndDelete(id);
       return { status: true, message: "post deleted successfully." };
     } catch (error) {
@@ -209,8 +199,6 @@ export default {
 
   addComment: async (postId: string, comment: CommentObject) => {
     try {
-      console.log("comment:", comment);
-
       const response = await Post.findByIdAndUpdate(
         postId,
         {
@@ -317,7 +305,6 @@ export default {
 
   editComment: async (postId: string, commentData: CommentObject) => {
     try {
-      console.log("commentData", commentData);
       const commentId = commentData.commentId;
 
       const post = await Post.findById(postId);
@@ -437,6 +424,56 @@ export default {
     } catch (error) {
       console.log("error in search post repository:", error);
       return { status: true, message: "error in findinf posts" };
+    }
+  },
+
+  reportPost: async (postId: string, reportObject: reportObject) => {
+    try {
+      const response = await Post.findByIdAndUpdate(postId, {
+        $push: { reportedUsersList: reportObject },
+      });
+
+      if (response) {
+        return { status: true, message: "reported successfully" };
+      } else {
+        return { status: false, message: "report unsuccessfull" };
+      }
+    } catch (error) {
+      console.log("error in report post repository", error);
+      return { status: false, message: "report unsuccessfull" };
+    }
+  },
+
+  getSavedPosts: async (savedPosts: [string]) => {
+    try {
+      const posts = await Post.find({ _id: { $in: savedPosts } }).populate(
+        "createdBy"
+      );
+
+      if (posts) {
+        return { status: true, message: "posts found", posts: posts };
+      } else {
+        return { status: false, message: "posts not found" };
+      }
+    } catch (error) {
+      console.log("error in get saved posts repository", error);
+      return { status: false, message: "posts not found" };
+    }
+  },
+
+  getPostsFromFollowing: async (following: string[]) => {
+    try {
+      const posts = await Post.find({ createdBy: { $in: following } }).populate(
+        "createdBy"
+      );
+
+      if (posts) {
+        return { status: true, messsage: "posts found", posts };
+      } else {
+        return { status: false, messsage: "posts not found" };
+      }
+    } catch (error) {
+      return { status: false, messsage: "posts not found" };
     }
   },
 };

@@ -6,7 +6,7 @@ const { User } = schema;
 export default {
   userEmailExist: async (email: string) => {
     try {
-      let response = await User.findOne({ email: email });
+      const response = await User.findOne({ email: email });
       return response;
     } catch (error) {
       console.log("error in authentication.repository.userEmailExist", error);
@@ -17,7 +17,6 @@ export default {
       const userData = { ...data, createdOn: Date.now() };
 
       const response = await schema.User.create(userData);
-      console.log(response, "rees");
 
       if (response) {
         return { status: true, message: "user created sucessfully", response };
@@ -36,7 +35,7 @@ export default {
     try {
       const userData = { ...data, editedOn: Date.now() };
 
-      let response = await User.findOneAndUpdate(
+      const response = await User.findOneAndUpdate(
         { _id: data._id },
         { $set: userData },
         { new: true, upsert: true }
@@ -83,9 +82,6 @@ export default {
 
   addPostToSave: async (userId: string, postId: string) => {
     try {
-      console.log("userId", userId);
-      console.log("postId", postId);
-
       const user = await User.findById(userId);
       if (!user) {
         return { status: false, message: "User not found" };
@@ -157,7 +153,7 @@ export default {
 
       const removeFollowerInFollowedUSer = await User.findByIdAndUpdate(
         userToBeFollowed,
-        { $push: { followers: userId } },
+        { $pull: { followers: userId } },
         { new: true, useFindAndModify: false }
       );
       if (removeFollowingInUser && removeFollowerInFollowedUSer) {

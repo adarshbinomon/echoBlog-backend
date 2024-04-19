@@ -1,11 +1,12 @@
 import { kafka } from "../config/kafkaClient";
 import { createUserController } from "../libs/controllers/consumeControllers/auth.consumer.controller";
+import { Dependencies } from "../utils/dependency.interface";
 
 const consumer = kafka.consumer({
   groupId: "post-service",
 });
 
-export const userConsumer = async (dependencies: any) => {
+export const userConsumer = async (dependencies: Dependencies) => {
   try {
     console.log('auth to post consumer');
     

@@ -1,17 +1,14 @@
 import { hashPassword, sendMail } from "../../../helper";
-import { dependencies } from "../../../utils/dependencies,interface";
+import { Dependencies } from "../../../utils/dependencies.interface";
 import { UserData } from "../../../utils/interface";
 
-export const addUser_useCases = (dependencies: dependencies) => {
+export const addUser_useCases = (dependencies: Dependencies) => {
   const {
     repository: { authenticationRepository },
   } = dependencies;
 
   const executeFunction = async (data: UserData) => {
     try {
-      console.log('data');
-      console.log(data);
-      
       const userExist = await authenticationRepository?.userEmailExist(
         data?.email
       );

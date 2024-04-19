@@ -1,8 +1,8 @@
 import { sendMail } from "../../../helper";
-import { dependencies } from "../../../utils/dependencies,interface";
+import { Dependencies } from "../../../utils/dependencies.interface";
 import { UserData } from "../../../utils/interface";
 
-export const resendOtp_useCase = (dependencies: dependencies) => {
+export const resendOtp_useCase = (dependencies: Dependencies) => {
   const {
     repository: { authenticationRepository },
   } = dependencies;

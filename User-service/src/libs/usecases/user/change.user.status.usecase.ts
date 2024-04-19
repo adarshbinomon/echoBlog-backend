@@ -1,17 +1,15 @@
-import { dependencies } from "../../../utils/interfaces/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 
-export const changeUserStatus_useCase = (dependencies: dependencies) => {
+export const changeUserStatus_useCase = (dependencies: Dependencies) => {
   const {
     repository: { userRepository },
   } = dependencies;
 
   const executeFunction = async (userId: string) => {
     try {
-        console.log('usecase',userId );
-
-      const response = await userRepository.changeUserStatus(userId);
-      console.log(response);
       
+      const response = await userRepository.changeUserStatus(userId);
+
       if (response.status) {
         return { status: true, message: response.message, user: response.user };
       } else {
@@ -24,4 +22,3 @@ export const changeUserStatus_useCase = (dependencies: dependencies) => {
   };
   return { executeFunction };
 };
- 

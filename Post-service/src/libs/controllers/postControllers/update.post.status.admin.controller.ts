@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export default (dependencies: dependencies) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { updataPostStatus_useCase },
   } = dependencies;
@@ -12,21 +12,17 @@ export default (dependencies: dependencies) => {
   ) => {
     try {
       const postId = req.params.postId;
-      console.log(postId);
-      
 
       const response = await updataPostStatus_useCase(
         dependencies
       ).executeFunction(postId);
 
       if (response.status) {
-        res
-          .status(200)
-          .json({
-            status: true,
-            message: response.message,
-            post: response.post,
-          });
+        res.status(200).json({
+          status: true,
+          message: response.message,
+          post: response.post,
+        });
       } else {
         res.status(404).json({ status: false, message: response.message });
       }

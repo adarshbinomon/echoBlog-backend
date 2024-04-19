@@ -15,8 +15,9 @@ import {
   createUserUsecase,
   updateUserUsecase,
 } from "../libs/usecase/consumerUseCases";
+import { ConsumeUsecase, Repository, UseCase } from "../utils/dependencies.interface";
 
-const useCase: any = {
+const useCase: UseCase = {
   createCommunity_usecase,
   getCommunity_useCase,
   getAllCommunities_useCase,
@@ -29,9 +30,9 @@ const useCase: any = {
   makeAdminUseCase,
 };
 
-const consumeUsecase: any = { createUserUsecase, updateUserUsecase };
+const consumeUsecase: ConsumeUsecase = { createUserUsecase, updateUserUsecase };
 
-const repository: any = {
+const repository: Repository = {
   communityRepository,
 };
 

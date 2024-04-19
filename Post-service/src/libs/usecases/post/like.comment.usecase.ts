@@ -1,4 +1,6 @@
-export const likeCommentUseCase = (dependencies: any) => {
+import { Dependencies } from "../../../utils/dependency.interface";
+
+export const likeCommentUseCase = (dependencies: Dependencies) => {
   const {
     repository: { postRepository },
   } = dependencies;

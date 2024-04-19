@@ -1,11 +1,12 @@
 import { kafka } from "../config/kafkaClient";
 import { updateUserController } from "../libs/controllers/consumeControllers";
+import { Dependencies } from "../utils/dependency.interface";
 
 const consumer = kafka.consumer({
   groupId: "post-service2",
 });
 
-export const userUpdateConsumer = async (dependencies: any) => {
+export const userUpdateConsumer = async (dependencies: Dependencies) => {
   try {
     console.log('userconsumer reached');
     

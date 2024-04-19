@@ -1,6 +1,6 @@
-import { dependencies } from "../../../utils/interfaces/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 
-export const joinCommunity_useCase = (dependencies: dependencies) => {
+export const joinCommunity_useCase = (dependencies: Dependencies) => {
   const {
     repository: { userRepository },
   } = dependencies;

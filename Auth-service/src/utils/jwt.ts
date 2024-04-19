@@ -1,13 +1,12 @@
 import jwt from "jsonwebtoken";
 import { Response } from "express";
-
+import { UserData } from "./interface";
 
 export const createAccessToken = (
-  user: any,
+  user: UserData,
   accessTokenSecretKey: string,
   expiration: string
 ) => {
-  // console.log("acceess token created");
   const token = jwt.sign({ user }, accessTokenSecretKey, {
     expiresIn: expiration,
   });
@@ -15,7 +14,7 @@ export const createAccessToken = (
 };
 
 export const createRefreshToken = (
-  user: any,
+  user: UserData,
   refreshTokenSecretKey: string,
   expiration: string
 ) => {
@@ -26,7 +25,6 @@ export const clearAccessTokenFromCookie = (
   cookieName: string,
   res: Response
 ) => {
-  console.log("attachAccesTokenToCookie - not http only ", "development");
   res.cookie(cookieName, {
     httpOnly: false,
     secure: false,

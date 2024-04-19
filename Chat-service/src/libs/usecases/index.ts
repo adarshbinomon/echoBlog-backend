@@ -1,5 +1,9 @@
 // import { updateUserUsecase } from "./consumerUsecase";
-import { sendMessageUsecase, getMessagesUseCase } from "./chatUsecase";
+import {
+  sendMessageUsecase,
+  getMessagesUseCase,
+  getConversationsUsecase,
+} from "./chatUsecase";
 
 // export {updateUserUsecase}
-export { sendMessageUsecase, getMessagesUseCase };
+export { sendMessageUsecase, getMessagesUseCase, getConversationsUsecase };

@@ -1,12 +1,13 @@
 import { kafka } from "../config/kafkaClient";
 import { createUserController } from "../libs/controller/consumeControllers";
 import { joinCommunityController } from "../libs/controller/consumeControllers/join.community.controller";
+import { Dependencies } from "../utils/interfaces/dependency.interface";
 
 const consumer = kafka.consumer({
   groupId: "user-service1",
 });
 
-export const communityConsumer = async (dependencies: any) => {
+export const communityConsumer = async (dependencies: Dependencies) => {
   try {
     console.log("community to user consumer");
 
@@ -15,7 +16,6 @@ export const communityConsumer = async (dependencies: any) => {
     await consumer.run({
       eachMessage: async ({ message }) => {
         try {
-          console.log("tryy");
 
           const binaryData: any = message.value;
           const jsonString: string = binaryData?.toString();

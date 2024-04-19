@@ -1,6 +1,6 @@
-import dependencies from "../../../config/dependencies";
+import { Dependencies } from "../../../utils/dependencies.interface";
 
-export const makeAdminUseCase = (dependencies: any) => {
+export const makeAdminUseCase = (dependencies: Dependencies) => {
   const {
     repository: { communityRepository },
   } = dependencies;

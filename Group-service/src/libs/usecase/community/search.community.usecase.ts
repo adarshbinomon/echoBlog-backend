@@ -1,5 +1,6 @@
+import { Dependencies } from "../../../utils/dependencies.interface";
 
-export const searchCommunityUseCase = (dependencies: any) => {
+export const searchCommunityUseCase = (dependencies: Dependencies) => {
     const {
       repository: { communityRepository },
     } = dependencies;

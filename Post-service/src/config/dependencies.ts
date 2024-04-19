@@ -17,13 +17,21 @@ import {
   likeCommentUseCase,
   deleteCommentUseCase,
   searchPostUseCase,
+  reportPostUseCase,
+  getSavedPostsUseCase,
+  getPostsFromFollowingUsecase,
 } from "../libs/usecases";
 import {
   createUserUsecase,
   updateUserUsecase,
 } from "../libs/usecases/consumerUseCases";
+import {
+  ConsumeUsecase,
+  Repository,
+  UseCase,
+} from "../utils/dependency.interface";
 
-const useCase: any = {
+const useCase: UseCase = {
   createPost_UseCase,
   findUserPosts_useCase,
   getPost_useCase,
@@ -41,13 +49,16 @@ const useCase: any = {
   likeCommentUseCase,
   deleteCommentUseCase,
   searchPostUseCase,
+  reportPostUseCase,
+  getSavedPostsUseCase,
+  getPostsFromFollowingUsecase,
 };
 
-const repository: any = {
+const repository: Repository = {
   postRepository,
 };
 
-const consumeUsecase: any = {
+const consumeUsecase: ConsumeUsecase = {
   createUserUsecase,
   updateUserUsecase,
 };

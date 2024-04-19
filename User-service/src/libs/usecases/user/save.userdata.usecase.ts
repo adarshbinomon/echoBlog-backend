@@ -1,14 +1,13 @@
-import { dependencies } from "../../../utils/interfaces/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 import { UserData } from "../../../utils/interfaces/interfaces";
 
-export const saveUserData_useCase = (dependencies: dependencies) => {
+export const saveUserData_useCase = (dependencies: Dependencies) => {
   const {
     repository: { userRepository },
   } = dependencies;
 
   const executeFunction = async (data: UserData) => {
     try {
-      
       const userId = data._id;
       if (data.gender === "Male") {
         data.profilePicture = `https://avatar.iran.liara.run/public/boy?username=[${data?.userName}]`;

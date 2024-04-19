@@ -1,7 +1,7 @@
-import { dependencies } from "../../../utils/dependencies.interface";
+import { Dependencies } from "../../../utils/dependencies.interface";
 import { CommunityData } from "../../../utils/interface";
 
-export const createCommunity_usecase = (dependencies: dependencies) => {
+export const createCommunity_usecase = (dependencies: Dependencies) => {
   const {
     repository: { communityRepository },
   } = dependencies;

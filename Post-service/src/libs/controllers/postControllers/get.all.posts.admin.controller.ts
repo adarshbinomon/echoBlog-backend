@@ -1,13 +1,12 @@
 import { Request, Response } from "express";
-import { dependencies } from "../../../utils/dependency.interface";
+import {  Dependencies } from "../../../utils/dependency.interface";
 
-export default (dependencies: dependencies) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { getAllPostsAdmin_useCase },
   } = dependencies;
   const getAllPostsAdminController = async (req: Request, res: Response) => {
     try {
-      console.log('controller');
       
       const response = await getAllPostsAdmin_useCase(
         dependencies

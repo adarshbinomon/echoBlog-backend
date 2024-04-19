@@ -15,8 +15,12 @@ import editCommentController from "./edit.comment.controller";
 import likeCommentController from "./like.comment.controller";
 import deleteCommentController from "./delete.comment,controller";
 import searchPostController from "./search.post.controller";
+import reportPostController from "./report.post.controller";
+import getSavedPostsController from "./get.saved.posts.controller";
+import { Dependencies } from "../../../utils/dependency.interface";
+import getPostsFromFollowingController from "./get.posts.from.following.controller";
 
-export default (dependencies: any) => {
+export default (dependencies: Dependencies) => {
   return {
     createPostController: createPost_controller(dependencies),
     getUserPostsController: getUserPosts_controller(dependencies),
@@ -37,5 +41,9 @@ export default (dependencies: any) => {
     likeCommentController: likeCommentController(dependencies),
     deleteCommentController: deleteCommentController(dependencies),
     searchPostController: searchPostController(dependencies),
+    reportPostController: reportPostController(dependencies),
+    getSavedPostsController: getSavedPostsController(dependencies),
+    getPostsFromFollowingController:
+      getPostsFromFollowingController(dependencies),
   };
 };

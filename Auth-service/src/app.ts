@@ -23,6 +23,7 @@ declare module "express-session" {
     otp: string;
     refreshToken: string;
     adminRefreshToken: string;
+    email: string;
   }
 }
 

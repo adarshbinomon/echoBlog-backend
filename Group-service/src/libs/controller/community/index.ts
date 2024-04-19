@@ -8,8 +8,9 @@ import searchCommunityController from "./search.community.controller";
 import removeMemberController from "./remove.member.controller";
 import getCommunityWithUsersController from "./get.communitywith.user.controller";
 import makeAdminController from "./make.admin.controller";
+import { Dependencies } from "../../../utils/dependencies.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: Dependencies) => {
   return {
     createCommunityController: createCommunity_controller(dependencies),
     getCommunityController: getCommunity_controller(dependencies),

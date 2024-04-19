@@ -15,8 +15,9 @@ import {
   createUserUsecase,
   joinCommunity_useCase,
 } from "../libs/usecases/consumerUsecases";
+import { ConsumeUsecase, Repository, UseCase } from "../utils/interfaces/dependency.interface";
 
-const useCase: any = {
+const useCase: UseCase = {
   saveUserData_useCase,
   getUser_useCase,
   editUserProfile_useCase,
@@ -29,11 +30,11 @@ const useCase: any = {
   searchUserUsecase,
 };
 
-const repository: any = {
+const repository: Repository = {
   userRepository,
 };
 
-const consumeUsecase: any = {
+const consumeUsecase: ConsumeUsecase = {
   createUserUsecase,
   joinCommunity_useCase,
 };

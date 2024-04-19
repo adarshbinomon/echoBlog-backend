@@ -1,8 +1,8 @@
-import { dependencies } from "../../../utils/interfaces/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 import { communityKafka } from "../../../utils/interfaces/interfaces";
 
 export const joinCommunityController = async (
-  dependencies: dependencies,
+  dependencies: Dependencies,
   data: communityKafka
 ) => {
   const {

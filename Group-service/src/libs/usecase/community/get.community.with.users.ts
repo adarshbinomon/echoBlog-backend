@@ -1,4 +1,6 @@
-export const getCommunity_useCaseWithUsers = (dependencies: any) => {
+import { Dependencies } from "../../../utils/dependencies.interface";
+
+export const getCommunity_useCaseWithUsers = (dependencies: Dependencies) => {
   const {
     repository: { communityRepository },
   } = dependencies;

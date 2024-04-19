@@ -1,4 +1,6 @@
-export const removeMemberUseCase = (dependencies: any) => {
+import { Dependencies } from "../../../utils/dependencies.interface";
+
+export const removeMemberUseCase = (dependencies: Dependencies) => {
   const {
     repository: { communityRepository },
   } = dependencies;

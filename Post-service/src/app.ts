@@ -8,6 +8,7 @@ import path from "path";
 import { userConsumer } from "./events/authConsumer";
 import { userUpdateConsumer } from "./events/userUpdateConsumer";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 dotenv.config({ path: ".env" });
 
 const app = express();
@@ -43,6 +44,8 @@ userConsumer(dependencies);
 userUpdateConsumer(dependencies);
 
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());
 
 app.use("/api", routes(dependencies));
 

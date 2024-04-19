@@ -1,6 +1,6 @@
-import dependencies from "../../../config/dependencies";
+import { Dependencies } from "../../../utils/dependencies.interface";
 
-export const getMessagesUseCase = (dependencies: any) => {
+export const getMessagesUseCase = (dependencies: Dependencies) => {
   const {
     repository: { chatRepository },
   } = dependencies;

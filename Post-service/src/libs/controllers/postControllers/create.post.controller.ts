@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { PostData } from "../../../utils/interface";
-import { dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/dependency.interface";
 
-export default (dependencies: dependencies) => {
+export default (dependencies: Dependencies) => {
   const {
     useCase: { createPost_UseCase },
   } = dependencies;
@@ -11,13 +11,9 @@ export default (dependencies: dependencies) => {
     try {
       const data = req.body;
 
-      console.log("Received data:", data);
-
       const response = await createPost_UseCase(dependencies).executeFunction(
         data
       );
-
-      console.log("Response:", response);
 
       if (response.status) {
         res

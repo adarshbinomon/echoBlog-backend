@@ -5,11 +5,11 @@ import find_all_users_controller from "./find.all.user.controller";
 import save_post_controller from "./save.post.controller";
 import follow_user_controller from "./follow.user.controller";
 import find_all_users_admin_controller from "./find.all.user.admin.controller";
-import change_user_status_admin_controller from "./change.user.status.admin.controller";
 import get_community_members_controller from "./get.community.members.controller";
 import searchUserController from "./search.user.controller";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 
-export default (dependencies: any) => {
+export default (dependencies: Dependencies) => {
   return {
     saveUserDataController: save_userData_controller(dependencies),
     getUserController: get_user_controller(dependencies),
@@ -18,8 +18,6 @@ export default (dependencies: any) => {
     savePostController: save_post_controller(dependencies),
     followUserController: follow_user_controller(dependencies),
     findAllUsersAdminController: find_all_users_admin_controller(dependencies),
-    changeUserStatusAdminController:
-      change_user_status_admin_controller(dependencies),
     getCommunityMembersController:
       get_community_members_controller(dependencies),
     searchUserController: searchUserController(dependencies),
