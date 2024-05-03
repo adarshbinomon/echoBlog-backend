@@ -10,6 +10,8 @@ export default (dependencies: Dependencies) => {
     try {
       const recieverId = req.params.userId;
       const { senderId } = req.body;
+      console.log('body',req.body);
+      
       console.log(senderId, recieverId,"senderId, recieverI");
       
       const conversation = await getMessagesUseCase(

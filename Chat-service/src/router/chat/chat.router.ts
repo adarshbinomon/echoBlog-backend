@@ -9,16 +9,13 @@ export default (dependencies: Dependencies) => {
   const {
     sendMessageController,
     getMessagesController,
-    getConversationsController,
+    getConversationsController,sendVideoCallController
   } = chatController(dependencies);
 
-  router.post("/:userId", getMessagesController);
+  router.post("/get-messages/:userId", getMessagesController);
   router.post("/send/:userId", sendMessageController);
-  router.get(
-    "/get-conversations/:userId",
-    verifyUser,
-    getConversationsController
-  );
+  router.post("/get-conversations", getConversationsController);
+  router.post("/videocall/:recieverId",sendVideoCallController );
 
   return router;
 };

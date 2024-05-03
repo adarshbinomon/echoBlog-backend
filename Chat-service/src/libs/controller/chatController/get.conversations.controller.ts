@@ -8,16 +8,17 @@ export default (dependencies: Dependencies) => {
 
   const getConversationsController = async (req: Request, res: Response) => {
     try {
-      const { userId } = req.params;
+      const { following } = req.body;
 
       const conversations = await getConversationsUsecase(
         dependencies
-      ).executeFunction(userId);
+      ).executeFunction(following);
+      
 
       if (conversations) {
-        res.status(200).json(conversations);
+        res.status(200).json(conversations.conversations);
       } else {
-        res.status(404).json(conversations);
+        res.status(404).json(conversations.conversations);
       }
     } catch (error) {
       console.error("Error in getConversationsController:", error);

@@ -16,8 +16,10 @@ export default (dependencies: Dependencies) => {
         recieverId,
         message
       );
+      // console.log('res:', response);
+
       if (response.status) {
-        res.status(201).json("message sent successfully");
+        res.status(201).json({status:true,message:"message sent successfully",sentMessage:response.savedMessage});
       }
     } catch (error) {
       console.log("error in send message controller:", error);

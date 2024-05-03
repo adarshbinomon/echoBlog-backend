@@ -5,9 +5,9 @@ export const getConversationsUsecase = (dependencies: Dependencies) => {
     repository: { chatRepository },
   } = dependencies;
 
-  const executeFunction = async (userId: string) => {
+  const executeFunction = async (following: string[]) => {
     try {
-      const conversations = await chatRepository.getConversations(userId);
+      const conversations = await chatRepository.getConversations(following);
 
       if (conversations.status) {
         return { conversations };

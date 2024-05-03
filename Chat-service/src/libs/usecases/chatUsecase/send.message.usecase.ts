@@ -21,7 +21,7 @@ export const sendMessageUsecase = (dependencies: Dependencies) => {
         return {
           status: true,
           message: response.message,
-          response: response.response,
+          savedMessage: response.response.savedMessage,
         };
       } else {
         return { status: false, message: response.message };

@@ -13,7 +13,6 @@ export default {
       const conversation = await Conversation.findOne({
         participants: { $all: [senderId, recieverId] },
       });
-      console.log("Enter");
 
       const recieverSocketId = getRecieverSocketId(recieverId);
       console.log(recieverSocketId, "recieverSocketId");
@@ -90,12 +89,10 @@ export default {
     try {
       const conversation = await Conversation.findOne({
         participants: { $all: [senderId, recieverId] },
-      })
-        .populate("messages")
-        .populate("participants");
+      }).populate("messages");
       if (conversation) {
         console.log(conversation);
-        
+
         return {
           status: true,
           message: "conversation found",
@@ -113,11 +110,11 @@ export default {
     }
   },
 
-  getConversations: async (userId: string) => {
+  getConversations: async (following: string[]) => {
     try {
-      const conversations = await Conversation.find({
-        participants: userId,
-      }).populate("participants");
+      const conversations = await User.find({
+        _id: { $in: following },
+      });
 
       if (conversations) {
         return { status: true, message: "conversations found", conversations };
@@ -126,6 +123,26 @@ export default {
       }
     } catch (error) {
       return { status: false, message: "error in finding conversation" };
+    }
+  },
+
+  videoCall: async (recieverId: string, senderId: string, roomId: string) => {
+    try {
+      const reciever = await User.findById(recieverId);
+      const sender = await User.findById(senderId);
+
+      if (reciever) {
+        const recieverSocketId = getRecieverSocketId(reciever._id);
+        if (recieverSocketId) {
+          const callDetails = { sender, roomId };
+          io.to(recieverSocketId).emit("videoCall", callDetails);
+        }
+      }
+
+      return { status: true, message: `Calling ${reciever?.name}` };
+    } catch (error) {
+      console.log("error in videaCall repo", error);
+      return { status: true, message: `error in calling` };
     }
   },
 };

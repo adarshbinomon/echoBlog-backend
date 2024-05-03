@@ -13,6 +13,7 @@ export interface UseCase {
   sendMessageUsecase: Function;
   getMessagesUseCase: Function;
   getConversationsUsecase: Function;
+  sendVideocallUseCase: Function;
 }
 
 export interface Repository {
@@ -23,4 +24,5 @@ export interface ChatRepository {
   sendMessage: Function;
   getMessages: Function;
   getConversations: Function;
+  videoCall: Function;
 }

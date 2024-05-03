@@ -4,13 +4,15 @@ import {
   sendMessageUsecase,
   getMessagesUseCase,
   getConversationsUsecase,
+  sendVideocallUseCase,
 } from "../libs/usecases";
-import {  Repository, UseCase } from "../utils/dependencies.interface";
+import { Repository, UseCase } from "../utils/dependencies.interface";
 
 const useCase: UseCase = {
   sendMessageUsecase,
   getMessagesUseCase,
   getConversationsUsecase,
+  sendVideocallUseCase,
 };
 
 // const consumeUsecase: any = {updateUserUsecase};
