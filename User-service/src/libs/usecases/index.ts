@@ -9,6 +9,8 @@ import {
   changeUserStatus_useCase,
   getCommunityMembers_useCase,
   searchUserUsecase,
+  getMonthlyUserCountUseCase,
+  chagePremiumStatusUseCase,
 } from "./user";
 
 export {
@@ -22,4 +24,6 @@ export {
   changeUserStatus_useCase,
   getCommunityMembers_useCase,
   searchUserUsecase,
+  getMonthlyUserCountUseCase,
+  chagePremiumStatusUseCase,
 };

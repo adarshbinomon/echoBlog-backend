@@ -10,12 +10,17 @@ import {
   changeUserStatus_useCase,
   getCommunityMembers_useCase,
   searchUserUsecase,
+  getMonthlyUserCountUseCase,chagePremiumStatusUseCase
 } from "../libs/usecases";
 import {
   createUserUsecase,
   joinCommunity_useCase,
 } from "../libs/usecases/consumerUsecases";
-import { ConsumeUsecase, Repository, UseCase } from "../utils/interfaces/dependency.interface";
+import {
+  ConsumeUsecase,
+  Repository,
+  UseCase,
+} from "../utils/interfaces/dependency.interface";
 
 const useCase: UseCase = {
   saveUserData_useCase,
@@ -28,6 +33,7 @@ const useCase: UseCase = {
   changeUserStatus_useCase,
   getCommunityMembers_useCase,
   searchUserUsecase,
+  getMonthlyUserCountUseCase,chagePremiumStatusUseCase
 };
 
 const repository: Repository = {

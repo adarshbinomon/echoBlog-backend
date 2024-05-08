@@ -27,6 +27,8 @@ export interface UserRepository {
   joinCommunity: Function;
   getCommunityMembers: Function;
   searchUser: Function;
+  getMonthlyUserCount: Function;
+  changePremiumStatus: Function;
 }
 
 export interface UseCase {
@@ -40,4 +42,6 @@ export interface UseCase {
   changeUserStatus_useCase: Function;
   getCommunityMembers_useCase: Function;
   searchUserUsecase: Function;
+  getMonthlyUserCountUseCase: Function;
+  chagePremiumStatusUseCase: Function;
 }

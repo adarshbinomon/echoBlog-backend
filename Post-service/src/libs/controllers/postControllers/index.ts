@@ -19,6 +19,7 @@ import reportPostController from "./report.post.controller";
 import getSavedPostsController from "./get.saved.posts.controller";
 import { Dependencies } from "../../../utils/dependency.interface";
 import getPostsFromFollowingController from "./get.posts.from.following.controller";
+import getMonthlyPostCountController from "./get.monthly.post.count.controller";
 
 export default (dependencies: Dependencies) => {
   return {
@@ -45,5 +46,6 @@ export default (dependencies: Dependencies) => {
     getSavedPostsController: getSavedPostsController(dependencies),
     getPostsFromFollowingController:
       getPostsFromFollowingController(dependencies),
+    getMonthlyPostCountController: getMonthlyPostCountController(dependencies),
   };
 };

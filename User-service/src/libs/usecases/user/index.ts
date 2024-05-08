@@ -8,6 +8,8 @@ import { findAllUsersAdmin_useCase } from "./find.all.users.admin.usecase";
 import { changeUserStatus_useCase } from "./change.user.status.usecase";
 import { getCommunityMembers_useCase } from "./get.community.members.usecase";
 import { searchUserUsecase } from "./search.user.usecase";
+import { getMonthlyUserCountUseCase } from "./get.monthly.user.count";
+import { chagePremiumStatusUseCase } from "./change.premiun.status.usecase";
 
 export {
   saveUserData_useCase,
@@ -20,4 +22,6 @@ export {
   changeUserStatus_useCase,
   getCommunityMembers_useCase,
   searchUserUsecase,
+  getMonthlyUserCountUseCase,
+  chagePremiumStatusUseCase,
 };

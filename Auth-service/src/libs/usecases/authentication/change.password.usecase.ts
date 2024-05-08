@@ -8,11 +8,12 @@ export const changePasswordUsecase = (dependencies: Dependencies) => {
 
   const executeFunction = async (email: string, password: string) => {
     try {
-        const hashedPassword = await hashPassword(password)
+      const hashedPassword = await hashPassword(password);
       const response = await authenticationRepository.changePassword(
         email,
         hashedPassword
       );
+      console.log(response);
 
       if (response.status) {
         return response;

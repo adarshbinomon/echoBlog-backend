@@ -70,6 +70,10 @@ const userSchema = new mongoose.Schema({
     default: true,
   },
   community: Array,
+  isPremium: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const User = mongoose.model("User", userSchema);

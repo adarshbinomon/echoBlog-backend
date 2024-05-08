@@ -18,6 +18,7 @@ import { searchPostUseCase } from "./search.posts.usecase";
 import { reportPostUseCase } from "./report.post.usecase";
 import { getSavedPostsUseCase } from "./get.saved.posts.usecase";
 import { getPostsFromFollowingUsecase } from "./get.posts.from.following.usecase";
+import { getMonthlyPostCountUseCase } from "./get.monthly.post.count";
 
 export {
   createPost_UseCase,
@@ -40,4 +41,5 @@ export {
   reportPostUseCase,
   getSavedPostsUseCase,
   getPostsFromFollowingUsecase,
+  getMonthlyPostCountUseCase,
 };

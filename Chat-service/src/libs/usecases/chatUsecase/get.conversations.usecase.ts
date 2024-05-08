@@ -11,7 +11,7 @@ export const getConversationsUsecase = (dependencies: Dependencies) => {
 
       if (conversations.status) {
         return { conversations };
-      } else {
+      } else { 
         return { conversations };
       }
     } catch (error) {

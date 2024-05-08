@@ -14,12 +14,9 @@ export default (dependencies: Dependencies) => {
         email,
         password
       );
-      console.log(response);
-      
 
       if (response.status) {
         const { user, accessToken, refreshToken } = response;
-        req.session.refreshToken = refreshToken;
         const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
         res.cookie("accessToken", accessToken, {
           expires: expirationDate,
@@ -35,10 +32,10 @@ export default (dependencies: Dependencies) => {
           .status(200)
           .json({ status: true, accessToken: accessToken, user: user });
       } else {
-        res.status(500).json({status:false,message:response.message})
+        res.status(500).json({ status: false, message: response.message });
       }
     } catch (error) {
-      res.status(400).json({ status: false, message: 'error in user login' });
+      res.status(400).json({ status: false, message: "error in user login" });
     }
   };
 

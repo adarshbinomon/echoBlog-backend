@@ -66,6 +66,7 @@ export const verifyUser = (
       } else {
         const decodedUser = decoded.user as UserData;
         req.user = decodedUser;
+        
         next();
       }
     }

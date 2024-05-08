@@ -31,6 +31,7 @@ export interface PostRepository {
   searchPost: Function;
   reportPost: Function;
   getSavedPosts: Function;
+  getMonthlyPostCount: Function;
 }
 
 export interface UseCase {
@@ -54,6 +55,7 @@ export interface UseCase {
   reportPostUseCase: Function;
   getSavedPostsUseCase: Function;
   getPostsFromFollowingUsecase: Function;
+  getMonthlyPostCountUseCase: Function;
 }
 
 export interface ConsumeUsecase {

@@ -13,7 +13,7 @@ export const userLogin_useCase = (dependencies: Dependencies) => {
 
       if (response.status) {
         try {
-          const { user } = response;
+          const { user } = JSON.parse(JSON.stringify(response));
 
           if (user.isActive) {
             const passwordValidation = await comparePassword(
@@ -32,6 +32,9 @@ export const userLogin_useCase = (dependencies: Dependencies) => {
                 process.env.REFRESH_SECRET_KEY || "refreshsecret",
                 process.env.REFRESH_TOKEN_EXPIRY || "30days"
               );
+
+              delete user.password;
+     
               return {
                 status: true,
                 user: user,
@@ -41,8 +44,11 @@ export const userLogin_useCase = (dependencies: Dependencies) => {
             } else {
               return { status: false, message: "incorrect password" };
             }
-          }else{
-return{status:false,message:'Your Account is taken down due to malicious activity!'}
+          } else {
+            return {
+              status: false,
+              message: "Your Account is taken down due to malicious activity!",
+            };
           }
         } catch (error) {
           return { status: false, message: "incorrect email or password1" };

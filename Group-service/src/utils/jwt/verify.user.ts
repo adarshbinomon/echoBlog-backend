@@ -44,7 +44,7 @@ export const verifyUser = (
                   .json({ status: false, message: "invalid refresh token" });
               }
               const user = decodedRefresh.user;
-              console.log("user", user);
+              console.log("user", user); 
 
               const newAccessToken = createAccessToken(
                 user,

@@ -1,4 +1,4 @@
-import express from "express";
+import express, { request } from "express";
 import { userController } from "../../libs/controller/";
 import {
   uploadProfilePicture,
@@ -6,6 +6,7 @@ import {
 } from "../../helper/s3Multer";
 import { verifyUser } from "../../utils/jwt/verify.user";
 import { Dependencies } from "../../utils/interfaces/dependency.interface";
+import { verifyAdmin } from "../../utils/jwt/verify.admin";
 // import { verifyUser } from "@adarshbinomon/verify-user";
 export default (dependencies: Dependencies) => {
   const router = express();
@@ -20,6 +21,9 @@ export default (dependencies: Dependencies) => {
     findAllUsersAdminController,
     getCommunityMembersController,
     searchUserController,
+    getMonthlyUserCountController,
+    createCheckoutSessionController,
+    changePremiumStatusController,
   } = userController(dependencies);
 
   router.post("/user-details", verifyUser, saveUserDataController);
@@ -32,7 +36,7 @@ export default (dependencies: Dependencies) => {
   );
   router.post(
     "/upload-cover-picture",
-    
+
     uploadCoverPicture,
     editUserProfileController
   );
@@ -44,11 +48,14 @@ export default (dependencies: Dependencies) => {
     verifyUser,
     getCommunityMembersController
   );
+  router.get("/search-user/:regex", searchUserController);
+  router.post("/create-checkout-session", createCheckoutSessionController);
+  router.get("/premium-success", verifyUser, changePremiumStatusController);
 
   //admin routes
 
-  router.get("/find-all-users", findAllUsersAdminController);
-  router.get("/search-user/:regex", searchUserController);
+  router.get("/find-all-users", verifyAdmin, findAllUsersAdminController);
+  router.get("/user-chart-data", verifyAdmin, getMonthlyUserCountController);
 
   return router;
 };

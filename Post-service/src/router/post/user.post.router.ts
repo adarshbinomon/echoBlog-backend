@@ -2,6 +2,7 @@ import express from "express";
 import { postController } from "../../libs/controllers";
 import { verifyUser } from "../../utils/jwt/verify.user";
 import { Dependencies } from "../../utils/dependency.interface";
+import { verifyAdmin } from "../../utils/jwt/verify.admin";
 
 export default (dependencies: Dependencies) => {
   const router = express();
@@ -27,12 +28,14 @@ export default (dependencies: Dependencies) => {
     reportPostController,
     getSavedPostsController,
     getPostsFromFollowingController,
+    getMonthlyPostCountController,
   } = postController(dependencies);
 
   //admin routes
 
   router.put("/update-post-status/:postId", updatePostStatusAdminController);
-  router.get("/all-posts", getAllPostsAdminController);
+  router.get("/all-posts", verifyAdmin, getAllPostsAdminController);
+  router.get("/post-chart-data", verifyAdmin, getMonthlyPostCountController);
 
   //user routes
 
@@ -58,13 +61,17 @@ export default (dependencies: Dependencies) => {
 
     replyToCommentController
   );
-  router.put("/edit-comment/:postId",verifyUser, editCommentController);
-  router.post("/like-comment/:commentId",verifyUser, likeCommentController);
-  router.post("/delete-comment/:postId",verifyUser, deleteCommentController);
-  router.get("/search-post/:regex",verifyUser, searchPostController);
-  router.post("/report-post/:postId",verifyUser, reportPostController);
-  router.post("/get-saved-posts",verifyUser, getSavedPostsController);
-  router.post("/posts-from-following",verifyUser, getPostsFromFollowingController);
+  router.put("/edit-comment/:postId", verifyUser, editCommentController);
+  router.post("/like-comment/:commentId", verifyUser, likeCommentController);
+  router.post("/delete-comment/:postId", verifyUser, deleteCommentController);
+  router.get("/search-post/:regex", verifyUser, searchPostController);
+  router.post("/report-post/:postId", verifyUser, reportPostController);
+  router.post("/get-saved-posts", verifyUser, getSavedPostsController);
+  router.post(
+    "/posts-from-following",
+    verifyUser,
+    getPostsFromFollowingController
+  );
 
   return router;
 };

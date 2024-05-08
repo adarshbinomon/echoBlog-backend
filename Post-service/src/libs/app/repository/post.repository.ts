@@ -476,4 +476,36 @@ export default {
       return { status: false, messsage: "posts not found" };
     }
   },
+
+  getMonthlyPostCount: async () => {
+    try {
+      const postsPerMonth = await Post.aggregate([
+        {
+          $group: {
+            _id: { $month: "$createdOn" },
+            count: { $sum: 1 },
+          },
+        },
+        {
+          $sort: { _id: 1 },
+        },
+      ]);
+
+      const resultArray = postsPerMonth.map((item) => ({
+        x: item._id,
+        y: item.count,
+      }));
+
+      if (postsPerMonth) {
+        return {
+          status: true,
+          message: "count successful",
+          postsPerMonth: resultArray,
+        };
+      }
+    } catch (error) {
+      console.log("error in get monthlyPostCount repo", error);
+      return { status: false, message: "count unsuccessful" };
+    }
+  },
 };

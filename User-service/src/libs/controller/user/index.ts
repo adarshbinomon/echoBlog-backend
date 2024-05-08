@@ -8,6 +8,9 @@ import find_all_users_admin_controller from "./find.all.user.admin.controller";
 import get_community_members_controller from "./get.community.members.controller";
 import searchUserController from "./search.user.controller";
 import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import getMonthlyUserCountController from "./get.monthly.user.count.controller";
+import createCheckoutSessionController from "./create.checkout.session";
+import changePremiumStatusController from "./change.premium.status.controller";
 
 export default (dependencies: Dependencies) => {
   return {
@@ -21,5 +24,9 @@ export default (dependencies: Dependencies) => {
     getCommunityMembersController:
       get_community_members_controller(dependencies),
     searchUserController: searchUserController(dependencies),
+    getMonthlyUserCountController: getMonthlyUserCountController(dependencies),
+    createCheckoutSessionController:
+      createCheckoutSessionController(dependencies),
+    changePremiumStatusController: changePremiumStatusController(dependencies),
   };
 };

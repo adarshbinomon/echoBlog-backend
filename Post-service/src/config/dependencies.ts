@@ -20,6 +20,7 @@ import {
   reportPostUseCase,
   getSavedPostsUseCase,
   getPostsFromFollowingUsecase,
+  getMonthlyPostCountUseCase,
 } from "../libs/usecases";
 import {
   createUserUsecase,
@@ -52,6 +53,7 @@ const useCase: UseCase = {
   reportPostUseCase,
   getSavedPostsUseCase,
   getPostsFromFollowingUsecase,
+  getMonthlyPostCountUseCase,
 };
 
 const repository: Repository = {

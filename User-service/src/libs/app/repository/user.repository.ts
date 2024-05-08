@@ -255,4 +255,57 @@ export default {
       return { status: false, mesesage: "error in finding user" };
     }
   },
+
+  getMonthlyUserCount: async () => {
+    try {
+      const usersPerMonth = await User.aggregate([
+        {
+          $group: {
+            _id: { $month: "$createdOn" },
+            count: { $sum: 1 },
+          },
+        },
+        {
+          $sort: { _id: 1 },
+        },
+      ]);
+
+      const resultArray = usersPerMonth.map((item) => ({
+        x: item._id,
+        y: item.count,
+      }));
+
+      if (usersPerMonth) {
+        return {
+          status: true,
+          message: "count successful",
+          usersPerMonth: resultArray,
+        };
+      }
+    } catch (error) {
+      console.log("error in get monthlyPostCount repo", error);
+      return { status: false, message: "count unsuccessful" };
+    }
+  },
+
+  changePremiumStatus: async (userId: string) => {
+    try {
+      const response = await User.findByIdAndUpdate(
+        userId,
+        {
+          $set: {
+            isPremium: true,
+            premiumFrom: Date.now(),
+          },
+        },
+        { upsert: true }
+      );
+
+      if (response) {
+        return { status: true, message: "premium subscription successfull" };
+      }
+    } catch (error) {
+      return { status: false, message: "premium subscription unsuccessfull" };
+    }
+  },
 };
