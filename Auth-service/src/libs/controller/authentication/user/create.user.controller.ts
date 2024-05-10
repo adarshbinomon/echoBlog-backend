@@ -1,5 +1,6 @@
 import { Response, Request } from "express";
 import { Dependencies } from "../../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../../utils/http.statuscodes.enum";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -24,23 +25,23 @@ export default (dependencies: Dependencies) => {
       req.session.userData = response.user;
 
       if (response.status) {
-        res.json({
+        res.status(HttpStatus.OK).json({
           status: true,
           message: `otp sent to ${response.user.email}`,
         });
       } else if (response.status1) {
-        res.json({
+        res.status(HttpStatus.OK).json({
           status1: true,
           message: response.message,
         });
       } else {
-        res.json({
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
           status: false,
           message: response.message,
         });
       }
     } catch (error) {
-      res.json({
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
         status: false,
         message: "error in google login",
       });

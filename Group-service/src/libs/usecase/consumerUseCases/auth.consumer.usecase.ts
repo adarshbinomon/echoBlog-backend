@@ -2,7 +2,6 @@ import { Dependencies } from "../../../utils/dependencies.interface";
 import { UserData } from "../../../utils/interface";
 
 export const createUserUsecase = (dependencies: Dependencies) => {
-  console.log("55createUserUsecase");
 
   const {
     repository: { communityRepository },

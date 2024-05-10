@@ -1,5 +1,6 @@
-import { Dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 import { Request, Response } from "express";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -11,15 +12,14 @@ export default (dependencies: Dependencies) => {
       const monthlyPostCount = await getMonthlyPostCountUseCase(
         dependencies
       ).executeFunction();
-    //   console.log(monthlyPostCount.postsPerMonth);
 
       if (monthlyPostCount) {
-        res.status(200).json(monthlyPostCount);
+        res.status(HttpStatus.OK).json(monthlyPostCount);
       }
     } catch (error) {
       console.log("error in get getMonthlyPostCountController ", error);
       res
-        .status(404)
+        .status(HttpStatus.NOT_FOUND)
         .json({ status: false, message: "error in finding posts" });
     }
   };

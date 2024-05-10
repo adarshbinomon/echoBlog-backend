@@ -9,7 +9,6 @@ export const forgotPasswordUsecase = (dependencies: Dependencies) => {
   const executeFunction = async (email: string) => {
     try {
       const user = await authenticationRepository.findUser(email);
-console.log(user);
 
       if (user.status) {
         const otp = await sendMail(email);

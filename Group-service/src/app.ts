@@ -7,6 +7,7 @@ import { userConsumer } from "./events/authConsumer";
 import { userUpdateConsumer } from "./events/userUpdateConsumer";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import morgan from "morgan";
 dotenv.config({ path: "src/.env" });
 
 const app = express();
@@ -27,6 +28,8 @@ declare module "express-session" {
     adminRefreshToken: string;
   }
 }
+
+// app.use(morgan('tiny'))
 
 app.use(
   session({

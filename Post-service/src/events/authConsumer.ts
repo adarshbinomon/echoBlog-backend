@@ -1,6 +1,6 @@
 import { kafka } from "../config/kafkaClient";
 import { createUserController } from "../libs/controllers/consumeControllers/auth.consumer.controller";
-import { Dependencies } from "../utils/dependency.interface";
+import { Dependencies } from "../utils/interfaces/dependency.interface";
 
 const consumer = kafka.consumer({
   groupId: "post-service",
@@ -8,7 +8,7 @@ const consumer = kafka.consumer({
 
 export const userConsumer = async (dependencies: Dependencies) => {
   try {
-    console.log('auth to post consumer');
+    console.log('consuming from auth service to post service');
     
     
     await consumer.connect();
@@ -16,16 +16,14 @@ export const userConsumer = async (dependencies: Dependencies) => {
     await consumer.run({
       eachMessage: async ({ message }) => {
         try {
-          console.log('userConsumer');
+          console.log('message recieved from auth service');
           const binaryData: any = message.value;
           const jsonString: string = binaryData?.toString();
           const jsonData = JSON.parse(jsonString);
           const messageType = jsonData?.type;
-          console.log(jsonData);
           
 
           if (messageType === "createUser") {
-            console.log('if');
             
             await createUserController(dependencies, jsonData.data);
           } else {

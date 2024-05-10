@@ -8,6 +8,8 @@ const consumer = kafka.consumer({
 
 export const userConsumer = async (dependencies: Dependencies) => {
   try {
+    console.log('consuming from user service to auth service');
+    
     await consumer.connect();
     await consumer.subscribe({ topic: "userTopic", fromBeginning: true });
     await consumer.run({

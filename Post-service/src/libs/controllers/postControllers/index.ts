@@ -17,9 +17,10 @@ import deleteCommentController from "./delete.comment,controller";
 import searchPostController from "./search.post.controller";
 import reportPostController from "./report.post.controller";
 import getSavedPostsController from "./get.saved.posts.controller";
-import { Dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 import getPostsFromFollowingController from "./get.posts.from.following.controller";
 import getMonthlyPostCountController from "./get.monthly.post.count.controller";
+import getPostsFromCommunityController from "./get.posts.from.community.controller";
 
 export default (dependencies: Dependencies) => {
   return {
@@ -47,5 +48,7 @@ export default (dependencies: Dependencies) => {
     getPostsFromFollowingController:
       getPostsFromFollowingController(dependencies),
     getMonthlyPostCountController: getMonthlyPostCountController(dependencies),
+    getPostsFromCommunityController:
+      getPostsFromCommunityController(dependencies),
   };
 };

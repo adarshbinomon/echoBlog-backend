@@ -1,7 +1,7 @@
 import express from "express";
 import { postController } from "../../libs/controllers";
 import { verifyUser } from "../../utils/jwt/verify.user";
-import { Dependencies } from "../../utils/dependency.interface";
+import { Dependencies } from "../../utils/interfaces/dependency.interface";
 import { verifyAdmin } from "../../utils/jwt/verify.admin";
 
 export default (dependencies: Dependencies) => {
@@ -29,6 +29,7 @@ export default (dependencies: Dependencies) => {
     getSavedPostsController,
     getPostsFromFollowingController,
     getMonthlyPostCountController,
+    getPostsFromCommunityController
   } = postController(dependencies);
 
   //admin routes
@@ -71,6 +72,11 @@ export default (dependencies: Dependencies) => {
     "/posts-from-following",
     verifyUser,
     getPostsFromFollowingController
+  );
+  router.post(
+    "/posts-from-community",
+    verifyUser,
+    getPostsFromCommunityController
   );
 
   return router;

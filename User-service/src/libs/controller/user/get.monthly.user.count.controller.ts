@@ -1,3 +1,4 @@
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 import { Request, Response } from "express";
 
@@ -11,15 +12,14 @@ export default (dependencies: Dependencies) => {
       const monthlyUserCount = await getMonthlyUserCountUseCase(
         dependencies
       ).executeFunction();
-      console.log(monthlyUserCount.postsPerMonth);
 
       if (monthlyUserCount) {
-        res.status(200).json(monthlyUserCount);
+        res.status(HttpStatus.OK).json(monthlyUserCount);
       }
     } catch (error) {
       console.log("error in get getMonthlyUserCountController ", error);
       res
-        .status(404)
+        .status(HttpStatus.NOT_FOUND)
         .json({ status: false, message: "error in finding posts" });
     }
   };

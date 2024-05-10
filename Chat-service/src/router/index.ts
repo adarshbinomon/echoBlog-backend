@@ -1,4 +1,4 @@
-import { Dependencies } from "../utils/dependencies.interface";
+import { Dependencies } from "../utils/interfaces/dependencies.interface";
 import chatRouter from "./chat/chat.router";
 import express from "express";
 

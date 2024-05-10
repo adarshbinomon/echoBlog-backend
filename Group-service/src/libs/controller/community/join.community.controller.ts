@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import community from ".";
 import { Dependencies } from "../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -10,7 +11,6 @@ export default (dependencies: Dependencies) => {
   const joinCommunityController = async (req: Request, res: Response) => {
     try {
       const { userId, communityId } = req.body;
-      console.log(userId, communityId);
       
 
       const response = await joinCommunity_useCase(
@@ -18,13 +18,13 @@ export default (dependencies: Dependencies) => {
       ).executeFunction(userId, communityId);
 
       if (response.status) {
-        res.status(201).json({
+        res.status(HttpStatus.CREATED).json({
           status: true,
           message: response.message,
           community: response.commuinity,
         });
       } else {
-        res.status(500).json({ status: true, message: response.message });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: true, message: response.message });
       }
     } catch (error) {
       console.log("error in jopin community controller:", error);

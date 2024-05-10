@@ -10,7 +10,6 @@ export const getCommunity_useCaseWithUsers = (dependencies: Dependencies) => {
       const response = await communityRepository.getCommunityWithUsers(
         communityId
       );
-      console.log("usecase:", response);
 
       if (response.status) {
         return {

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { userProducer } from "../../../events/userUpdateProducer";
 import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -18,12 +19,12 @@ export default (dependencies: Dependencies) => {
       if (response.status) {
         await userProducer(response.user, "userTopic", "updateUser");
         res
-          .status(201)
+          .status(HttpStatus.CREATED)
           .json({ status: true, message: "user-details saved successfully" });
       }
     } catch (error) {
       res
-        .status(500)
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ status: false, message: "failed to save user details" });
     }
   };

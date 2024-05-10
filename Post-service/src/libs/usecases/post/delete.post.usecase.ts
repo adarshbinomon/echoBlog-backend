@@ -1,4 +1,4 @@
-import { Dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 
 export const deletePost_useCase = (dependencies: Dependencies) => {
   const {

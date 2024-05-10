@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { Dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -13,10 +14,10 @@ export default (dependencies: Dependencies) => {
 
     if (response.status) {
       res
-        .status(200)
+        .status(HttpStatus.OK)
         .json({ status: true, post: response.post, user: response.user });
     } else {
-      res.status(404).json({ status: false, message: "error finding post" });
+      res.status(HttpStatus.NOT_FOUND).json({ status: false, message: "error finding post" });
     }
   };
   return getPostController;

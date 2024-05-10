@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -9,7 +10,6 @@ export default (dependencies: Dependencies) => {
   const editCommunityController = async (req: Request, res: Response) => {
     try {
       const data = req.body;
-      console.log("dataaaaa", data);
 
       const communityId = req.params.communityId;
 
@@ -17,18 +17,18 @@ export default (dependencies: Dependencies) => {
         dependencies
       ).executeFunction(communityId, data);
       if (response.status) {
-        res.status(200).json({
+        res.status(HttpStatus.OK).json({
           status: true,
           message: response.message,
           community: response.community,
         });
       } else {
-        res.status(500).json({ status: false, message: response.message });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, message: response.message });
       }
     } catch (error) {
       console.log("error in edit community controller:", error);
       res
-        .status(500)
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ status: false, message: "error in editing community" });
     }
   };

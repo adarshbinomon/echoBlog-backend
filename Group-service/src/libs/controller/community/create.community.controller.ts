@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -13,15 +14,14 @@ export default (dependencies: Dependencies) => {
       const response = await createCommunity_usecase(
         dependencies
       ).executeFunction(data);
-      console.log(response);
       if (response.status) {
-        res.status(201).json({
+        res.status(HttpStatus.OK).json({
           status: true,
           message: response.message,
           community: response.community,
         });
       } else {
-        res.status(500).json({ status: false, message: response.message });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, message: response.message });
       }
     } catch (error) {
       console.log("error in create community controler:", error);

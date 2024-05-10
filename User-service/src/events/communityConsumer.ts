@@ -9,19 +9,19 @@ const consumer = kafka.consumer({
 
 export const communityConsumer = async (dependencies: Dependencies) => {
   try {
-    console.log("community to user consumer");
+    console.log('consuming from community service');
 
     await consumer.connect();
     await consumer.subscribe({ topic: "communityTopic", fromBeginning: true });
     await consumer.run({
       eachMessage: async ({ message }) => {
         try {
+          console.log('message recieved from community service');
 
           const binaryData: any = message.value;
           const jsonString: string = binaryData?.toString();
           const jsonData = JSON.parse(jsonString);
           const messageType = jsonData?.type;
-          console.log(jsonData);
 
           if (messageType === "joinCommunity") {
             await joinCommunityController(dependencies, jsonData.data);

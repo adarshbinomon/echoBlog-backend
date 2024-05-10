@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -13,13 +14,13 @@ export default (dependencies: Dependencies) => {
       ).executeFunction();
 
       if (response.status) {
-        res.status(200).json({
+        res.status(HttpStatus.OK).json({
           status: true,
           message: "response.message",
           users: response.users,
         });
       } else {
-        res.status(404).json({ status: true, message: "response.message" });
+        res.status(HttpStatus.NOT_FOUND).json({ status: true, message: "response.message" });
       }
     } catch (error) {
       console.log("error in find all user admin controller:", error);

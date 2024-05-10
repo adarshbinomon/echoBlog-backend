@@ -8,7 +8,7 @@ const consumer = kafka.consumer({
 
 export const updateUserStatusConsumer = async (dependencies: Dependencies) => {
   try {
-    console.log("changeUserStatus");
+    console.log("consuming from user service");
 
     await consumer.connect();
     await consumer.subscribe({
@@ -18,6 +18,8 @@ export const updateUserStatusConsumer = async (dependencies: Dependencies) => {
     await consumer.run({
       eachMessage: async ({ message }) => {
         try {
+          console.log('message recieved form user service');
+          
           const binaryData: any = message.value;
           const jsonString: string = binaryData?.toString();
           const jsonData = JSON.parse(jsonString);

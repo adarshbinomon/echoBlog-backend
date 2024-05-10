@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import { PostData } from "../../../utils/interface";
-import { Dependencies } from "../../../utils/dependency.interface";
+import { PostData } from "../../../utils/interfaces/interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -17,7 +18,7 @@ export default (dependencies: Dependencies) => {
 
       if (response.status) {
         res
-          .status(201)
+          .status(HttpStatus.CREATED)
           .json({ status: true, message: "Post created successfully" });
       } else {
         res
@@ -26,7 +27,7 @@ export default (dependencies: Dependencies) => {
       }
     } catch (error) {
       console.error("Error creating post:", error);
-      res.status(500).json({ status: false, message: "Internal Server Error" });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, message: "Internal Server Error" });
     }
   };
 

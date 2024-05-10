@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { Dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -17,12 +18,12 @@ export default (dependencies: Dependencies) => {
       );
 
       if (response.status) {
-        res.status(201).json({ status: true, message: response.message });
+        res.status(HttpStatus.CREATED).json({ status: true, message: response.message });
       } else {
-        res.status(500).json({ status: true, message: response.message });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: true, message: response.message });
       }
     } catch (error) {
-      res.status(500).json({ status: true, message: "error i reporting post" });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: true, message: "error i reporting post" });
     }
   };
   return reportPostController;

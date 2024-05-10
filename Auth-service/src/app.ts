@@ -5,9 +5,12 @@ import { routes } from "./router";
 import session, { MemoryStore, SessionOptions } from "express-session";
 import dotenv from "dotenv";
 import { userConsumer } from "./events/userUpdateConsumer";
+import morgan from "morgan";
+
 dotenv.config({ path: "src/.env" });
 
 const app = express();
+
 
 const store = new MemoryStore();
 declare module "express-session" {
@@ -26,6 +29,8 @@ declare module "express-session" {
     email: string;
   }
 }
+
+app.use(morgan('tiny'))
 
 app.use(
   session({

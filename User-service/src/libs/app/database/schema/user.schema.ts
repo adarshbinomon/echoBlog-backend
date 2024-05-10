@@ -1,14 +1,7 @@
 import mongoose from "mongoose";
+import accountTypeEnum from '../../../../utils/enums/account.types'
+import genderEnum from "../../../../utils/enums/gender";
 
-enum accountTypeEnum {
-  "Private",
-  "Public",
-}
-enum genderEnum {
-  "Male",
-  "Female",
-  "Other",
-}
 
 const userSchema = new mongoose.Schema({
   _id: {

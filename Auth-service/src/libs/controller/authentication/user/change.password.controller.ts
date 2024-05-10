@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../../utils/http.statuscodes.enum";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -10,21 +11,20 @@ export default (dependencies: Dependencies) => {
     try {
       const { password } = req.body;
       const email = req.session.email;
-      console.log(password, email);
 
       const response = await changePasswordUsecase(
         dependencies
       ).executeFunction(email, password);
 
       if (response.status) {
-        res.status(204).json(response);
+        res.status(HttpStatus.NO_CONTENT).json(response);
       } else {
-        res.status(500).json(response);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(response);
       }
     } catch (error) {
       console.log("error in change password controller:", error);
       res
-        .status(500)
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ status: false, message: "error in changing password" });
     }
   };

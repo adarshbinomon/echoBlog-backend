@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (depedndencies: Dependencies) => {
   const {
@@ -17,13 +18,13 @@ export default (depedndencies: Dependencies) => {
 
       if (resposne.status) {
         res
-          .status(201)
+          .status(HttpStatus.CREATED)
           .json({ status: true, message: "post saved", user: resposne.user });
       }
     } catch (error) {
       console.log("error in save post controller:", error);
 
-      res.status(201).json({ status: true, message: "post saved" });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, message: "post not saved" });
     }
   };
   return savePostController;

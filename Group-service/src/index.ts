@@ -12,7 +12,7 @@ const start = async () => {
 };
 
 app.listen(port, () => {
-  console.log(`server started on port ${port}`);
+  console.log(`Group server started on port ${port}`);
 });
 
 start();

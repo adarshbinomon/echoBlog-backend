@@ -8,7 +8,6 @@ export const createUserController = async (
   const {
     consumeUsecase: { createUserUsecase },
   } = dependencies;
-  console.log('kafka controller');
   
   const response = await createUserUsecase(dependencies).executeFunction(data);
 };

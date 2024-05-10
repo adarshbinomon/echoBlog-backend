@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { Dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -12,16 +13,18 @@ export default (dependencies: Dependencies) => {
       ).executeFunction();
 
       if (response.status) {
-        res.status(200).json({
+        res.status(HttpStatus.OK).json({
           status: true,
           posts: response.posts,
           message: response.message,
         });
       } else {
-        res.status(500).json({ status: false, message: response.message });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, message: response.message });
       }
     } catch (error) {
-      res.status(500).json({ status: false, message: "posts not found" });
+      console.log('error in get all post controller ',error);
+      
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, message: "posts not found" });
     }
   };
   return getAllPostsController;

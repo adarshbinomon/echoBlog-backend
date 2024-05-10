@@ -9,9 +9,7 @@ export const updateUserController = async (
   const {
     consumeUsecase: { updateUserUsecase },
   } = dependencies;
-  console.log("data:", data);
 
   const response = await updateUserUsecase(dependencies)?.executeFunction(data);
-  console.log('response:' , response);
   
 };

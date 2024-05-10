@@ -12,7 +12,6 @@ export const verifyUser = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(req.cookies);
 
   const userAccessToken = req.cookies.accessToken;
   const userRefreshToken = req.cookies.refreshToken;
@@ -28,7 +27,8 @@ export const verifyUser = (
     process.env.ACCESS_SECRET_KEY || "",
     (err: jwt.VerifyErrors | null, decoded: any) => {
       if (err) {
-        console.log("err.name", err.name);
+        console.log('err in verify user',err.message);
+        
         if (
           (err.name === "TokenExpiredError" ||
             err.name === "JsonWebTokenError") &&
@@ -44,7 +44,6 @@ export const verifyUser = (
                   .json({ status: false, message: "invalid refresh token" });
               }
               const user = decodedRefresh.user;
-              console.log("user", user); 
 
               const newAccessToken = createAccessToken(
                 user,

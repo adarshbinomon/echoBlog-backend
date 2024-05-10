@@ -1,5 +1,5 @@
-import { Dependencies } from "../../../utils/dependency.interface";
-import { CommentObject } from "../../../utils/interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { CommentObject } from "../../../utils/interfaces/interface";
 import mongoose, { Types } from "mongoose";
 const { ObjectId } = mongoose.Types;
 

@@ -6,7 +6,7 @@ import {
   getConversationsUsecase,
   sendVideocallUseCase,
 } from "../libs/usecases";
-import { Repository, UseCase } from "../utils/dependencies.interface";
+import { Repository, UseCase } from "../utils/interfaces/dependencies.interface";
 
 const useCase: UseCase = {
   sendMessageUsecase,

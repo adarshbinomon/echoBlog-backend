@@ -4,7 +4,7 @@ import {
   UserData,
   PostData,
   reportObject,
-} from "../../../utils/interface";
+} from "../../../utils/interfaces/interface";
 import { schema } from "../database";
 const { ObjectId } = mongoose.Types;
 
@@ -468,6 +468,25 @@ export default {
       );
 
       if (posts) {
+        return { status: true, messsage: "posts found", posts };
+      } else {
+        return { status: false, messsage: "posts not found" };
+      }
+    } catch (error) {
+      return { status: false, messsage: "posts not found" };
+    }
+  },
+
+  getPostsFromCommunity: async (community: string[]) => {
+    try {
+      console.log('community',community);
+      
+      const posts = await Post.find({
+        communityId: { $in: community },
+      }).populate("createdBy");      
+      console.log("posts", posts);
+
+      if (posts.length>0) {
         return { status: true, messsage: "posts found", posts };
       } else {
         return { status: false, messsage: "posts not found" };

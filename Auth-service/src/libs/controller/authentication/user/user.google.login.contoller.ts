@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../../utils/dependencies.interface";
 import { userProducer } from "../../../../events/userProduces";
+import { HttpStatus } from "../../../../utils/http.statuscodes.enum";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -17,8 +18,7 @@ export default (dependencies: Dependencies) => {
 
       if (response.status) {
         const { user, accessToken, refreshToken } = response;
-        console.log("user");
-        console.log(accessToken);
+
 
         req.session.refreshToken = refreshToken;
         const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
@@ -31,7 +31,6 @@ export default (dependencies: Dependencies) => {
         const userDataForResponse = JSON.parse(
           JSON.stringify(response.user.user)
         );
-        console.log(userDataForResponse);
 
         delete userDataForResponse.password;
         delete userDataForResponse.isGoogle;
@@ -41,13 +40,13 @@ export default (dependencies: Dependencies) => {
         await userProducer(userDataForResponse, "authTopic", "createUser");
 
         res
-          .status(200)
+          .status(HttpStatus.OK)
           .json({ status: true, accessToken: accessToken, user: user.user });
       } else {
-        res.status(400).json({ status: false, message: response.message });
+        res.status(HttpStatus.BAD_REQUEST).json({ status: false, message: response.message });
       }
     } catch (error) {
-      res.status(400).json({ status: false, message: "error in google login" });
+      res.status(HttpStatus.BAD_REQUEST).json({ status: false, message: "error in google login" });
     }
   };
   return googleLogin;

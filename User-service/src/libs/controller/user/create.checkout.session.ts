@@ -1,3 +1,4 @@
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 import { Request, Response } from "express";
 
@@ -30,10 +31,10 @@ export default (dependencies: Dependencies) => {
         cancel_url: "http://localhost:5173/edit-profile/premium",
       });
 
-      res.json({ id: session.id });
+      res.status(HttpStatus.OK).json({ id: session.id });
     } catch (error) {
       console.log("error in createCheckoutSessionController ", error);
-      res.status(500).json({
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
         status: false,
         message: "error in createCheckoutSessionController",
       });

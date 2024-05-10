@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -10,9 +11,7 @@ export default (dependencies: Dependencies) => {
     try {
       const { communityId } = req.params;
       const { memberId } = req.body;
-      console.log('req.body');
-      console.log(req.body);
-      
+   
 
       const response = await removeMemberUseCase(dependencies).executeFunction(
         communityId,
@@ -21,14 +20,14 @@ export default (dependencies: Dependencies) => {
       console.log("response:", response);
 
       if (response.status) {
-        res.status(200).json({ status: true, message: response.message });
+        res.status(HttpStatus.OK).json({ status: true, message: response.message });
       } else {
-        res.status(500).json({ status: false, message: response.message });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, message: response.message });
       }
     } catch (error) {
       console.log("error in remove member controller:", error);
       res
-        .status(500)
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ status: false, message: "error in removing member" });
     }
   };

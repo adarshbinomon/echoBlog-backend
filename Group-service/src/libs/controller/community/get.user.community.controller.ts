@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -10,21 +11,23 @@ export default (dependencies: Dependencies) => {
     try {
       const userId = req.params.userId;
 
-      const response = await
-        getUserCommunities_useCase(dependencies).executeFunction(userId);
-        console.log(response);
+      const response = await getUserCommunities_useCase(
+        dependencies
+      ).executeFunction(userId);
 
       if (response.status) {
-        res.status(200).json({
+        res.status(HttpStatus.OK).json({
           status: true,
           message: response.message,
           communities: response.communities,
         });
       } else {
-        res.status(404).json({ status: false, message: response.message });
+        res.status(HttpStatus.NOT_FOUND).json({ status: false, message: response.message });
       }
     } catch (error) {
-      return { status: false, message: "error in finding communities" };
+      res
+        .status(HttpStatus.NOT_FOUND)
+        .json({ status: false, message: "error in finding communities" });
     }
   };
   return getUserCommunitiesController;

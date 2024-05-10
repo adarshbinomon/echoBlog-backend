@@ -21,6 +21,7 @@ import {
   getSavedPostsUseCase,
   getPostsFromFollowingUsecase,
   getMonthlyPostCountUseCase,
+  getPostsFromCommunityUsecase,
 } from "../libs/usecases";
 import {
   createUserUsecase,
@@ -30,7 +31,7 @@ import {
   ConsumeUsecase,
   Repository,
   UseCase,
-} from "../utils/dependency.interface";
+} from "../utils/interfaces/dependency.interface";
 
 const useCase: UseCase = {
   createPost_UseCase,
@@ -54,6 +55,7 @@ const useCase: UseCase = {
   getSavedPostsUseCase,
   getPostsFromFollowingUsecase,
   getMonthlyPostCountUseCase,
+  getPostsFromCommunityUsecase,
 };
 
 const repository: Repository = {

@@ -7,7 +7,8 @@ import { routes } from "./router";
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
 import socketConfig from "./socket/socket";
-import { Dependencies } from "./utils/dependencies.interface";
+import { Dependencies } from "./utils/interfaces/dependencies.interface";
+import morgan from "morgan";
 dotenv.config();
 const app =express()
 const store = new MemoryStore();
@@ -27,6 +28,7 @@ app.use(
   } as SessionOptions)
 );
 app.use(cookieParser());
+// app.use(morgan('tiny'))
 app.use(express.json());
 app.use(
   cors({

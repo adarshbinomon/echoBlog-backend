@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dependencies from "./config/dependencies";
 import { routes } from "./router";
+import morgan from 'morgan'
 import session, { MemoryStore, SessionOptions } from "express-session";
 import dotenv from "dotenv";
 import path from "path";
@@ -19,6 +20,9 @@ declare module "express-session" {
     otp: string;
   }
 }
+
+// app.use(morgan("tiny"));
+
 
 app.use(cookieParser());
 

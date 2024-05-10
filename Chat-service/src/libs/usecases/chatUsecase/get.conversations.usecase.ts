@@ -1,17 +1,27 @@
-import { Dependencies } from "../../../utils/dependencies.interface";
+import { Dependencies } from "../../../utils/interfaces/dependencies.interface";
 
 export const getConversationsUsecase = (dependencies: Dependencies) => {
   const {
     repository: { chatRepository },
   } = dependencies;
 
-  const executeFunction = async (following: string[]) => {
+  const executeFunction = async (following: string[],userId:string) => {
     try {
-      const conversations = await chatRepository.getConversations(following);
+      const conversations = await chatRepository.getConversations(following,userId);
+      const participantsArray = conversations.participantsArray;
+
+      const participants = participantsArray.map((conversation: any) => {
+        return conversation._doc;
+      });
+
 
       if (conversations.status) {
-        return { conversations };
-      } else { 
+        return {
+          status: true,
+          message: conversations.message,
+          conversations: participants,
+        };
+      } else {
         return { conversations };
       }
     } catch (error) {

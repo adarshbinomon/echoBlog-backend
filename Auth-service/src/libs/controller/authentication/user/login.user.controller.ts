@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../../utils/http.statuscodes.enum";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -29,13 +30,13 @@ export default (dependencies: Dependencies) => {
           secure: true,
         });
         res
-          .status(200)
+          .status(HttpStatus.OK)
           .json({ status: true, accessToken: accessToken, user: user });
       } else {
-        res.status(500).json({ status: false, message: response.message });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, message: response.message });
       }
     } catch (error) {
-      res.status(400).json({ status: false, message: "error in user login" });
+      res.status(HttpStatus.BAD_REQUEST).json({ status: false, message: "error in user login" });
     }
   };
 

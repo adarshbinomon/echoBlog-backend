@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../../utils/http.statuscodes.enum";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -12,8 +13,7 @@ export default (dependencies: Dependencies) => {
   ) => {
     try {
       const { enteredOtp } = req.body;
-      console.log(req.body);
-      console.log(req.session.otp);
+
 
       const response = await verifyForgotPasswordOtp(
         dependencies
@@ -23,12 +23,12 @@ export default (dependencies: Dependencies) => {
       );
 
       if (response.status) {
-        res.status(200).json(response);
+        res.status(HttpStatus.OK).json(response);
       } else {
-        res.status(500).json(response);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(response);
       }
     } catch (error) {
-      res.status(500).json({ status: false, message: "Internal server error" });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, message: "Internal server error" });
     }
   };
 

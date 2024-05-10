@@ -1,5 +1,5 @@
-import { Dependencies } from "../../../utils/dependency.interface";
-import { PostData } from "../../../utils/interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { PostData } from "../../../utils/interfaces/interface";
 
 export const findUserPosts_useCase = (dependencies: Dependencies) => {
 

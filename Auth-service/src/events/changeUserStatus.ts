@@ -4,7 +4,7 @@ const producer = kafka.producer();
 
 export const changeUserStatus = async (sendData: UserData, topic: string, type: string) => {
   try {
-    console.log('changeUserStatus');
+    console.log('changeUserStatus Producer');
     
     if (!sendData) {
       throw new Error("send data not existed");

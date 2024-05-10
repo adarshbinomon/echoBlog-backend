@@ -1,5 +1,5 @@
-import { Dependencies } from "../../../utils/dependency.interface";
-import { UserData } from "../../../utils/interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { UserData } from "../../../utils/interfaces/interface";
 
 export const createUserUsecase = (dependencies: Dependencies) => {
 

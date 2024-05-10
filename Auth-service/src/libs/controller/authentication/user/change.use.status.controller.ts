@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { changeUserStatus } from "../../../../events/changeUserStatus";
 import { clearAccessTokenFromCookie } from "../../../../utils/jwt";
 import { Dependencies } from "../../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../../utils/http.statuscodes.enum";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -33,13 +34,13 @@ export default (dependencies: Dependencies) => {
           "changeUserStatus",
           "statuschange"
         );
-        res.status(201).json({
+        res.status(HttpStatus.CREATED).json({
           status: true,
           message: response.message,
           user: response.user,
         });
       } else {
-        res.status(500).json({ status: false, message: response.message });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, message: response.message });
       }
     } catch (error) {
       console.log("error in change user status controller:", error);

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { Dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -16,13 +17,13 @@ export default (dependencies: Dependencies) => {
 
       if (response.status) {
         res
-          .status(202)
+          .status(HttpStatus.NO_CONTENT)
           .json({ status: true, message: "post deleted succesfully." });
       } else {
-        res.status(500).json({ status: false, messge: "post deletion failed" });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, messge: "post deletion failed" });
       }
     } catch (error) {
-      res.status(500).json({ status: false, messge: "post deletion failed" });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, messge: "post deletion failed" });
     }
   };
   return deletePostController;

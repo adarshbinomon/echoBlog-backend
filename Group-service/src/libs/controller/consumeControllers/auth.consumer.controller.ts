@@ -9,8 +9,6 @@ export const createUserController = async (
   const {
     consumeUsecase: { createUserUsecase },
   } = dependencies;
-  console.log('data:',data);
   const response = await createUserUsecase(dependencies).executeFunction(data);
-  console.log('response:',response);
   
 };

@@ -20,6 +20,7 @@ import {
   getSavedPostsUseCase,
   getPostsFromFollowingUsecase,
   getMonthlyPostCountUseCase,
+  getPostsFromCommunityUsecase,
 } from "./post";
 
 export {
@@ -44,4 +45,5 @@ export {
   getSavedPostsUseCase,
   getPostsFromFollowingUsecase,
   getMonthlyPostCountUseCase,
+  getPostsFromCommunityUsecase,
 };

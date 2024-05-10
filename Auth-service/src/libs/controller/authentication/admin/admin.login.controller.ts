@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../../utils/http.statuscodes.enum";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -13,7 +14,6 @@ export default (dependencies: Dependencies) => {
       email,
       password
     );
-    // console.log(response);
     
 
     if (response.status) {
@@ -26,10 +26,10 @@ export default (dependencies: Dependencies) => {
         secure: true,
       });
       res
-        .status(201)
+        .status(HttpStatus.CREATED)
         .json({ status: true, accessToken: adminAccessToken, user: user });
     } else {      
-      res.status(400).json({ status: false, message: response.message });
+      res.status(HttpStatus.BAD_REQUEST).json({ status: false, message: response.message });
     }
   };
 

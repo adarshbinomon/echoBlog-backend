@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -10,23 +11,21 @@ export default (dependencies: Dependencies) => {
     try {
       const { communityId } = req.params;
       const { memberId } = req.body;
-      console.log(communityId);
 
       const response = await makeAdminUseCase(dependencies).executeFunction(
         communityId,
         memberId
       );
-      console.log(response);
 
       if (response.status) {
-        res.status(201).json({ status: true, message: response.message });
+        res.status(HttpStatus.CREATED).json({ status: true, message: response.message });
       } else {
-        res.status(500).json({ status: true, message: response.message });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: true, message: response.message });
       }
     } catch (error) {
       console.log("error in make admin controller:", error);
       res
-        .status(500)
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ status: true, message: "error in making user admin" });
     }
   };

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { Dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -15,14 +16,14 @@ export default (dependencies: Dependencies) => {
       );
 
       if (response.status) {
-        res.status(201).json({ status: true, message: "comment added", comment: response.comment });
+        res.status(HttpStatus.CREATED).json({ status: true, message: "comment added", comment: response.comment });
       } else {
-        res.status(500).json({ status: false, message: "comment not added" });
+        res.status(HttpStatus.CREATED).json({ status: false, message: "comment not added" });
       }
     } catch (error) {
       console.log("error in add comment controller:", error);
 
-      res.status(500).json({ status: false, message: "comment not added" });
+      res.status(HttpStatus.CREATED).json({ status: false, message: "comment not added" });
     }
   };
   return addCommentController;

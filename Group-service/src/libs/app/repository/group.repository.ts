@@ -36,8 +36,6 @@ export default {
 
   getCommunityWithId: async (communityId: string) => {
     try {
-      console.log(communityId);
-
       const community = await Community.findById(communityId);
 
       if (community) {
@@ -54,12 +52,9 @@ export default {
   },
   getCommunityWithUsers: async (communityId: string) => {
     try {
-      console.log(communityId);
-
       const community = await Community.findById(communityId).populate(
         "members"
       );
-      console.log("response:", community);
 
       if (community) {
         return {
@@ -78,7 +73,6 @@ export default {
       const userData = { ...data };
 
       const response = await schema.User.create(userData);
-      console.log(response, "res");
 
       if (response) {
         return { status: true, message: "user created sucessfully", response };
@@ -172,10 +166,7 @@ export default {
 
   editCommunitySettings: async (communityId: string, data: CommunityData) => {
     try {
-      console.log(data);
-
       const response = await Community.findByIdAndUpdate(communityId, data);
-      console.log("repo:", response);
       if (response) {
         return {
           status: true,
@@ -212,16 +203,11 @@ export default {
   },
   removeMember: async (communityId: string, memberId: string) => {
     try {
-      console.log("memberId");
-      console.log(memberId);
-
       const response = await Community.findByIdAndUpdate(
         communityId,
         { $pull: { members: memberId } },
         { new: true, lean: true }
       );
-
-      console.log("response", response);
 
       if (response) {
         return { status: true, message: "Member removed successfully" };
@@ -236,25 +222,20 @@ export default {
 
   makeAdmin: async (communityId: string, memberId: string) => {
     try {
-      console.log(communityId);
-      console.log(memberId);
-      
       const response = await Community.findByIdAndUpdate(
         communityId,
         { $push: { admins: memberId } },
-        { new: true } 
+        { new: true }
       );
-  console.log(response);
-  
+
       if (response) {
-        return { status: true, message: 'admin added' };
+        return { status: true, message: "admin added" };
       } else {
-        return { status: false, message: 'admin not added' };
+        return { status: false, message: "admin not added" };
       }
     } catch (error) {
-      console.log('error in make admin repository:', error);
-      return { status: false, message: 'admin not added' };
+      console.log("error in make admin repository:", error);
+      return { status: false, message: "admin not added" };
     }
-  }
-  
+  },
 };

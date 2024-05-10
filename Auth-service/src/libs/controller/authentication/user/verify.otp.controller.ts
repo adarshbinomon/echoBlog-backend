@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
 import { userProducer } from "../../../../events/userProduces";
 import { Dependencies } from "../../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../../utils/http.statuscodes.enum";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -30,7 +31,6 @@ export default (dependencies: Dependencies) => {
         const userDataForResponse = JSON.parse(
           JSON.stringify(response.user.response)
         );
-        console.log(userDataForResponse);
 
         delete userDataForResponse.password;
         delete userDataForResponse.isGoogle;
@@ -38,16 +38,16 @@ export default (dependencies: Dependencies) => {
         delete userDataForResponse.uid;
 
         await userProducer(userDataForResponse, "authTopic", "createUser");
-        res.status(201).json({
+        res.status(HttpStatus.CREATED).json({
           status: true,
           accessToken: accessToken,
           user: userDataForResponse,
         });
       } else {
-        res.status(400).json({ status: false, message: response.message });
+        res.status(HttpStatus.BAD_REQUEST).json({ status: false, message: response.message });
       }
     } catch (error) {
-      res.status(400).json({ status: false, message: "error in verify otp" });
+      res.status(HttpStatus.BAD_REQUEST).json({ status: false, message: "error in verify otp" });
     }
   };
 

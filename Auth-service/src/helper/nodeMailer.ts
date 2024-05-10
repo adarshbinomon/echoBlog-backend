@@ -9,7 +9,7 @@ const generateOtp = () => {
 export const sendMail = async (email: string, name?: string) => {
   try {
     const otp = generateOtp();
-    console.log(otp);
+    console.log('otp',otp);
 
     // const transporter = nodemailer.createTransport({
     //   host: "smtp.gmail.com",
@@ -25,7 +25,7 @@ export const sendMail = async (email: string, name?: string) => {
     // const mailOptions = {
     //   from: "adarshbinomon.3@gmail.com",
     //   to: email,
-    //   subject: "OTP || Spark Fire 🔥",
+    //   subject: "OTP || Echo Blog",
     //   text: `Thank you for choosing Spark Fire. Use this otp to finish your signup: ${otp}`,
     // };
 

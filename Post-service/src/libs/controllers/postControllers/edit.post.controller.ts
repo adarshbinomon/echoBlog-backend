@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { Dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -18,18 +19,18 @@ export default (dependencies: Dependencies) => {
 
       if (response.status) {
         res
-          .status(201)
+          .status(HttpStatus.CREATED)
           .json({ status: true, message: "post updated successfully" });
       } else {
         res
-          .status(500)
+          .status(HttpStatus.INTERNAL_SERVER_ERROR)
           .json({ status: false, message: "post update unsuccessful" });
       }
     } catch (error) {
       console.log(error);
 
       res
-        .status(500)
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ status: false, message: "post update unsuccessful" });
     }
   };

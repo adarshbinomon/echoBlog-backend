@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 export default (dependencies: any) => {
   const {
     useCase: { getPostsFromFollowingUsecase },
@@ -13,11 +14,12 @@ export default (dependencies: any) => {
       const response = await getPostsFromFollowingUsecase(
         dependencies
       ).executeFunction(following);
+console.log('response',response);
 
       if (response.status) {
-        res.status(200).json(response);
+        res.status(HttpStatus.OK).json(response);
       } else {
-        res.status(404).json(response);
+        res.status(HttpStatus.NOT_FOUND).json(response);
       }
     } catch (error) {
       return {

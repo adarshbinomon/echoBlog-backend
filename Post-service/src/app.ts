@@ -9,6 +9,7 @@ import { userConsumer } from "./events/authConsumer";
 import { userUpdateConsumer } from "./events/userUpdateConsumer";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import morgan from "morgan";
 dotenv.config({ path: ".env" });
 
 const app = express();
@@ -19,6 +20,8 @@ declare module "express-session" {
 }
 
 app.use(bodyParser.json({ limit: "10mb" }));
+
+// app.use(morgan('tiny'))
 app.use(
   cors({
     origin: "http://localhost:5173",

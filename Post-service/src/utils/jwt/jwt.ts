@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Response } from "express";
-import { UserData } from "../interface";
+import { UserData } from "../interfaces/interface";
 
 export const createAccessToken = (
   user: UserData,

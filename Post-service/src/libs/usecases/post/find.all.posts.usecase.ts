@@ -1,4 +1,4 @@
-import { Dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 
 export const getAllPosts_useCase = (dependencies: Dependencies) => {
   const {

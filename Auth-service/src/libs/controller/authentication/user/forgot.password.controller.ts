@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../../utils/http.statuscodes.enum";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -19,13 +20,13 @@ export default (dependencies: Dependencies) => {
         req.session.otp = response.otp;
         req.session.email = email
 
-        res.status(200).json({ success: true, message: response.message });
+        res.status(HttpStatus.OK).json({ success: true, message: response.message });
       } else {
-        res.status(500).json({ success: false, message: response.message });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ success: false, message: response.message });
       }
     } catch (error) {
       console.error("Error in sending OTP:", error);
-      res.status(500).json({ success: false, message: "Error in sending OTP" });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ success: false, message: "Error in sending OTP" });
     }
   };
 

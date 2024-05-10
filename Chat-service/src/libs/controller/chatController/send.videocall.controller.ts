@@ -1,4 +1,5 @@
-import { Dependencies } from "../../../utils/dependencies.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
+import { Dependencies } from "../../../utils/interfaces/dependencies.interface";
 import { Request, Response } from "express";
 
 export default (dependencies: Dependencies) => {
@@ -17,12 +18,12 @@ export default (dependencies: Dependencies) => {
       );
 
       if (response.status) {
-        res.status(200).json(response);
+        res.status(HttpStatus.OK).json(response);
       }
     } catch (error) {
       console.log("error in send videocall controller", error);
       res
-        .status(500)
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ status: false, message: "error in send videocall controller" });
     }
   };

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { UserData } from "../../../utils/interfaces/interfaces";
 import { userProducer } from "../../../events/userUpdateProducer";
 import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -20,7 +21,7 @@ export default (dependencies: Dependencies) => {
 
       if (response.status) {
         await userProducer(data, "userTopic", "updateUser");
-        res.status(200).json({
+        res.status(HttpStatus.OK).json({
           status: true,
           user: response.user,
           message: "user data edited successfuly",
@@ -28,7 +29,7 @@ export default (dependencies: Dependencies) => {
       }
     } catch (error) {
       res
-        .status(500)
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ status: false, message: "failed to edit user data" });
     }
   };

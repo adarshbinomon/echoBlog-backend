@@ -10,7 +10,6 @@ export const userGoogleLogin_useCase = (dependencies: Dependencies) => {
 
   const executeFunction = async (data: UserData) => {
     try {
-      console.log("Received data:", data);
 
       const existingUser = await authenticationRepository?.findUser(data.email);
 

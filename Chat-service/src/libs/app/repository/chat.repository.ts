@@ -15,7 +15,6 @@ export default {
       });
 
       const recieverSocketId = getRecieverSocketId(recieverId);
-      console.log(recieverSocketId, "recieverSocketId");
 
       if (!conversation) {
         const newConversation = await Conversation.create({
@@ -29,7 +28,6 @@ export default {
 
         if (newMessage) {
           newConversation.messages.push(newMessage._id);
-          console.log(recieverSocketId, "recieverSocketId");
 
           if (recieverSocketId) {
             io.to(recieverSocketId).emit("newMessage", newMessage);
@@ -56,7 +54,6 @@ export default {
           recieverId,
           message,
         });
-        console.log(newMessage, "newMessage");
 
         if (newMessage) {
           conversation.messages.push(newMessage._id);
@@ -91,8 +88,6 @@ export default {
         participants: { $all: [senderId, recieverId] },
       }).populate("messages");
       if (conversation) {
-        console.log(conversation);
-
         return {
           status: true,
           message: "conversation found",
@@ -110,14 +105,37 @@ export default {
     }
   },
 
-  getConversations: async (following: string[]) => {
+  getConversations: async (following: string[], userId: string) => {
     try {
-      const conversations = await User.find({
-        _id: { $in: following },
+      const conversations = await Conversation.find({
+        $and: [
+          { participants: { $in: following } }, // Match participants in 'following' array
+          { participants: userId }, // Match specific 'userId'
+        ],
+      })
+        .sort({ updatedAt: -1 })
+        .populate({
+          path: "participants",
+          match: { _id: { $in: following } },
+          select: "userName name email profilePicture",
+        })
+        .select("participants");
+
+      console.log("conversations", conversations);
+
+      const participantsArray = conversations.map((conversation) => {
+        const firstParticipant = conversation.participants[0];
+        return {
+          ...firstParticipant,
+        };
       });
 
       if (conversations) {
-        return { status: true, message: "conversations found", conversations };
+        return {
+          status: true,
+          message: "conversations found",
+          participantsArray,
+        };
       } else {
         return { status: false, message: "error in finding conversation" };
       }

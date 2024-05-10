@@ -56,6 +56,7 @@ export interface UseCase {
   getSavedPostsUseCase: Function;
   getPostsFromFollowingUsecase: Function;
   getMonthlyPostCountUseCase: Function;
+  getPostsFromCommunityUsecase: Function;
 }
 
 export interface ConsumeUsecase {

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { Dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -17,7 +18,7 @@ export default (dependencies: Dependencies) => {
 
       if (response.status) {
         res
-          .status(201)
+          .status(HttpStatus.CREATED)
           .json({
             status: true,
             message: response.message,
@@ -25,7 +26,7 @@ export default (dependencies: Dependencies) => {
           });
       } else {
         res
-          .status(400)
+          .status(HttpStatus.BAD_REQUEST)
           .json({ status: false, message: "Failed to reply to comment" });
       }
     } catch (error) {

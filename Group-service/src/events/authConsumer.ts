@@ -8,7 +8,7 @@ const consumer = kafka.consumer({
 
 export const userConsumer = async (dependencies: Dependencies) => {
   try {
-    console.log('auth to post consumer');
+    console.log('consuming from auth service');
     
     
     await consumer.connect();
@@ -16,12 +16,11 @@ export const userConsumer = async (dependencies: Dependencies) => {
     await consumer.run({
       eachMessage: async ({ message }) => {
         try {
-          console.log('userConsumer');
+          console.log('message recvieved from auth service');
           const binaryData: any = message.value;
           const jsonString: string = binaryData?.toString();
           const jsonData = JSON.parse(jsonString);
           const messageType = jsonData?.type;
-          console.log(jsonData);
           
 
           if (messageType === "createUser") {            

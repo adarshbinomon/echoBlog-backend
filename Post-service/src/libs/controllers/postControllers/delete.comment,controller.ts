@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { Dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -16,14 +17,14 @@ export default (dependencies: Dependencies) => {
         commentId
       );
       if (response.status) {
-        res.status(200).json({ status: true, message: response.message });
+        res.status(HttpStatus.OK).json({ status: true, message: response.message });
       } else {
-        res.status(500).json({ status: false, message: response.message });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, message: response.message });
       }
     } catch (error) {
       console.log("error in delete comment controller:", error);
       res
-        .status(500)
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ status: false, message: "error in deleting comment" });
     }
   };

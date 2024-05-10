@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { Dependencies } from "../../../utils/dependency.interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   const {
@@ -17,13 +18,13 @@ export default (dependencies: Dependencies) => {
         liked
       );
       if (response.status) {
-        res.status(200).json({
+        res.status(HttpStatus.OK).json({
           status: true,
           message: "like successfull",
           likes: response?.likes,
         });
       } else {
-        res.status(500).json({
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
           status: false,
           message: "like unsuccessfull",
           likes: response?.likes,
@@ -32,7 +33,7 @@ export default (dependencies: Dependencies) => {
     } catch (error) {
       console.log("error in like post controller: ", error);
 
-      res.status(500).json({ status: false, message: "like unsuccessfull" });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ status: false, message: "like unsuccessfull" });
     }
   };
   return likePostController;

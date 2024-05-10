@@ -1,6 +1,6 @@
 import jwt, { VerifyErrors } from "jsonwebtoken";
 import { Request, Response, NextFunction, RequestHandler } from "express";
-import { UserData } from "../interface";
+import { UserData } from "../interfaces/interface";
 
 interface CustomRequest extends Request {
   user?: UserData;

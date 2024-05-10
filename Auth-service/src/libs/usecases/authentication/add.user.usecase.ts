@@ -21,7 +21,6 @@ export const addUser_useCases = (dependencies: Dependencies) => {
       const updatedData = { ...data, password: hashedPassword };
 
       const otp = await sendMail(updatedData.email, updatedData.name);
-      console.log(otp);
 
       if (otp) {
         return {

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { UserData } from "../../../utils/interface";
-import { Dependencies } from "../../../utils/dependency.interface";
+import { UserData } from "../../../utils/interfaces/interface";
+import { Dependencies } from "../../../utils/interfaces/dependency.interface";
 
 export const createUserController = async (
   dependencies: Dependencies,

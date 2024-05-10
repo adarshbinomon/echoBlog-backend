@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Dependencies } from "../../../utils/interfaces/dependency.interface";
+import { HttpStatus } from "../../../utils/enums/http.statuscodes";
 
 export default (dependencies: Dependencies) => {
   
@@ -16,13 +17,13 @@ export default (dependencies: Dependencies) => {
 
       if (response.status) {
         res
-          .status(200)
+          .status(HttpStatus.OK)
           .json({ status: true, message: "user found", user: response.user });
       } else {
-        res.status(404).json({ status: false, message: response.message });
+        res.status(HttpStatus.NOT_FOUND).json({ status: false, message: response.message });
       }
     } catch (error) {
-      res.status(404).json({ status: false, message: "user not found" });
+      res.status(HttpStatus.NOT_FOUND).json({ status: false, message: "user not found" });
     }
   };
   return getUserController;

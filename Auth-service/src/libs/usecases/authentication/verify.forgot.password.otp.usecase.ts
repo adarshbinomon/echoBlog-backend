@@ -7,8 +7,8 @@ export const verifyForgotPasswordOtp = (dependencies: Dependencies) => {
 
   const executeFunction = async (enteredOtp: number, sessionOtp: number) => {
     try {
-        console.log(enteredOtp);
-        console.log(sessionOtp);
+        console.log('enteredOtp',enteredOtp);
+        console.log('sessionOtp',sessionOtp);
         
       if (enteredOtp == sessionOtp) {
         return { status: true, message: "otp verification successfull" };

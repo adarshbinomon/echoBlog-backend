@@ -13,7 +13,6 @@ export const changePasswordUsecase = (dependencies: Dependencies) => {
         email,
         hashedPassword
       );
-      console.log(response);
 
       if (response.status) {
         return response;
